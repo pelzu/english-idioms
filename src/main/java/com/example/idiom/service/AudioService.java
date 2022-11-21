@@ -14,7 +14,7 @@ public class AudioService {
     RestTemplate restTemplate = new RestTemplate();
     private String FILE_URL = "https://www.ang.pl/sound/idioms/example/mr-brown-has-a-heart-of-gold-he.mp3";
 
-    public void downLoad() throws IOException {
+    public void downLoadAudio() throws IOException {
         File fileOrzechowe = new File("C:\\Users\\pelzu\\IdeaProjects\\idiom\\src\\main\\resources\\static\\mr-brown-has-a-heart-of-gold-he.mp3");
         File file = restTemplate.execute(FILE_URL, HttpMethod.GET, null, clientHttpResponse -> {
             File ret = File.createTempFile("download", "tmp");

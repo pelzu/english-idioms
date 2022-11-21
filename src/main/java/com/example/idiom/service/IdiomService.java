@@ -6,30 +6,53 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class IdiomService {
-    final static String audioUri = "/sound/idioms/example/";
-    final static String idiomUri = "https://www.ang.pl/slownictwo/idiomy/";
-    final static String englishWordBegin = "class=\"sm2_button\">play</a>";
-    final static String polishWordBegin = "<tr><td><span class=\"pl_flag\">tłumaczenie:</span></td><td class=\"pol\">";
-    final static String polengWordEnd = "</td></tr>";
-    final static String exampleWordEnd = "</td>";
+    final static String DOMAIN_ANG_PL = "ang.pl";
+    final static String AUDIO_URI_TRANSLATE = "/sound/idioms/";
+
+    final static String AUDIO_URI_EXAMPLE = "/sound/idioms/example";
+
+    final static String AUDIO_URI_END = ".mp3\"";
+    final static String IDIOM_URI = "https://www.ang.pl/slownictwo/idiomy/";
+    final static String ENGLISH_WORD_BEGIN = "class=\"sm2_button\">play</a>";
+    final static String POLISH_WORD_BEGIN = "<tr><td><span class=\"pl_flag\">tłumaczenie:</span></td><td class=\"pol\">";
+    final static String POLENG_WORD_END = "</td></tr>";
+    final static String EXAMPLE_WORD_END = "</td>";
+
+
 
     RestTemplate restTemplate = new RestTemplate();
 
     public IdiomModel getOneIdiom(int httpEnd) {
-
-        String result = restTemplate.getForObject(this.idiomUri + httpEnd, String.class);
-
-        int englishBeginingIndex = result.indexOf(englishWordBegin);
-        int englishLastIndex = result.indexOf(polengWordEnd, englishBeginingIndex);
-        int polishBeginningIndex = result.indexOf(polishWordBegin);
-        int polishLastIndex = result.indexOf(polengWordEnd, polishBeginningIndex);
-        int exampleBeginingIndex = result.indexOf(englishWordBegin, englishBeginingIndex + englishWordBegin.length());
-        int exampleLastIndex = result.indexOf(exampleWordEnd, exampleBeginingIndex);
-
         IdiomModel idioms = new IdiomModel();
-        idioms.setEnglishMeaning(result.substring(englishBeginingIndex + englishWordBegin.length(), englishLastIndex));
-        idioms.setPolishMeaning(result.substring(polishBeginningIndex + polishWordBegin.length(), polishLastIndex));
-        idioms.setEnglishExample(result.substring(exampleBeginingIndex + englishWordBegin.length(), exampleLastIndex));
+        String result = restTemplate.getForObject(this.IDIOM_URI + httpEnd, String.class);
+
+        int englishBeginingIndex = result.indexOf(ENGLISH_WORD_BEGIN);
+        int englishLastIndex = result.indexOf(POLENG_WORD_END, englishBeginingIndex);
+        idioms.setEnglishMeaning(result.substring(englishBeginingIndex + ENGLISH_WORD_BEGIN.length(), englishLastIndex));
+
+
+        int polishBeginningIndex = result.indexOf(POLISH_WORD_BEGIN);
+        int polishLastIndex = result.indexOf(POLENG_WORD_END, polishBeginningIndex);
+        idioms.setPolishMeaning(result.substring(polishBeginningIndex + POLISH_WORD_BEGIN.length(), polishLastIndex));
+
+
+        int exampleBeginingIndex = result.indexOf(ENGLISH_WORD_BEGIN, englishBeginingIndex + ENGLISH_WORD_BEGIN.length());
+        int exampleLastIndex = result.indexOf(EXAMPLE_WORD_END, exampleBeginingIndex);
+        idioms.setEnglishExample(result.substring(exampleBeginingIndex + ENGLISH_WORD_BEGIN.length(), exampleLastIndex));
+
+
+
+
+        int audioTranslateBeginingIndex = result.indexOf(AUDIO_URI_TRANSLATE);
+        int audioTranslateLastIndex = result.indexOf(AUDIO_URI_END, audioTranslateBeginingIndex);
+        idioms.setAudioTranslateLink(DOMAIN_ANG_PL+result.substring(audioTranslateBeginingIndex, audioTranslateLastIndex+AUDIO_URI_END.length()-1));
+
+        int audioExampleBeginingIndex = result.indexOf(AUDIO_URI_EXAMPLE);
+        int audioExampleLastIndex = result.indexOf(AUDIO_URI_END, audioExampleBeginingIndex);
+        idioms.setAudioExampleLink(DOMAIN_ANG_PL+result.substring(audioExampleBeginingIndex, audioExampleLastIndex+AUDIO_URI_END.length()-1));
+
+
+
         idioms.setId(httpEnd);
 
         System.out.println(idioms);

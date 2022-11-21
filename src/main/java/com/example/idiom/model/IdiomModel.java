@@ -14,4 +14,6 @@ public class IdiomModel {
     private String polishMeaning;
     private String englishMeaning;
     private String englishExample;
+    private String audioTranslateLink;
+    private String audioExampleLink;
 }

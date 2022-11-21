@@ -11,10 +11,11 @@ import java.util.ArrayList;
 public class CsVWriter {
     public void save(ArrayList<IdiomModel> idiomModels) {
 
+
         PrintWriter printWriter;
         {
             try {
-                printWriter = new PrintWriter(new File("resources/static/csv/idiom.csv"));
+                printWriter = new PrintWriter(new File("src/main/resources/static/csv/idiom.csv"));
                 StringBuffer csvHeader = new StringBuffer("");
                 csvHeader.append("id;polishMeaning;englishMeaning;englishExample\n");
                 StringBuffer csvData = new StringBuffer("");

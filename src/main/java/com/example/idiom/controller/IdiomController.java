@@ -19,7 +19,7 @@ public class IdiomController {
 
     private AudioService audioService;
 
-    private int idiomLength = 521;
+    private int idiomLength = 2;
 
     private ArrayList<IdiomModel> idiomsArrayList = new ArrayList<>();
 
@@ -41,7 +41,7 @@ public class IdiomController {
     @GetMapping("/1")
     public void download() throws IOException {
 
-    audioService.downLoad();
+    audioService.downLoadAudio();
 
     }
 
