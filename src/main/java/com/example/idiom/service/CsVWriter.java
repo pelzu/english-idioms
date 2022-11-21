@@ -1,16 +1,20 @@
-package com.example.idiom;
+package com.example.idiom.service;
+
+import com.example.idiom.model.IdiomModel;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+@Service
 public class CsVWriter {
     public void save(ArrayList<IdiomModel> idiomModels) {
+
         PrintWriter printWriter;
         {
             try {
-                printWriter = new PrintWriter(new File("test.csv"));
+                printWriter = new PrintWriter(new File("resources/static/csv/idiom.csv"));
                 StringBuffer csvHeader = new StringBuffer("");
                 csvHeader.append("id;polishMeaning;englishMeaning;englishExample\n");
                 StringBuffer csvData = new StringBuffer("");
@@ -23,11 +27,10 @@ public class CsVWriter {
                     csvData.append(idiom.getEnglishExample() + "\n");
 
                 }
+                csvData.ensureCapacity(csvData.length());
                 System.out.println(csvData);
                 printWriter.write(csvData.toString());
                 printWriter.close();
-
-
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
