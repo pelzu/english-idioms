@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class IdiomService {
-    final static String DOMAIN_ANG_PL = "ang.pl";
+    final static String DOMAIN_ANG_PL = "https://www.ang.pl";
     final static String AUDIO_URI_TRANSLATE = "/sound/idioms/";
 
     final static String AUDIO_URI_EXAMPLE = "/sound/idioms/example";

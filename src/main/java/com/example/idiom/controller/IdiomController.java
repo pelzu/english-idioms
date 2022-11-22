@@ -19,7 +19,7 @@ public class IdiomController {
 
     private AudioService audioService;
 
-    private int idiomLength = 2;
+    private int idiomLength = 100;
 
     private ArrayList<IdiomModel> idiomsArrayList = new ArrayList<>();
 
@@ -30,20 +30,29 @@ public class IdiomController {
         this.audioService = audioService;
     }
 
-    @GetMapping("/idiom")
-    public void getEnglishMeaning() {
-        idiomsArrayList.ensureCapacity(idiomLength);
-        for (int i = 1; i <= idiomLength; i++) {
-            idiomsArrayList.add(idiomService.getOneIdiom(i));
+    @GetMapping("/idioms")
+    public void getEnglishMeaning() throws IOException {
+
+        for (int i = 0; i <= idiomLength; i++) {
+            addAllIdioms(i);
+            downloadAudio(i);
         }
+        writeToCSV();
+    }
+
+    public void downloadAudio(int iterator)  {
+        audioService.downLoadAudio(idiomsArrayList.get(iterator));
+    }
+
+    public void writeToCSV() {
         csVWriter.save(idiomsArrayList);
     }
-    @GetMapping("/1")
-    public void download() throws IOException {
-
-    audioService.downLoadAudio();
+    public void addAllIdioms(int iterator) {
+        idiomsArrayList.add(idiomService.getOneIdiom(iterator));
 
     }
+
+
 
 
 }
