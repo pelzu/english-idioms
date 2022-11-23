@@ -53,7 +53,7 @@ public class IdiomService {
         int audioExampleLastIndex = result.indexOf(AUDIO_URI_END, audioExampleBeginingIndex);
         idioms.setAudioExampleLink(DOMAIN_ANG_PL+result.substring(audioExampleBeginingIndex, audioExampleLastIndex+AUDIO_URI_END.length()-1));
 
-
+        idioms.setLinkToIdiom(IDIOM_URI+httpEnd);
 
         idioms.setId(httpEnd);
 

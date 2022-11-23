@@ -16,4 +16,6 @@ public class IdiomModel {
     private String englishExample;
     private String audioTranslateLink;
     private String audioExampleLink;
+    private String linkToIdiom;
+
 }

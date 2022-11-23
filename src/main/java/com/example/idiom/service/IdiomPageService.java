@@ -6,46 +6,90 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 
+import static java.lang.Integer.valueOf;
+
 @Service
 public class IdiomPageService {
-    private static final String DOMAIN_URL = "https://www.ang.pl/slownictwo/idiomy/page/" ;
+    private static final String DOMAIN_URL = "https://www.ang.pl/slownictwo/idiomy/page/";
 
-    private static final String TRIM_RESULT_BEGIN ="<div class=\"row\" style=\"border-bottom: 1px solid #ccc;\">";
-    private static final String TRIM_RESULT_END="<div class=\"mtop\">";
+    final static String IDIOM_URL = "https://www.ang.pl/slownictwo/idiomy/";
 
-    private static final String ENGLISH_MEANING_BEGIN="class=\"sm2_button\">play</a>";
+    final static String AUDIO_EXAMPLE_URL = "https://www.ang.pl/sound/idioms/example/";
 
-    private static final String ENGLISH_AUDIO__BEGIN="<a href=\"/sound/idioms/>";
+    final static String AUDIO_MEANING_URL = "https://www.ang.pl/sound/idioms/";
+
+    private static final String TRIM_RESULT_BEGIN = "<div class=\"row\" style=\"border-bottom: 1px solid #ccc;\">";
+    private static final String TRIM_RESULT_END = "<div class=\"mtop\">";
+
+    private static final String AUDIO_MEANING_BEGIN_PHRASE = "<a href=\"/sound/idioms/";
+
+    private static final String IDIOM_LINK_BEGIN_PHRASE = "<a href=\"/slownictwo/idiomy/";
+
+    private static final String ENGLISH_MEANING_BEGIN_PHRASE = ">";
+
+    private static final String POLISH_MEANING_BEGIN_PHRASE = "<p class=\"pol\">";
+
+    private static final String AUDIO_EXAMPLE_BEGIN_PHRASE = "<a href=\"/sound/idioms/example/";
+
+    private static final String ENGLISH_EXAMPLE_BEGIN_PHRASE = "class=\"sm2_button\">play</a>";
 
 
-    private static final String POLISH_MEANING_BEGIN="<div class=\"medium-3 columns\"><p class=\"pol\">";
     private RestTemplate restTemplate = new RestTemplate();
-    private ArrayList<IdiomModel> idiomModel=new ArrayList<>();
+    private ArrayList<IdiomModel> idiomModelArrayList = new ArrayList<>();
 
 
     public void getOnePageOfIdioms(int httpEnd) {
         String result = restTemplate.getForObject(this.DOMAIN_URL + httpEnd, String.class);
-        result=getTrimResult(result);
+        result = getTrimResult(result);
         System.out.println(result);
-        getIdiomModel(result);
+
+
+        idiomModelArrayList.add(getIdiomModel(result));
+        System.out.println(idiomModelArrayList);
     }
 
     public String getTrimResult(String htmlResult) {
-        int trimIndexBegin=htmlResult.indexOf(TRIM_RESULT_BEGIN);
-        int trimIndexEnd=htmlResult.indexOf(TRIM_RESULT_END);
+        int trimIndexBegin = htmlResult.indexOf(TRIM_RESULT_BEGIN);
+        int trimIndexEnd = htmlResult.indexOf(TRIM_RESULT_END);
 
-        return htmlResult.substring(trimIndexBegin,trimIndexEnd+TRIM_RESULT_END.length());
+        return htmlResult.substring(trimIndexBegin, trimIndexEnd + TRIM_RESULT_END.length());
     }
 
-    public void getIdiomModel(String trimedResult){
+    public IdiomModel getIdiomModel(String trimedResult) {
+        IdiomModel idiomModel=new IdiomModel();
+
+        int audioMeaningBeginIndex = trimedResult.indexOf(AUDIO_MEANING_BEGIN_PHRASE) + AUDIO_MEANING_BEGIN_PHRASE.length();
+        int audioMeaningEndIndex = trimedResult.indexOf("\"", audioMeaningBeginIndex);
+        System.out.println(trimedResult.substring(audioMeaningBeginIndex, audioMeaningEndIndex));
+        idiomModel.setAudioTranslateLink(AUDIO_MEANING_URL+trimedResult.substring(audioMeaningBeginIndex,audioMeaningEndIndex));
+
+        int idiomLinkBeginIndex = trimedResult.indexOf(IDIOM_LINK_BEGIN_PHRASE, audioMeaningEndIndex) + IDIOM_LINK_BEGIN_PHRASE.length();
+        int idiomLinkEndIndex = trimedResult.indexOf("\"", idiomLinkBeginIndex);
+        System.out.println(trimedResult.substring(idiomLinkBeginIndex, idiomLinkEndIndex));
+        idiomModel.setLinkToIdiom(IDIOM_URL+trimedResult.substring(idiomLinkBeginIndex, idiomLinkEndIndex));
+        idiomModel.setId(valueOf(trimedResult.substring(idiomLinkBeginIndex, idiomLinkEndIndex)));
+
+        int englishMeaningBeginIndex = trimedResult.indexOf(ENGLISH_MEANING_BEGIN_PHRASE, idiomLinkEndIndex) + ENGLISH_MEANING_BEGIN_PHRASE.length();
+        int englishMeaningEndIndex = trimedResult.indexOf("</a>", englishMeaningBeginIndex);
+        System.out.println(trimedResult.substring(englishMeaningBeginIndex, englishMeaningEndIndex));
+        idiomModel.setEnglishMeaning(trimedResult.substring(englishMeaningBeginIndex, englishMeaningEndIndex));
+
+        int polishMeaningBeginIndex = trimedResult.indexOf(POLISH_MEANING_BEGIN_PHRASE, englishMeaningEndIndex) + POLISH_MEANING_BEGIN_PHRASE.length();
+        int polishMeaningEndIndex = trimedResult.indexOf("</p>", polishMeaningBeginIndex);
+        System.out.println(trimedResult.substring(polishMeaningBeginIndex, polishMeaningEndIndex));
+        idiomModel.setPolishMeaning(trimedResult.substring(polishMeaningBeginIndex, polishMeaningEndIndex));
+
+        int audioExampleBeginIndex = trimedResult.indexOf(AUDIO_EXAMPLE_BEGIN_PHRASE, polishMeaningBeginIndex) + AUDIO_EXAMPLE_BEGIN_PHRASE.length();
+        int audioExampleingEndIndex = trimedResult.indexOf("\"", audioExampleBeginIndex);
+        System.out.println(trimedResult.substring(audioExampleBeginIndex, audioExampleingEndIndex));
+        idiomModel.setAudioExampleLink(AUDIO_EXAMPLE_URL+trimedResult.substring(audioExampleBeginIndex, audioExampleingEndIndex));
+
+        int englishExampleBeginIndex = trimedResult.indexOf(ENGLISH_EXAMPLE_BEGIN_PHRASE, audioExampleingEndIndex) + ENGLISH_EXAMPLE_BEGIN_PHRASE.length();
+        int englishExampleingEndIndex = trimedResult.indexOf("</p>", englishExampleBeginIndex);
+        System.out.println(trimedResult.substring(englishExampleBeginIndex, englishExampleingEndIndex));
+        idiomModel.setEnglishExample(trimedResult.substring(englishExampleBeginIndex, englishExampleingEndIndex));
 
 
-         int polishMeaningBeginIndex=   trimedResult.indexOf(ENGLISH_MEANING_BEGIN);
-         polishMeaningBeginIndex=polishMeaningBeginIndex+trimedResult.indexOf(">",polishMeaningBeginIndex);
-        System.out.println(trimedResult.substring(polishMeaningBeginIndex,polishMeaningBeginIndex+120));
-
-
-
-
+        return idiomModel;
     }
 }
