@@ -16,14 +16,16 @@ public class IdiomService {
     final static String ENGLISH_WORD_BEGIN = "class=\"sm2_button\">play</a>";
     final static String POLISH_WORD_BEGIN = "<tr><td><span class=\"pl_flag\">tłumaczenie:</span></td><td class=\"pol\">";
     final static String POLENG_WORD_END = "</td></tr>";
-    final static String EXAMPLE_WORD_END = "</td>";
+    final static String EXAMPLE_WORD_END = "<";
 
 
 
     RestTemplate restTemplate = new RestTemplate();
 
     public IdiomModel getOneIdiom(int httpEnd) {
+
         IdiomModel idioms = new IdiomModel();
+
         String result = restTemplate.getForObject(this.IDIOM_URI + httpEnd, String.class);
 
         int englishBeginingIndex = result.indexOf(ENGLISH_WORD_BEGIN);
@@ -37,7 +39,7 @@ public class IdiomService {
 
 
         int exampleBeginingIndex = result.indexOf(ENGLISH_WORD_BEGIN, englishBeginingIndex + ENGLISH_WORD_BEGIN.length());
-        int exampleLastIndex = result.indexOf(EXAMPLE_WORD_END, exampleBeginingIndex);
+        int exampleLastIndex = result.indexOf(EXAMPLE_WORD_END,exampleBeginingIndex+ ENGLISH_WORD_BEGIN.length());
         idioms.setEnglishExample(result.substring(exampleBeginingIndex + ENGLISH_WORD_BEGIN.length(), exampleLastIndex));
 
 
@@ -56,8 +58,10 @@ public class IdiomService {
         idioms.setId(httpEnd);
 
         System.out.println(idioms);
+
         return idioms;
     }
+
 }
 
 
