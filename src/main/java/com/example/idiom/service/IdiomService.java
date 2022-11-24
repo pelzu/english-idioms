@@ -26,6 +26,7 @@ public class IdiomService {
 
         IdiomModel idioms = new IdiomModel();
 
+
         String result = restTemplate.getForObject(this.IDIOM_URI + httpEnd, String.class);
 
         int englishBeginingIndex = result.indexOf(ENGLISH_WORD_BEGIN);
@@ -55,7 +56,7 @@ public class IdiomService {
 
         idioms.setLinkToIdiom(IDIOM_URI+httpEnd);
 
-        idioms.setId(httpEnd);
+        idioms.setId(new Integer(httpEnd).toString());
 
         System.out.println(idioms);
 

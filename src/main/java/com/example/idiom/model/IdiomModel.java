@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class IdiomModel {
 
 
-    private int id;
+    private String id;
     private String polishMeaning;
     private String englishMeaning;
     private String englishExample;

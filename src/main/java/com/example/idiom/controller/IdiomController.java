@@ -35,17 +35,24 @@ public class IdiomController {
 
 
 
-    @GetMapping("/idioms")
-    public void getEnglishMeaning() throws IOException {
+    @GetMapping("/idiomsPagination")
+    public void getIdiomsByPage() throws IOException {
 
-        idiomPageService.getOnePageOfIdioms(1);
+        for (int i = 1; i <= 11; i++) {
+            idiomPageService.getOnePageOfIdioms(i);
+            System.out.println("Page "+i);
+        }
 
-
-//    for (int i = 0; i <= idiomLength; i++) {  //
-//            addAllIdioms(i);
-//          downloadAudio(i);
-//        }
-//        writeToCSV();1ccv
+        idiomPageService.getArraySize();
+        idiomPageService.getArray();
+    }
+    @GetMapping("/idiomsOneGet")
+    public void getIdiomsbyOneGet() throws IOException {
+    for (int i = 1; i <= idiomLength; i++) {  //
+            addAllIdioms(i);
+          downloadAudio(i);
+        }
+        writeToCSV();
     }
 
     public void downloadAudio(int iterator) {
