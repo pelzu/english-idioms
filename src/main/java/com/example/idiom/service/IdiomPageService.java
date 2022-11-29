@@ -50,9 +50,12 @@ public class IdiomPageService {
         String result = restTemplate.getForObject(this.DOMAIN_URL + httpEnd, String.class);
            result = getTrimResult(result);
 
-           for (int i = 0; i <49; i++) {
+           for (int i = 0; i <=49; i++) {
                idiomModelArrayList.add(getIdiomModel(result));
+//               System.out.println(idiomModelArrayList.get(idiomModelArrayList.size()-1));
            }
+        System.out.println(idiomModelArrayList.size());
+
 
 
 
@@ -100,7 +103,7 @@ public class IdiomPageService {
         idiomModel.setEnglishExample(trimedResult.substring(englishExampleBeginIndex, englishExampleingEndIndex));
 
         setTemResultIndex(englishExampleingEndIndex);
-
+        System.out.println(idiomModel);
         return idiomModel;
     }
 
@@ -112,7 +115,14 @@ public class IdiomPageService {
     public void getArraySize() {
         System.out.println("Rozmiar Tablicy="+idiomModelArrayList.size());
     }
+
     public void getArray() {
-        System.out.println(idiomModelArrayList.toString());
+        for (IdiomModel idiom:idiomModelArrayList
+             ) {
+            System.out.println(idiom);
+
+        }
     }
+
+
 }

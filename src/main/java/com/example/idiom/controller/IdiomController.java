@@ -39,16 +39,16 @@ public class IdiomController {
     public void getIdiomsByPage() throws IOException {
 
         for (int i = 1; i <= 11; i++) {
-            idiomPageService.getOnePageOfIdioms(i);
             System.out.println("Page "+i);
+            idiomPageService.getOnePageOfIdioms(i);
         }
 
         idiomPageService.getArraySize();
-        idiomPageService.getArray();
+//       idiomPageService.getArray() ;
     }
     @GetMapping("/idiomsOneGet")
     public void getIdiomsbyOneGet() throws IOException {
-    for (int i = 1; i <= idiomLength; i++) {  //
+    for (int i = 0; i <= idiomLength; i++) {  //
             addAllIdioms(i);
           downloadAudio(i);
         }
