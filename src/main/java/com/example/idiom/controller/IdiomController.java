@@ -1,10 +1,7 @@
 package com.example.idiom.controller;
 
 import com.example.idiom.model.IdiomModel;
-import com.example.idiom.service.AudioService;
-import com.example.idiom.service.CsVWriter;
-import com.example.idiom.service.IdiomPageService;
-import com.example.idiom.service.IdiomService;
+import com.example.idiom.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,14 +19,28 @@ public class IdiomController {
 
     private AudioService audioService;
 
+    private IdiomJsoupApproach idiomJsoupApproach ;
+
     private int idiomLength = 520;
     private ArrayList<IdiomModel> idiomsArrayList = new ArrayList<>();
+
+    private IdiomModel[] idiomList=new IdiomModel[idiomLength];
+
     @Autowired
-    public IdiomController(IdiomService idiomService, CsVWriter csVWriter, IdiomPageService idiomPageService, AudioService audioService) {
+    public IdiomController(IdiomService idiomService, CsVWriter csVWriter, IdiomPageService idiomPageService, AudioService audioService, IdiomJsoupApproach idiomJsoupApproach) {
         this.idiomService = idiomService;
         this.csVWriter = csVWriter;
         this.idiomPageService = idiomPageService;
         this.audioService = audioService;
+        this.idiomJsoupApproach = idiomJsoupApproach;
+    }
+
+
+
+    @GetMapping("/idiomJsoup")
+    public void getIdiomsByJsoup() throws IOException {
+        idiomJsoupApproach.getIdiom();
+
     }
 
 
@@ -37,7 +48,6 @@ public class IdiomController {
 
     @GetMapping("/idiomsPagination")
     public void getIdiomsByPage() throws IOException {
-
         for (int i = 1; i <= 11; i++) {
             System.out.println("Page "+i);
             idiomPageService.getOnePageOfIdioms(i);

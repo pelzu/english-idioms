@@ -53,6 +53,7 @@ public class IdiomPageService {
            for (int i = 0; i <=49; i++) {
                idiomModelArrayList.add(getIdiomModel(result));
 //               System.out.println(idiomModelArrayList.get(idiomModelArrayList.size()-1));
+
            }
         System.out.println(idiomModelArrayList.size());
 
