@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 
 @Service
 public class AudioService {
-    private static String MP3_DESTINATION = "C:\\Users\\pelzu\\IdeaProjects\\idiom\\src\\main\\resources\\static\\mp3\\";
+    private static final String MP3_DESTINATION = "C:\\Users\\pelzu\\IdeaProjects\\idiom\\src\\main\\resources\\static\\mp3\\";
     RestTemplate restTemplate = new RestTemplate();
 
     public void downLoadAudio(IdiomModel idiomModel) {

@@ -18,4 +18,16 @@ public class IdiomModel {
     private String audioExampleLink;
     private String linkToIdiom;
 
+    @Override
+    public String toString() {
+        return "IdiomModel{" +
+                "id='" + id + '\'' +
+                ", polishMeaning='" + polishMeaning + '\'' +
+                ", englishMeaning='" + englishMeaning + '\'' +
+                ", englishExample='" + englishExample + '\'' +
+                ", audioTranslateLink='" + audioTranslateLink + '\'' +
+                ", audioExampleLink='" + audioExampleLink + '\'' +
+                ", linkToIdiom='" + linkToIdiom + '\'' +
+                '}';
+    }
 }

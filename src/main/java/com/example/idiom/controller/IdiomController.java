@@ -12,19 +12,18 @@ import java.util.ArrayList;
 @RestController
 public class IdiomController {
 
-    private IdiomService idiomService;
-    private CsVWriter csVWriter;
+    private final IdiomService idiomService;
+    private final CsVWriter csVWriter;
 
-    private IdiomPageService idiomPageService;
+    private final IdiomPageService idiomPageService;
 
-    private AudioService audioService;
+    private final AudioService audioService;
 
-    private IdiomJsoupApproach idiomJsoupApproach ;
+    private final IdiomJsoupApproach idiomJsoupApproach;
 
-    private int idiomLength = 520;
-    private ArrayList<IdiomModel> idiomsArrayList = new ArrayList<>();
+    private final int idiomLength = 520;
+    private final ArrayList<IdiomModel> idiomsArrayList = new ArrayList<>();
 
-    private IdiomModel[] idiomList=new IdiomModel[idiomLength];
 
     @Autowired
     public IdiomController(IdiomService idiomService, CsVWriter csVWriter, IdiomPageService idiomPageService, AudioService audioService, IdiomJsoupApproach idiomJsoupApproach) {
@@ -36,31 +35,29 @@ public class IdiomController {
     }
 
 
-
     @GetMapping("/idiomJsoup")
     public void getIdiomsByJsoup() throws IOException {
         idiomJsoupApproach.getIdiom();
 
+
     }
-
-
 
 
     @GetMapping("/idiomsPagination")
     public void getIdiomsByPage() throws IOException {
         for (int i = 1; i <= 11; i++) {
-            System.out.println("Page "+i);
+            System.out.println("Page " + i);
             idiomPageService.getOnePageOfIdioms(i);
         }
 
         idiomPageService.getArraySize();
-//       idiomPageService.getArray() ;
     }
+
     @GetMapping("/idiomsOneGet")
     public void getIdiomsbyOneGet() throws IOException {
-    for (int i = 0; i <= idiomLength; i++) {  //
+        for (int i = 0; i <= idiomLength; i++) {  //
             addAllIdioms(i);
-          downloadAudio(i);
+            downloadAudio(i);
         }
         writeToCSV();
     }
