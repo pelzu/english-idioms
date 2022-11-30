@@ -4,15 +4,19 @@ import com.example.idiom.model.IdiomModel;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class IdiomJsoupApproach {
-    private static final String baseLink = "https://www.ang.pl/slownictwo/idiomy/page/";
+    private static final String BASE_LINK = "https://www.ang.pl/slownictwo/idiomy/page/";
+
+    private final static String PREFIX_LINK= "https://www.ang.pl";
 
     private static Elements allElements = new Elements();
 
@@ -26,9 +30,9 @@ public class IdiomJsoupApproach {
 
         for (int i = 1; i <=11 ; i++) {
 
-            Document doc = Jsoup.connect(baseLink+i).get();
+            Document doc = Jsoup.connect(BASE_LINK +i).get();
             parseToIdiomModel(doc);
-            System.out.println(baseLink+i);
+            System.out.println(BASE_LINK +i);
             System.out.println(idiomModels.toArray().length);
         }
 
@@ -60,15 +64,16 @@ public class IdiomJsoupApproach {
     }
 
     public String getExampleEnglish(Element el) {
-        String exampleEnglish = el.select("div[class=medium-5 columns]").select("p").text();
-        return exampleEnglish;
+//        String exampleEnglish = el.select("div[class=medium-5 columns]").select("p").text();
+        Node node =el.select("div[class=medium-5 columns]").select("p").first().childNodes().get(1);
+        return node.toString();
 
     }
 
 
     public String getExampleMp3Link(Element el) {
         String exampleMp3Link = el.select("div[class=medium-5 columns]").select("a[href]").attr("href");
-        return exampleMp3Link;
+        return PREFIX_LINK+exampleMp3Link;
 
     }
 
@@ -87,12 +92,12 @@ public class IdiomJsoupApproach {
 
     private String getLinkToIdiom(Element el) {
         String idiomLink = el.select("p[class=big mtop]").select("a[href]").next("a[href]").attr("href");
-        return idiomLink;
+        return PREFIX_LINK+idiomLink;
     }
 
     public String getMp3TranslateLink(Element el) {
         String mp3El = el.select("p[class=big mtop]").select("a[href]").attr("href");
-        return mp3El;
+        return PREFIX_LINK+mp3El;
     }
 
 
