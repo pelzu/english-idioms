@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class IdiomJsoupApproach {
@@ -28,13 +27,16 @@ public class IdiomJsoupApproach {
 
     public void getIdiom() throws IOException {
 
-        for (int i = 1; i <=11 ; i++) {
 
+        Document tempDoc = Jsoup.connect(BASE_LINK).get();
+
+        for (int i = 1; i <= getNumberOfPageIdiom(tempDoc) ; i++) {
             Document doc = Jsoup.connect(BASE_LINK +i).get();
             parseToIdiomModel(doc);
             System.out.println(BASE_LINK +i);
             System.out.println(idiomModels.toArray().length);
         }
+
 
 
 
@@ -98,6 +100,12 @@ public class IdiomJsoupApproach {
     public String getMp3TranslateLink(Element el) {
         String mp3El = el.select("p[class=big mtop]").select("a[href]").attr("href");
         return PREFIX_LINK+mp3El;
+    }
+
+    public int getNumberOfPageIdiom(Document document) {
+        Elements elements =document.getElementsByClass("pagination");
+        String numberOfPage= elements.first().lastElementChild().text();
+        return Integer.parseInt(numberOfPage) ;
     }
 
 
