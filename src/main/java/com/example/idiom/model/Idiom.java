@@ -1,13 +1,16 @@
 package com.example.idiom.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IdiomModel {
+
+public class Idiom {
 
 
     private String id;

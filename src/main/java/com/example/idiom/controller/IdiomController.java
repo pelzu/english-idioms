@@ -1,6 +1,6 @@
 package com.example.idiom.controller;
 
-import com.example.idiom.model.IdiomModel;
+import com.example.idiom.model.Idiom;
 import com.example.idiom.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class IdiomController {
     private final IdiomJsoupApproach idiomJsoupApproach;
 
     private final int idiomLength = 520;
-    private final ArrayList<IdiomModel> idiomsArrayList = new ArrayList<>();
+    private final ArrayList<Idiom> idiomsArrayList = new ArrayList<>();
 
 
     @Autowired

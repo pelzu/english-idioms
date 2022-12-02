@@ -1,6 +1,6 @@
 package com.example.idiom.service;
 
-import com.example.idiom.model.IdiomModel;
+import com.example.idiom.model.Idiom;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,9 +22,9 @@ public class IdiomService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public IdiomModel getOneIdiom(int httpEnd) {
+    public Idiom getOneIdiom(int httpEnd) {
 
-        IdiomModel idioms = new IdiomModel();
+        Idiom idioms = new Idiom();
 
 
         String result = restTemplate.getForObject(this.IDIOM_URI + httpEnd, String.class);

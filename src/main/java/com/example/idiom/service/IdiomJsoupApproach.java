@@ -1,6 +1,6 @@
 package com.example.idiom.service;
 
-import com.example.idiom.model.IdiomModel;
+import com.example.idiom.model.Idiom;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class IdiomJsoupApproach {
@@ -18,7 +19,7 @@ public class IdiomJsoupApproach {
     private final static String PREFIX_LINK = "https://www.ang.pl";
 
 
-    private static ArrayList<IdiomModel> idiomModels = new ArrayList<>();
+    private static List<Idiom> idioms = new ArrayList<>();
 
 
 //    private static int incrementator = 1;
@@ -32,7 +33,7 @@ public class IdiomJsoupApproach {
             Document doc = Jsoup.connect(BASE_LINK + i).get();
             parseToIdiomModel(doc,i);
             System.out.println(BASE_LINK + i);
-            System.out.println(idiomModels.toArray().length);
+            System.out.println(idioms.toArray().length);
         }
 
     }
@@ -43,16 +44,28 @@ public class IdiomJsoupApproach {
         Elements elements = document.select("div[style*=border-bottom: 1px solid #ccc;]");
         for (int i = 0; i <elements.toArray().length ; i++) {
 
-            IdiomModel idiomModel = new IdiomModel();
-            idiomModel.setId(Integer.toString((calculateId(paginationIncrement,i))));
-            idiomModel.setAudioTranslateLink(getMp3TranslateLink(elements.get(i)));
-            idiomModel.setLinkToIdiom(getLinkToIdiom(elements.get(i)));
-            idiomModel.setEnglishMeaning(getEnglishTranslation(elements.get(i)));
-            idiomModel.setPolishMeaning(getPolishTranslation(elements.get(i)));
-            idiomModel.setAudioExampleLink(getExampleMp3Link(elements.get(i)));
-            idiomModel.setEnglishExample(getExampleEnglish(elements.get(i)));
-            idiomModels.add(idiomModel);
-            System.out.println(idiomModel);
+            Idiom idiom = Idiom.builder()
+                    .id(Integer.toString((calculateId(paginationIncrement,i))))
+                    .audioTranslateLink(getMp3TranslateLink(elements.get(i)))
+                    .linkToIdiom(getLinkToIdiom(elements.get(i)))
+                    .englishMeaning(getLinkToIdiom(elements.get(i)))
+                    .polishMeaning(getPolishTranslation(elements.get(i)))
+                    .audioExampleLink(getExampleMp3Link(elements.get(i)))
+                    .englishExample(getExampleEnglish(elements.get(i)))
+                    .build();
+
+
+//
+//            IdiomModel idiomModel = new IdiomModel();
+//            idiomModel.setId(Integer.toString((calculateId(paginationIncrement,i))));
+//            idiomModel.setAudioTranslateLink(getMp3TranslateLink(elements.get(i)));
+//            idiomModel.setLinkToIdiom(getLinkToIdiom(elements.get(i)));
+//            idiomModel.setEnglishMeaning(getEnglishTranslation(elements.get(i)));
+//            idiomModel.setPolishMeaning(getPolishTranslation(elements.get(i)));
+//            idiomModel.setAudioExampleLink(getExampleMp3Link(elements.get(i)));
+//            idiomModel.setEnglishExample(getExampleEnglish(elements.get(i)));
+            idioms.add(idiom);
+            System.out.println(idiom);
 
         }
 

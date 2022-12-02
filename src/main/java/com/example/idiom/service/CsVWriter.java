@@ -1,6 +1,6 @@
 package com.example.idiom.service;
 
-import com.example.idiom.model.IdiomModel;
+import com.example.idiom.model.Idiom;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 @Service
 public class CsVWriter {
-    public void save(ArrayList<IdiomModel> idiomModels) {
+    public void save(ArrayList<Idiom> idioms) {
 
 
         PrintWriter printWriter;
@@ -21,7 +21,7 @@ public class CsVWriter {
                 StringBuffer csvData = new StringBuffer("");
                 printWriter.write(csvHeader.toString());
 
-                for (IdiomModel idiom : idiomModels) {
+                for (Idiom idiom : idioms) {
                     csvData.append(idiom.getId() + ";");
                     csvData.append(idiom.getPolishMeaning() + ";");
                     csvData.append(idiom.getEnglishMeaning() + ";");

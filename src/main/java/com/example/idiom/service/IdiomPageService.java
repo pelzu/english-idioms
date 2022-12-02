@@ -1,6 +1,6 @@
 package com.example.idiom.service;
 
-import com.example.idiom.model.IdiomModel;
+import com.example.idiom.model.Idiom;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,7 +32,7 @@ public class IdiomPageService {
 
 
     private static final int arraySize = 521;
-    private static final ArrayList<IdiomModel> idiomModelArrayList = new ArrayList<>();
+    private static final ArrayList<Idiom> IDIOM_ARRAY_LIST = new ArrayList<>();
 
     private int temResultIndex = 0;
 
@@ -45,11 +45,11 @@ public class IdiomPageService {
         result = getTrimResult(result);
 
         for (int i = 0; i <= 49; i++) {
-            idiomModelArrayList.add(getIdiomModel(result));
+            IDIOM_ARRAY_LIST.add(getIdiomModel(result));
 //               System.out.println(idiomModelArrayList.get(idiomModelArrayList.size()-1));
 
         }
-        System.out.println(idiomModelArrayList.size());
+        System.out.println(IDIOM_ARRAY_LIST.size());
 
 
     }
@@ -63,38 +63,38 @@ public class IdiomPageService {
         return htmlResult.substring(trimIndexBegin, trimIndexEnd + TRIM_RESULT_END.length());
     }
 
-    public IdiomModel getIdiomModel(String trimedResult) {
+    public Idiom getIdiomModel(String trimedResult) {
 
 
-        IdiomModel idiomModel = new IdiomModel();
+        Idiom idiom = new Idiom();
         int audioMeaningBeginIndex = trimedResult.indexOf(AUDIO_MEANING_BEGIN_PHRASE, temResultIndex) + AUDIO_MEANING_BEGIN_PHRASE.length();
         int audioMeaningEndIndex = trimedResult.indexOf("\"", audioMeaningBeginIndex);
-        idiomModel.setAudioTranslateLink(AUDIO_MEANING_URL + trimedResult.substring(audioMeaningBeginIndex, audioMeaningEndIndex));
+        idiom.setAudioTranslateLink(AUDIO_MEANING_URL + trimedResult.substring(audioMeaningBeginIndex, audioMeaningEndIndex));
 
         int idiomLinkBeginIndex = trimedResult.indexOf(IDIOM_LINK_BEGIN_PHRASE, audioMeaningEndIndex) + IDIOM_LINK_BEGIN_PHRASE.length();
         int idiomLinkEndIndex = trimedResult.indexOf("\"", idiomLinkBeginIndex);
-        idiomModel.setLinkToIdiom(IDIOM_URL + trimedResult.substring(idiomLinkBeginIndex, idiomLinkEndIndex));
-        idiomModel.setId(trimedResult.substring(idiomLinkBeginIndex, idiomLinkEndIndex));
+        idiom.setLinkToIdiom(IDIOM_URL + trimedResult.substring(idiomLinkBeginIndex, idiomLinkEndIndex));
+        idiom.setId(trimedResult.substring(idiomLinkBeginIndex, idiomLinkEndIndex));
 
         int englishMeaningBeginIndex = trimedResult.indexOf(ENGLISH_MEANING_BEGIN_PHRASE, idiomLinkEndIndex) + ENGLISH_MEANING_BEGIN_PHRASE.length();
         int englishMeaningEndIndex = trimedResult.indexOf("</a>", englishMeaningBeginIndex);
-        idiomModel.setEnglishMeaning(trimedResult.substring(englishMeaningBeginIndex, englishMeaningEndIndex));
+        idiom.setEnglishMeaning(trimedResult.substring(englishMeaningBeginIndex, englishMeaningEndIndex));
 
         int polishMeaningBeginIndex = trimedResult.indexOf(POLISH_MEANING_BEGIN_PHRASE, englishMeaningEndIndex) + POLISH_MEANING_BEGIN_PHRASE.length();
         int polishMeaningEndIndex = trimedResult.indexOf("</p>", polishMeaningBeginIndex);
-        idiomModel.setPolishMeaning(trimedResult.substring(polishMeaningBeginIndex, polishMeaningEndIndex));
+        idiom.setPolishMeaning(trimedResult.substring(polishMeaningBeginIndex, polishMeaningEndIndex));
 
         int audioExampleBeginIndex = trimedResult.indexOf(AUDIO_EXAMPLE_BEGIN_PHRASE, polishMeaningBeginIndex) + AUDIO_EXAMPLE_BEGIN_PHRASE.length();
         int audioExampleingEndIndex = trimedResult.indexOf("\"", audioExampleBeginIndex);
-        idiomModel.setAudioExampleLink(AUDIO_EXAMPLE_URL + trimedResult.substring(audioExampleBeginIndex, audioExampleingEndIndex));
+        idiom.setAudioExampleLink(AUDIO_EXAMPLE_URL + trimedResult.substring(audioExampleBeginIndex, audioExampleingEndIndex));
 
         int englishExampleBeginIndex = trimedResult.indexOf(ENGLISH_EXAMPLE_BEGIN_PHRASE, audioExampleingEndIndex) + ENGLISH_EXAMPLE_BEGIN_PHRASE.length();
         int englishExampleingEndIndex = trimedResult.indexOf("</p>", englishExampleBeginIndex);
-        idiomModel.setEnglishExample(trimedResult.substring(englishExampleBeginIndex, englishExampleingEndIndex));
+        idiom.setEnglishExample(trimedResult.substring(englishExampleBeginIndex, englishExampleingEndIndex));
 
         setTemResultIndex(englishExampleingEndIndex);
-        System.out.println(idiomModel);
-        return idiomModel;
+        System.out.println(idiom);
+        return idiom;
     }
 
     public void setTemResultIndex(int temResultIndex) {
@@ -103,11 +103,11 @@ public class IdiomPageService {
 
 
     public void getArraySize() {
-        System.out.println("Rozmiar Tablicy=" + idiomModelArrayList.size());
+        System.out.println("Rozmiar Tablicy=" + IDIOM_ARRAY_LIST.size());
     }
 
     public void getArray() {
-        for (IdiomModel idiom : idiomModelArrayList
+        for (Idiom idiom : IDIOM_ARRAY_LIST
         ) {
             System.out.println(idiom);
 
