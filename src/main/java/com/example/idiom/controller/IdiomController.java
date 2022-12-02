@@ -37,6 +37,7 @@ public class IdiomController {
 
     @GetMapping("/idiomJsoup")
     public void getIdiomsByJsoup() throws IOException {
+
         idiomJsoupApproach.getIdiom();
 
 
@@ -55,7 +56,9 @@ public class IdiomController {
 
     @GetMapping("/idiomsOneGet")
     public void getIdiomsbyOneGet() throws IOException {
+
         for (int i = 0; i <= idiomLength; i++) {  //
+
             addAllIdioms(i);
             downloadAudio(i);
         }

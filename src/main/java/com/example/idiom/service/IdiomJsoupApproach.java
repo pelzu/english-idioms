@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @Service
 public class IdiomJsoupApproach {
-    private static final String BASE_LINK = "https://www.ang.pl/slownictwo/idiomy/page/";
+    public static final String BASE_LINK = "https://www.ang.pl/slownictwo/idiomy/page/";
 
     private final static String PREFIX_LINK = "https://www.ang.pl";
 
@@ -22,38 +22,29 @@ public class IdiomJsoupApproach {
 
 
 //    private static int incrementator = 1;
+    private static  int numberOfPage ;
 
     public void getIdiom() throws IOException {
+        Document  tempDoc= Jsoup.connect(BASE_LINK).get();
+        int numberOfPage=getNumberOfPageIdiom(tempDoc);
 
-
-        Document tempDoc = Jsoup.connect(BASE_LINK).get();
-
-
-        for (int i = 1; i <= getNumberOfPageIdiom(tempDoc); i++) {
+        for (int i = 1; i <= numberOfPage; i++) {
             Document doc = Jsoup.connect(BASE_LINK + i).get();
             parseToIdiomModel(doc,i);
             System.out.println(BASE_LINK + i);
             System.out.println(idiomModels.toArray().length);
         }
 
-        for (IdiomModel idiom:idiomModels
-             ) {
-            System.out.println(idiom);
-
-        }
-
-
-
-
     }
 
-    public void parseToIdiomModel(Document document, int increment) {
-        Elements elements = document.select("div[style*=border-bottom: 1px solid #ccc;]");
 
+
+    public void parseToIdiomModel(Document document, int paginationIncrement) {
+        Elements elements = document.select("div[style*=border-bottom: 1px solid #ccc;]");
         for (int i = 0; i <elements.toArray().length ; i++) {
 
             IdiomModel idiomModel = new IdiomModel();
-            idiomModel.setId(Integer.toString((increment-1)*50+i+1));
+            idiomModel.setId(Integer.toString((calculateId(paginationIncrement,i))));
             idiomModel.setAudioTranslateLink(getMp3TranslateLink(elements.get(i)));
             idiomModel.setLinkToIdiom(getLinkToIdiom(elements.get(i)));
             idiomModel.setEnglishMeaning(getEnglishTranslation(elements.get(i)));
@@ -82,6 +73,10 @@ public class IdiomJsoupApproach {
 //        }
 
 
+    }
+
+    private int calculateId(int paginationIncrement, int i) {
+        return ((paginationIncrement-1)*50+i+1);
     }
 
     public String getExampleEnglish(Element el) {
