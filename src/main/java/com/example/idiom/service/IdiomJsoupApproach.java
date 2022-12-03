@@ -22,16 +22,16 @@ public class IdiomJsoupApproach {
     private static List<Idiom> idioms = new ArrayList<>();
 
 
-//    private static int incrementator = 1;
-    private static  int numberOfPage ;
+    //    private static int incrementator = 1;
+    private static int numberOfPage;
 
     public void getIdiom() throws IOException {
-        Document  tempDoc= Jsoup.connect(BASE_LINK).get();
-        int numberOfPage=getNumberOfPageIdiom(tempDoc);
+        Document tempDoc = Jsoup.connect(BASE_LINK).get();
+        int numberOfPage = getNumberOfPageIdiom(tempDoc);
 
         for (int i = 1; i <= numberOfPage; i++) {
             Document doc = Jsoup.connect(BASE_LINK + i).get();
-            parseToIdiomModel(doc,i);
+            parseToIdiomModel(doc, i);
             System.out.println(BASE_LINK + i);
             System.out.println(idioms.toArray().length);
         }
@@ -39,13 +39,13 @@ public class IdiomJsoupApproach {
     }
 
 
-
     public void parseToIdiomModel(Document document, int paginationIncrement) {
         Elements elements = document.select("div[style*=border-bottom: 1px solid #ccc;]");
-        for (int i = 0; i <elements.toArray().length ; i++) {
+        int numberOfElements=elements.toArray().length ;
+        for (int i = 0; i < numberOfElements; i++) {
 
             Idiom idiom = Idiom.builder()
-                    .id(Integer.toString((calculateId(paginationIncrement,i))))
+                    .id(Integer.toString((calculateId(paginationIncrement, i))))
                     .audioTranslateLink(getMp3TranslateLink(elements.get(i)))
                     .linkToIdiom(getLinkToIdiom(elements.get(i)))
                     .englishMeaning(getLinkToIdiom(elements.get(i)))
@@ -53,64 +53,31 @@ public class IdiomJsoupApproach {
                     .audioExampleLink(getExampleMp3Link(elements.get(i)))
                     .englishExample(getExampleEnglish(elements.get(i)))
                     .build();
-
-
-//
-//            IdiomModel idiomModel = new IdiomModel();
-//            idiomModel.setId(Integer.toString((calculateId(paginationIncrement,i))));
-//            idiomModel.setAudioTranslateLink(getMp3TranslateLink(elements.get(i)));
-//            idiomModel.setLinkToIdiom(getLinkToIdiom(elements.get(i)));
-//            idiomModel.setEnglishMeaning(getEnglishTranslation(elements.get(i)));
-//            idiomModel.setPolishMeaning(getPolishTranslation(elements.get(i)));
-//            idiomModel.setAudioExampleLink(getExampleMp3Link(elements.get(i)));
-//            idiomModel.setEnglishExample(getExampleEnglish(elements.get(i)));
             idioms.add(idiom);
             System.out.println(idiom);
-
         }
-
-//        for (Element element : elements
-//        ) {
-//            IdiomModel idiomModel = new IdiomModel();
-//            idiomModel.setId(Integer.toString(incrementator));
-//            idiomModel.setAudioTranslateLink(getMp3TranslateLink(element));
-//            idiomModel.setLinkToIdiom(getLinkToIdiom(element));
-//            idiomModel.setEnglishMeaning(getEnglishTranslation(element));
-//            idiomModel.setPolishMeaning(getPolishTranslation(element));
-//            idiomModel.setAudioExampleLink(getExampleMp3Link(element));
-//            idiomModel.setEnglishExample(getExampleEnglish(element));
-//            idiomModels.add(idiomModel);
-//            System.out.println(idiomModel);
-//            incrementator++;
-//
-//        }
-
-
     }
 
     private int calculateId(int paginationIncrement, int i) {
-        return ((paginationIncrement-1)*50+i+1);
+        return ((paginationIncrement - 1) * 50 + i + 1);
     }
 
     public String getExampleEnglish(Element el) {
 //        String exampleEnglish = el.select("div[class=medium-5 columns]").select("p").text();
         Node node = el.select("div[class=medium-5 columns]").select("p").first().childNodes().get(1);
         return node.toString();
-
     }
 
 
     public String getExampleMp3Link(Element el) {
         String exampleMp3Link = el.select("div[class=medium-5 columns]").select("a[href]").attr("href");
         return PREFIX_LINK + exampleMp3Link;
-
     }
 
 
     public String getPolishTranslation(Element el) {
         String polishTranslation = el.select("p[class=pol]").text();
         return polishTranslation;
-
     }
 
     public String getEnglishTranslation(Element el) {
