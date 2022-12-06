@@ -21,8 +21,8 @@ public class IdiomJsoupApproach {
     private final static String PREFIX_LINK = "https://www.ang.pl";
 
 
-    private static List<Idiom> idioms = new ArrayList<>();
-    List<Document> paginationDocuments =new ArrayList<Document>();
+    private static final List<Idiom> idioms = new ArrayList<>();
+    List<Document> paginationDocuments = new ArrayList<Document>();
     int numberOfPage;
 
 
@@ -61,38 +61,8 @@ public class IdiomJsoupApproach {
                     .englishExample(getExampleEnglish(element))
                     .build();
             idioms.add(idiom);
-            log.info(idiom.toString());
+            log.info(String.valueOf(idiom));
         });
-//        for (Element element:elements
-//             ) {
-//            Idiom idiom = Idiom.builder()
-//                .id(element.id())
-//                .audioTranslateLink(getMp3TranslateLink(element))
-//                .linkToIdiom(getLinkToIdiom(element))
-//                .englishMeaning(getLinkToIdiom(element))
-//                .polishMeaning(getPolishTranslation(element))
-//                .audioExampleLink(getExampleMp3Link(element))
-//                .englishExample(getExampleEnglish(element))
-//                .build();
-//            idioms.add(idiom);
-//            log.info(idiom.toString());
-//        }
-//
-//        for (int i = 0; i < numberOfElements; i++) {
-//
-//            Idiom idiom = Idiom.builder()
-//                    .id(Integer.toString((calculateId(paginationIncrement, i))))
-//                    .audioTranslateLink(getMp3TranslateLink(elements.get(i)))
-//                    .linkToIdiom(getLinkToIdiom(elements.get(i)))
-//                    .englishMeaning(getLinkToIdiom(elements.get(i)))
-//                    .polishMeaning(getPolishTranslation(elements.get(i)))
-//                    .audioExampleLink(getExampleMp3Link(elements.get(i)))
-//                    .englishExample(getExampleEnglish(elements.get(i)))
-//                    .build();
-//            idioms.add(idiom);
-//           log.info(idiom.toString());
-//
-//        }
     }
 
 
@@ -124,12 +94,13 @@ public class IdiomJsoupApproach {
         String idiomLink = el.select("p[class=big mtop]").select("a[href]").next("a[href]").attr("href");
         return PREFIX_LINK + idiomLink;
     }
+
     private String getIdNumber(Element el) {
 
         String idNumber = el.select("p[class=big mtop]").select("a[href]").next("a[href]").attr("href");
-        idNumber=idNumber.substring(idNumber.lastIndexOf("/")+1,idNumber.length());
+        idNumber = idNumber.substring(idNumber.lastIndexOf("/") + 1);
 
-        return  idNumber;
+        return idNumber;
 
     }
 
@@ -138,11 +109,15 @@ public class IdiomJsoupApproach {
         return PREFIX_LINK + mp3El;
     }
 
-    public int getNumberOfPageIdiom( ) throws IOException {
+    public int getNumberOfPageIdiom() throws IOException {
         Document tempDoc = Jsoup.connect(BASE_LINK).get();
         Elements elements = tempDoc.getElementsByClass("pagination");
         String numberOfPage = elements.first().lastElementChild().text();
         return Integer.parseInt(numberOfPage);
+    }
+
+    public List<Idiom> getIdioms() {
+        return idioms;
     }
 
 
