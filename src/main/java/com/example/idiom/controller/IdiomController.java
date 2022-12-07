@@ -1,14 +1,18 @@
 package com.example.idiom.controller;
 
+import com.example.idiom.service.dataGrab.idiom.IdiomImpl;
+import com.example.idiom.service.inter.DataGrabberAngPl;
 import com.example.idiom.model.Idiom;
-import com.example.idiom.service.phrasal.PhrasalVerbsImpl;
 import com.example.idiom.service.*;
+import com.example.idiom.service.dataGrab.phrasal.PhrasalVerbsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class IdiomController {
@@ -20,36 +24,31 @@ public class IdiomController {
 
     private final AudioService audioService;
 
-    private final IdiomJsoupApproach idiomJsoupApproach;
 
-    private final PhrasalVerbsImpl phrasalVerbs;
+    private final PhrasalVerbsImpl phrasalVerbsImpl;
+
+    private final IdiomImpl idiomImpl ;
+
 
     private final int idiomLength = 520;
     private final ArrayList<Idiom> idiomsArrayList = new ArrayList<>();
 
     @Autowired
-    public IdiomController(IdiomService idiomService, CsVWriter csVWriter, IdiomPageService idiomPageService, AudioService audioService, IdiomJsoupApproach idiomJsoupApproach, PhrasalVerbsImpl phrasalVerbs) {
+    public IdiomController(IdiomService idiomService, CsVWriter csVWriter, IdiomPageService idiomPageService, AudioService audioService, PhrasalVerbsImpl phrasalVerbsImpl, IdiomImpl idiomImpl) {
         this.idiomService = idiomService;
         this.csVWriter = csVWriter;
         this.idiomPageService = idiomPageService;
         this.audioService = audioService;
-        this.idiomJsoupApproach = idiomJsoupApproach;
-        this.phrasalVerbs = phrasalVerbs;
+        this.phrasalVerbsImpl = phrasalVerbsImpl;
+        this.idiomImpl = idiomImpl;
     }
 
-    @GetMapping("/Phrasal")
-    public void getPhrasal() throws IOException {
-        phrasalVerbs.getObject();
+    @GetMapping("/learn")
+    public List<DataGrabberAngPl> getPhrasal(@RequestParam String kind) {
+        return getRightObjectByParam(kind).getObject();
 
     }
 
-    @GetMapping("/idiomJsoup")
-    public void getIdiomsByJsoup() throws IOException {
-
-        idiomJsoupApproach.getIdiom();
-
-
-    }
 
 
     @GetMapping("/idiomsPagination")
@@ -83,6 +82,15 @@ public class IdiomController {
 
     public void addAllIdioms(int iterator) {
         idiomsArrayList.add(idiomService.getOneIdiom(iterator));
+
+    }
+
+    public DataGrabberAngPl getRightObjectByParam(String param) {
+        if (param.equals("idiom")) {
+            return idiomImpl ;
+        } else if (param.equals("phrasal")) {
+            return phrasalVerbsImpl ;
+        }else return null ;
 
     }
 

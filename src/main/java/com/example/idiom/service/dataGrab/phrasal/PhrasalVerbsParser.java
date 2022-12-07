@@ -1,4 +1,4 @@
-package com.example.idiom.service.phrasal;
+package com.example.idiom.service.dataGrab.phrasal;
 
 import com.example.idiom.model.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
@@ -9,12 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.idiom.inter.DataGrabberAngPl.PREFIX_LINK;
-
 @Slf4j
 @Service
 public class PhrasalVerbsParser {
 
+    private final String PREFIX_LINK = "https://www.ang.pl";
 
     public List<PhrasalVerb> parseToPhrasalVerbs(Elements elements) {
         List<PhrasalVerb> phrasalVerbList = new ArrayList<>();

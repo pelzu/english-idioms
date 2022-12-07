@@ -1,15 +1,16 @@
-package com.example.idiom.service.phrasal;
+package com.example.idiom.service.dataGrab.phrasal;
 
-import com.example.idiom.inter.DataGrabberAngPl;
+import com.example.idiom.service.inter.DataGrabberAngPl;
+import com.example.idiom.model.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Service
-public class PhrasalVerbsImpl implements DataGrabberAngPl {
+public class PhrasalVerbsImpl implements DataGrabberAngPl<PhrasalVerb> {
 
     private final PhrasalVerbsParser phrasalVerbsParser;
 
@@ -23,8 +24,8 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl {
 
 
     @Override
-    public void getObject() throws IOException {
-        phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements());
+    public List<PhrasalVerb> getObject() {
+        return phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements());
     }
 
 
