@@ -1,35 +1,20 @@
-package com.example.idiom.inter;
+package com.example.idiom.service.phrasal;
 
 import com.example.idiom.model.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.idiom.inter.DataGrabberAngPl.PREFIX_LINK;
+
 @Slf4j
 @Service
-public class PhrasalVerbsImpl implements DataGrabberAngPl {
+public class PhrasalVerbsParser {
 
-
-    @Override
-    public void getObject() throws IOException {
-        parseToPhrasalVerbs(getElements());
-    }
-
-    public Elements getElements() throws IOException {
-        int paginationNumbers = getNumberOfPagePhrasalVerb();
-        Elements elements = new Elements();
-        for (int i = 1; i <= paginationNumbers; i++) {
-            elements.addAll(Jsoup.connect(PHRASAL_VERB_LINK + i).get().select("div[style*=border-bottom: 1px solid #ccc;]"));
-        }
-        return elements;
-    }
 
     public List<PhrasalVerb> parseToPhrasalVerbs(Elements elements) {
         List<PhrasalVerb> phrasalVerbList = new ArrayList<>();
@@ -70,14 +55,4 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl {
         idNumber = idNumber.substring(idNumber.lastIndexOf("/") + 1);
         return idNumber;
     }
-
-    public int getNumberOfPagePhrasalVerb() throws IOException {
-        Document tempDoc = Jsoup.connect(PHRASAL_VERB_LINK).get();
-        Elements elements = tempDoc.getElementsByClass("pagination");
-        String numberOfPage = elements.first().lastElementChild().text();
-        return Integer.parseInt(numberOfPage);
-
-    }
-
-
 }

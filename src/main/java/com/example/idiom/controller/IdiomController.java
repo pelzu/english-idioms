@@ -1,8 +1,7 @@
 package com.example.idiom.controller;
 
-import com.example.idiom.inter.DataGrabberAngPl;
-import com.example.idiom.inter.IdiomImpl;
 import com.example.idiom.model.Idiom;
+import com.example.idiom.service.phrasal.PhrasalVerbsImpl;
 import com.example.idiom.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,24 +22,24 @@ public class IdiomController {
 
     private final IdiomJsoupApproach idiomJsoupApproach;
 
-  private final DataGrabberAngPl dataGrabberAngPl ;
+    private final PhrasalVerbsImpl phrasalVerbs;
 
     private final int idiomLength = 520;
     private final ArrayList<Idiom> idiomsArrayList = new ArrayList<>();
 
     @Autowired
-    public IdiomController(IdiomService idiomService, CsVWriter csVWriter, IdiomPageService idiomPageService, AudioService audioService, IdiomJsoupApproach idiomJsoupApproach, DataGrabberAngPl dataGrabberAngPl) {
+    public IdiomController(IdiomService idiomService, CsVWriter csVWriter, IdiomPageService idiomPageService, AudioService audioService, IdiomJsoupApproach idiomJsoupApproach, PhrasalVerbsImpl phrasalVerbs) {
         this.idiomService = idiomService;
         this.csVWriter = csVWriter;
         this.idiomPageService = idiomPageService;
         this.audioService = audioService;
         this.idiomJsoupApproach = idiomJsoupApproach;
-        this.dataGrabberAngPl = dataGrabberAngPl;
+        this.phrasalVerbs = phrasalVerbs;
     }
 
     @GetMapping("/Phrasal")
     public void getPhrasal() throws IOException {
-        dataGrabberAngPl.getObject();
+        phrasalVerbs.getObject();
 
     }
 
