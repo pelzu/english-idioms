@@ -29,6 +29,7 @@ public class IdiomElement {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+            //TODO Add hand RuntimeException(e) handling
         }
     }
 }

@@ -1,10 +1,9 @@
 package com.example.idiom.service.dataGrab.idiom;
 
 import com.example.idiom.model.Idiom;
-import com.example.idiom.service.inter.DataGrabberAngPl;
+import com.example.idiom.inter.DataGrabberAngPl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +15,20 @@ public class IdiomImpl implements DataGrabberAngPl<Idiom> {
 
     private final IdiomElement idiomElement;
 
+
+    private final IdiomCsVConverter idiomCsVConverter;
+
     @Autowired
-    public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement) {
+    public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement, IdiomCsVConverter idiomCsVConverter) {
         this.idiomParser = idiomParser;
         this.idiomElement = idiomElement;
+        this.idiomCsVConverter = idiomCsVConverter;
     }
 
     @Override
     public List<Idiom> getObject() {
-        return idiomParser.parseToIdiom(idiomElement.getElements());
+        List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
+        idiomCsVConverter.save(idiomList);
+        return idiomList;
     }
 }

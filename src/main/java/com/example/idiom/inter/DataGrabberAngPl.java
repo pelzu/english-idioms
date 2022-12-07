@@ -1,4 +1,4 @@
-package com.example.idiom.service.inter;
+package com.example.idiom.inter;
 
 import com.example.idiom.model.PhrasalVerb;
 

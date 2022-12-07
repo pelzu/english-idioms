@@ -24,6 +24,8 @@ public class IdiomPagination {
         } catch (
                 IOException e) {
             throw new RuntimeException(e);
+            //TODO Add hand RuntimeException(e) handling
+
         }
     }
 

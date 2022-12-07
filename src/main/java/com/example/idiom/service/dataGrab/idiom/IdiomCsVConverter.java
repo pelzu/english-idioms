@@ -1,4 +1,4 @@
-package com.example.idiom.service;
+package com.example.idiom.service.dataGrab.idiom;
 
 import com.example.idiom.model.Idiom;
 import org.springframework.stereotype.Service;
@@ -6,27 +6,30 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-@Service
-public class CsVWriter {
-    public void save(ArrayList<Idiom> idioms) {
+import java.util.List;
 
+@Service
+public class IdiomCsVConverter {
+
+    public void save(List<Idiom> idioms) {
 
         PrintWriter printWriter;
         {
             try {
                 printWriter = new PrintWriter(new File("src/main/resources/static/csv/idiom.csv"));
-                StringBuffer csvHeader = new StringBuffer("");
-                csvHeader.append("id;polishMeaning;englishMeaning;englishExample\n");
-                StringBuffer csvData = new StringBuffer("");
+                StringBuffer csvHeader = new StringBuffer();
+                csvHeader.append("id;polishMeaning;englishMeaning;LinkToIdiom;AudioTranslateLink;AudioExampleLink;englishExample\n");
+                StringBuffer csvData = new StringBuffer();
                 printWriter.write(csvHeader.toString());
 
                 for (Idiom idiom : idioms) {
                     csvData.append(idiom.getId() + ";");
                     csvData.append(idiom.getPolishMeaning() + ";");
                     csvData.append(idiom.getEnglishMeaning() + ";");
+                    csvData.append(idiom.getLinkToIdiom() + ";");
+                    csvData.append(idiom.getAudioTranslateLink() + ";");
+                    csvData.append(idiom.getAudioExampleLink() + ";");
                     csvData.append(idiom.getEnglishExample() + "\n");
-
                 }
                 csvData.ensureCapacity(csvData.length());
                 System.out.println(csvData);
@@ -36,9 +39,10 @@ public class CsVWriter {
                 throw new RuntimeException(e);
             }
         }
-
     }
 }
+
+
 
 
 

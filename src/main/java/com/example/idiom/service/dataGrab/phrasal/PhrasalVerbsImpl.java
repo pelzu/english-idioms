@@ -1,6 +1,6 @@
 package com.example.idiom.service.dataGrab.phrasal;
 
-import com.example.idiom.service.inter.DataGrabberAngPl;
+import com.example.idiom.inter.DataGrabberAngPl;
 import com.example.idiom.model.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +16,19 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl<PhrasalVerb> {
 
     private final PhrasalElement phrasalElement;
 
-    @Autowired
-    public PhrasalVerbsImpl(PhrasalVerbsParser phrasalVerbsParser, PhrasalElement phrasalElement) {
+    private final PhrasalCsvConverter phrasalCsvConverter;
+
+    public PhrasalVerbsImpl(PhrasalVerbsParser phrasalVerbsParser, PhrasalElement phrasalElement, PhrasalCsvConverter phrasalCsvConverter) {
         this.phrasalVerbsParser = phrasalVerbsParser;
         this.phrasalElement = phrasalElement;
+        this.phrasalCsvConverter = phrasalCsvConverter;
     }
-
 
     @Override
     public List<PhrasalVerb> getObject() {
-        return phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements());
+        List<PhrasalVerb> phrasalVerbList=phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements()) ;
+        phrasalCsvConverter.save(phrasalVerbList);
+        return phrasalVerbList ;
     }
 
 
