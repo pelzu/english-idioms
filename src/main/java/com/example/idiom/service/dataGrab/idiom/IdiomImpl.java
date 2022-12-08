@@ -15,20 +15,27 @@ public class IdiomImpl implements DataGrabberAngPl<Idiom> {
 
     private final IdiomElement idiomElement;
 
+    private final IdiomAudioGrabber idiomAudioGrabber;
 
     private final IdiomCsVConverter idiomCsVConverter;
 
+
     @Autowired
-    public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement, IdiomCsVConverter idiomCsVConverter) {
+    public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement, IdiomAudioGrabber idiomAudioGrabber, IdiomCsVConverter idiomCsVConverter) {
         this.idiomParser = idiomParser;
         this.idiomElement = idiomElement;
+        this.idiomAudioGrabber = idiomAudioGrabber;
         this.idiomCsVConverter = idiomCsVConverter;
     }
 
     @Override
-    public List<Idiom> getObject() {
+    public List<Idiom> getObject(String audio, String csv) {
         List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
-        idiomCsVConverter.save(idiomList);
+        if (audio.equals("true")){idiomCsVConverter.save(idiomList);}
+        if (csv.equals("true")){idiomAudioGrabber.downLoadAudio(idiomList);}
+
+
+
         return idiomList;
     }
 }

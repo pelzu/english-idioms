@@ -1,4 +1,4 @@
-package com.example.idiom.service;
+package com.example.idiom.oldAproach;
 
 import com.example.idiom.model.Idiom;
 import org.springframework.stereotype.Service;

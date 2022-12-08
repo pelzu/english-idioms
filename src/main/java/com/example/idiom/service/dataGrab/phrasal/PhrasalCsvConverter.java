@@ -20,7 +20,6 @@ public class PhrasalCsvConverter {
                 csvHeader.append("id;polishMeaning;englishMeaning;englishExample;LinkToPhrasalVerb\n");
                 StringBuffer csvData = new StringBuffer();
                 printWriter.write(csvHeader.toString());
-
                 for (PhrasalVerb phrasalVerb : phrasalVerbList) {
                     csvData.append(phrasalVerb.getId() + ";");
                     csvData.append(phrasalVerb.getPolishMeaning() + ";");
@@ -29,8 +28,6 @@ public class PhrasalCsvConverter {
                     csvData.append(phrasalVerb.getLinkToPhrasalVerb() + "\n");
 
                 }
-                csvData.ensureCapacity(csvData.length());
-                System.out.println(csvData);
                 printWriter.write(csvData.toString());
                 printWriter.close();
             } catch (FileNotFoundException e) {

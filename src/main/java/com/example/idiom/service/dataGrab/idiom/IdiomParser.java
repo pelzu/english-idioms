@@ -35,7 +35,6 @@ public class IdiomParser {
     }
 
     public String getExampleEnglish(Element el) {
-//        String exampleEnglish = el.select("div[class=medium-5 columns]").select("p").text();
         Node node = el.select("div[class=medium-5 columns]").select("p").first().childNodes().get(1);
         return node.toString();
     }
