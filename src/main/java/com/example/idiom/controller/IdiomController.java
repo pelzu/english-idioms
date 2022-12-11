@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class IdiomController {
 
     @GetMapping("/learn")
     public List<DataGrabberAngPl> getPhrasal(@RequestParam String kind,@RequestParam String audio,@RequestParam String csv) {
+
         List<DataGrabberAngPl>dataGrabberAngPls=getRightObjectByParam(kind).getObject(audio,csv);
 
         return dataGrabberAngPls;

@@ -11,6 +11,9 @@ import java.util.List;
 @Service
 public class PhrasalCsvConverter {
     public void save(List<PhrasalVerb> phrasalVerbList) {
+
+
+        createDirForCsv();
         PrintWriter printWriter;
 
         {
@@ -34,6 +37,12 @@ public class PhrasalCsvConverter {
                 throw new RuntimeException(e);
             }
         }
+
+    }
+    public void createDirForCsv() {
+        File csvDir=new File("src/main/resources/static/csv") ;
+        csvDir.mkdirs();
+
     }
 
 }

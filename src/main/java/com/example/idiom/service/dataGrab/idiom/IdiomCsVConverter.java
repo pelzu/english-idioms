@@ -13,6 +13,7 @@ public class IdiomCsVConverter {
 
     public void save(List<Idiom> idioms) {
 
+        createDirForCsv();
         PrintWriter printWriter;
         {
             try {
@@ -39,6 +40,11 @@ public class IdiomCsVConverter {
                 throw new RuntimeException(e);
             }
         }
+    }
+    public void createDirForCsv() {
+        File csvDir = new File("src/main/resources/static/csv");
+        csvDir.mkdir() ;
+
     }
 }
 
