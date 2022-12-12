@@ -33,7 +33,7 @@ public class IdiomAudioGrabber {
             });
 
             File exampleFileMp3 = restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {
-                File mp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + idiom.getId() + "example" + ".mp3");
+                File mp3File = new File(MP3_EXAMPLE_DESTINATION +  idiom.getId() + "example" + ".mp3");
                 mp3File.createNewFile();
                 StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(mp3File));
                 return mp3File;

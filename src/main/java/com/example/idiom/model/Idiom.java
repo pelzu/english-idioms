@@ -5,12 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Comparator;
+
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Idiom {
+public class Idiom implements Comparable<Idiom> {
+
 
 
     private String id;
@@ -33,4 +36,11 @@ public class Idiom {
                 ", linkToIdiom='" + linkToIdiom + '\'' +
                 '}';
     }
+    @Override
+    public int compareTo(Idiom o) {
+
+        return Double.compare(Integer.parseInt(id),Integer.parseInt(o.id));
+    }
+
+
 }

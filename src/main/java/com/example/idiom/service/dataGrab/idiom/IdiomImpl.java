@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -29,12 +30,11 @@ public class IdiomImpl implements DataGrabberAngPl<Idiom> {
     }
 
     @Override
-    public List<Idiom> getObject(String audio, String csv) {
+    public List<Idiom> getObject(String kind, String audio, String csv) {
         List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
-        if (audio.equals("true")){idiomCsVConverter.save(idiomList);}
-        if (csv.equals("true")){idiomAudioGrabber.downLoadAudio(idiomList);}
 
-
+        if (csv.equals("true")){idiomCsVConverter.save(idiomList);}
+        if (audio.equals("true")){idiomAudioGrabber.downLoadAudio(idiomList);}
 
         return idiomList;
     }

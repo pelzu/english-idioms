@@ -1,5 +1,6 @@
 package com.example.idiom.controller;
 
+import com.example.idiom.service.dataGrab.DefaultImplAngPl;
 import com.example.idiom.service.dataGrab.idiom.IdiomAudioGrabber;
 import com.example.idiom.oldAproach.IdiomPageService;
 import com.example.idiom.oldAproach.IdiomService;
@@ -33,24 +34,26 @@ public class IdiomController {
 
     private final IdiomImpl idiomImpl ;
 
+private final DefaultImplAngPl defaultImplAngPl ;
 
     private final int idiomLength = 520;
     private final ArrayList<Idiom> idiomsArrayList = new ArrayList<>();
 
     @Autowired
-    public IdiomController(IdiomService idiomService, IdiomCsVConverter idiomCsVConverter, IdiomPageService idiomPageService, IdiomAudioGrabber idiomAudioGrabber, PhrasalVerbsImpl phrasalVerbsImpl, IdiomImpl idiomImpl) {
+    public IdiomController(IdiomService idiomService, IdiomCsVConverter idiomCsVConverter, IdiomPageService idiomPageService, IdiomAudioGrabber idiomAudioGrabber, PhrasalVerbsImpl phrasalVerbsImpl, IdiomImpl idiomImpl, DefaultImplAngPl defaultImplAngPl) {
         this.idiomService = idiomService;
         this.idiomCsVConverter = idiomCsVConverter;
         this.idiomPageService = idiomPageService;
         this.idiomAudioGrabber = idiomAudioGrabber;
         this.phrasalVerbsImpl = phrasalVerbsImpl;
         this.idiomImpl = idiomImpl;
+        this.defaultImplAngPl = defaultImplAngPl;
     }
 
     @GetMapping("/learn")
     public List<DataGrabberAngPl> getPhrasal(@RequestParam String kind,@RequestParam String audio,@RequestParam String csv) {
 
-        List<DataGrabberAngPl>dataGrabberAngPls=getRightObjectByParam(kind).getObject(audio,csv);
+        List<DataGrabberAngPl>dataGrabberAngPls=getRightObjectByParam(kind).getObject(kind,audio,csv);
 
         return dataGrabberAngPls;
 
@@ -62,7 +65,7 @@ public class IdiomController {
             return idiomImpl ;
         } else if (param.equals("phrasal")) {
             return phrasalVerbsImpl ;
-        }else return null ;
+        }else return defaultImplAngPl ;
 
     }
 

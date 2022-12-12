@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DataGrabberAngPl<T> {
 
-     List<T> getObject(String audio, String csv) ;
+     List<T> getObject(String words, String audio, String csv) ;
 
 
 
