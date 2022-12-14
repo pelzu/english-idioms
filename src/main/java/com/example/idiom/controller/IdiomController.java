@@ -1,7 +1,7 @@
 package com.example.idiom.controller;
 
 import com.example.idiom.inter.DataGrabberAngPl;
-import com.example.idiom.model.Idiom;
+import com.example.idiom.model.idiom.Idiom;
 import com.example.idiom.oldAproach.IdiomPageService;
 import com.example.idiom.oldAproach.IdiomService;
 import com.example.idiom.service.dataGrab.ChooseClass;
@@ -55,7 +55,7 @@ public class IdiomController {
     @GetMapping("/learn")
     public List<DataGrabberAngPl> getPhrasal(@RequestParam(required = false) String kind, @RequestParam(required = false) String audio, @RequestParam(required = false) String csv) {
 
-        return chooseClass.getLists(kind).getObject(audio, csv);
+        return chooseClass.getRightImpl(kind).getObject(audio, csv);
 
     }
 

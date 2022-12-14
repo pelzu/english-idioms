@@ -20,15 +20,15 @@ public class ChooseClass {
         this.defaultImplAngPl = defaultImplAngPl;
     }
 
-    public DataGrabberAngPl getLists(String kind) {
-        if (kind.equals("idiom")) {
+    public DataGrabberAngPl getRightImpl(String kind) {
+        if (kind == null) {
+            return defaultImplAngPl;
+        } else if (kind.equals("idiom")) {
             return idiom;
         } else if (kind.equals("phrasal")) {
             return phrasalVerbs;
         } else
             return defaultImplAngPl;
-
-
     }
 
 

@@ -1,6 +1,6 @@
 package com.example.idiom.service.dataGrab.idiom;
 
-import com.example.idiom.model.Idiom;
+import com.example.idiom.model.idiom.Idiom;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;

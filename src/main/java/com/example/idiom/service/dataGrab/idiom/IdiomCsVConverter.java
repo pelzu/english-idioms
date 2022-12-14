@@ -1,6 +1,6 @@
 package com.example.idiom.service.dataGrab.idiom;
 
-import com.example.idiom.model.Idiom;
+import com.example.idiom.model.idiom.Idiom;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -33,7 +33,7 @@ public class IdiomCsVConverter {
                     csvData.append(idiom.getEnglishExample() + "\n");
                 }
                 csvData.ensureCapacity(csvData.length());
-                System.out.println(csvData);
+//                System.out.println(csvData);
                 printWriter.write(csvData.toString());
                 printWriter.close();
             } catch (FileNotFoundException e) {

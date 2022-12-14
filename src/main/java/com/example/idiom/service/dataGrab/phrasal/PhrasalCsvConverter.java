@@ -1,6 +1,6 @@
 package com.example.idiom.service.dataGrab.phrasal;
 
-import com.example.idiom.model.PhrasalVerb;
+import com.example.idiom.model.phrasal.PhrasalVerb;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

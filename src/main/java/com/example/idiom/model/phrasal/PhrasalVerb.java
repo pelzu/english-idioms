@@ -1,46 +1,31 @@
-package com.example.idiom.model;
+package com.example.idiom.model.phrasal;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Comparator;
-
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Idiom implements Comparable<Idiom> {
-
-
+public class PhrasalVerb {
 
     private String id;
     private String polishMeaning;
     private String englishMeaning;
     private String englishExample;
-    private String audioTranslateLink;
-    private String audioExampleLink;
-    private String linkToIdiom;
+    private String linkToPhrasalVerb;
 
     @Override
     public String toString() {
-        return "IdiomModel{" +
+        return "PhrasalVerb{" +
                 "id='" + id + '\'' +
                 ", polishMeaning='" + polishMeaning + '\'' +
                 ", englishMeaning='" + englishMeaning + '\'' +
                 ", englishExample='" + englishExample + '\'' +
-                ", audioTranslateLink='" + audioTranslateLink + '\'' +
-                ", audioExampleLink='" + audioExampleLink + '\'' +
-                ", linkToIdiom='" + linkToIdiom + '\'' +
+                ", linkToPhrasalVerb='" + linkToPhrasalVerb + '\'' +
                 '}';
     }
-    @Override
-    public int compareTo(Idiom o) {
-
-        return Double.compare(Integer.parseInt(id),Integer.parseInt(o.id));
-    }
-
-
 }

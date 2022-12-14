@@ -1,6 +1,6 @@
 package com.example.idiom.oldAproach;
 
-import com.example.idiom.model.Idiom;
+import com.example.idiom.model.idiom.Idiom;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

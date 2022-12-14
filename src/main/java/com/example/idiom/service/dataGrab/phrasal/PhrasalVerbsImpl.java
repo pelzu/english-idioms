@@ -1,16 +1,15 @@
 package com.example.idiom.service.dataGrab.phrasal;
 
 import com.example.idiom.inter.DataGrabberAngPl;
-import com.example.idiom.model.PhrasalVerb;
+import com.example.idiom.model.phrasal.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
 @Service
-public class PhrasalVerbsImpl implements DataGrabberAngPl<PhrasalVerb> {
+public class PhrasalVerbsImpl implements DataGrabberAngPl {
 
     private final PhrasalVerbsParser phrasalVerbsParser;
 
@@ -26,11 +25,19 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl<PhrasalVerb> {
 
     @Override
     public List<PhrasalVerb> getObject(String audio, String csv) {
-        List<PhrasalVerb> phrasalVerbList=phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements()) ;
-        if (audio.equals("true")){}
-        if (csv.equals("true")){phrasalCsvConverter.save(phrasalVerbList);}
-        return phrasalVerbList ;
+        List<PhrasalVerb> phrasalVerbList = phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements());
+        if (audio != null) {
+            if (audio.equals("true")) {
+            }
+        }
+        if (csv != null) {
+            if (csv.equals("true")) {
+                phrasalCsvConverter.save(phrasalVerbList);
+            }
+        }
+
+        return phrasalVerbList;
+
+
     }
-
-
 }

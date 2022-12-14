@@ -1,6 +1,7 @@
 package com.example.idiom.service.dataGrab.idiom;
 
-import com.example.idiom.model.Idiom;
+import com.example.idiom.model.idiom.Idiom;
+import com.example.idiom.model.idiom.IdiomIdComparator;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
@@ -31,6 +32,13 @@ public class IdiomParser {
             log.info(String.valueOf(idiom));
             idiomList.add(idiom);
         });
+        idiomList.sort(new IdiomIdComparator());
+        for (Idiom idiom:idiomList
+             ) {log.info(idiom.toString());
+
+        }
+
+
         return idiomList;
     }
 

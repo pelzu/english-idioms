@@ -3,9 +3,9 @@ package com.example.idiom.inter;
 
 import java.util.List;
 
-public interface DataGrabberAngPl<T> {
+public interface DataGrabberAngPl {
 
-     List<T> getObject(String audio, String csv) ;
+     List getObject(String audio, String csv) ;
 
 
 
