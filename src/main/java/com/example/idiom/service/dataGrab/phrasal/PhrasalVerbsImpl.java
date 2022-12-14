@@ -25,7 +25,7 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl<PhrasalVerb> {
     }
 
     @Override
-    public List<PhrasalVerb> getObject(String kind, String audio, String csv) {
+    public List<PhrasalVerb> getObject(String audio, String csv) {
         List<PhrasalVerb> phrasalVerbList=phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements()) ;
         if (audio.equals("true")){}
         if (csv.equals("true")){phrasalCsvConverter.save(phrasalVerbList);}

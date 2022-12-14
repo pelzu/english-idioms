@@ -1,20 +1,20 @@
 package com.example.idiom.controller;
 
-import com.example.idiom.service.dataGrab.DefaultImplAngPl;
-import com.example.idiom.service.dataGrab.idiom.IdiomAudioGrabber;
-import com.example.idiom.oldAproach.IdiomPageService;
-import com.example.idiom.oldAproach.IdiomService;
-import com.example.idiom.service.dataGrab.idiom.IdiomCsVConverter;
-import com.example.idiom.service.dataGrab.idiom.IdiomImpl;
 import com.example.idiom.inter.DataGrabberAngPl;
 import com.example.idiom.model.Idiom;
+import com.example.idiom.oldAproach.IdiomPageService;
+import com.example.idiom.oldAproach.IdiomService;
+import com.example.idiom.service.dataGrab.ChooseClass;
+import com.example.idiom.service.dataGrab.DefaultImplAngPl;
+import com.example.idiom.service.dataGrab.idiom.IdiomAudioGrabber;
+import com.example.idiom.service.dataGrab.idiom.IdiomCsVConverter;
+import com.example.idiom.service.dataGrab.idiom.IdiomImpl;
 import com.example.idiom.service.dataGrab.phrasal.PhrasalVerbsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +32,16 @@ public class IdiomController {
 
     private final PhrasalVerbsImpl phrasalVerbsImpl;
 
-    private final IdiomImpl idiomImpl ;
+    private final IdiomImpl idiomImpl;
 
-private final DefaultImplAngPl defaultImplAngPl ;
+    private final DefaultImplAngPl defaultImplAngPl;
 
+    private final ChooseClass chooseClass;
     private final int idiomLength = 520;
     private final ArrayList<Idiom> idiomsArrayList = new ArrayList<>();
 
     @Autowired
-    public IdiomController(IdiomService idiomService, IdiomCsVConverter idiomCsVConverter, IdiomPageService idiomPageService, IdiomAudioGrabber idiomAudioGrabber, PhrasalVerbsImpl phrasalVerbsImpl, IdiomImpl idiomImpl, DefaultImplAngPl defaultImplAngPl) {
+    public IdiomController(IdiomService idiomService, IdiomCsVConverter idiomCsVConverter, IdiomPageService idiomPageService, IdiomAudioGrabber idiomAudioGrabber, PhrasalVerbsImpl phrasalVerbsImpl, IdiomImpl idiomImpl, DefaultImplAngPl defaultImplAngPl, ChooseClass chooseClass) {
         this.idiomService = idiomService;
         this.idiomCsVConverter = idiomCsVConverter;
         this.idiomPageService = idiomPageService;
@@ -48,27 +49,15 @@ private final DefaultImplAngPl defaultImplAngPl ;
         this.phrasalVerbsImpl = phrasalVerbsImpl;
         this.idiomImpl = idiomImpl;
         this.defaultImplAngPl = defaultImplAngPl;
+        this.chooseClass = chooseClass;
     }
 
     @GetMapping("/learn")
-    public List<DataGrabberAngPl> getPhrasal(@RequestParam String kind,@RequestParam String audio,@RequestParam String csv) {
+    public List<DataGrabberAngPl> getPhrasal(@RequestParam(required = false) String kind, @RequestParam(required = false) String audio, @RequestParam(required = false) String csv) {
 
-        List<DataGrabberAngPl>dataGrabberAngPls=getRightObjectByParam(kind).getObject(kind,audio,csv);
-
-        return dataGrabberAngPls;
+        return chooseClass.getLists(kind).getObject(audio, csv);
 
     }
-
-
-    public DataGrabberAngPl getRightObjectByParam(String param) {
-        if (param.equals("idiom")) {
-            return idiomImpl ;
-        } else if (param.equals("phrasal")) {
-            return phrasalVerbsImpl ;
-        }else return defaultImplAngPl ;
-
-    }
-
 
 
     //Old approach
@@ -102,8 +91,6 @@ private final DefaultImplAngPl defaultImplAngPl ;
         idiomsArrayList.add(idiomService.getOneIdiom(iterator));
 
     }
-
-
 
 
 }

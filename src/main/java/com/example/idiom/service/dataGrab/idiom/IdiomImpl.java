@@ -30,7 +30,7 @@ public class IdiomImpl implements DataGrabberAngPl<Idiom> {
     }
 
     @Override
-    public List<Idiom> getObject(String kind, String audio, String csv) {
+    public List<Idiom> getObject(String audio, String csv) {
         List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
 
         if (csv.equals("true")){idiomCsVConverter.save(idiomList);}
