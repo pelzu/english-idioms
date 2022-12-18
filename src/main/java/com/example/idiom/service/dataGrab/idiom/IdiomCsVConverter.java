@@ -33,7 +33,6 @@ public class IdiomCsVConverter {
                     csvData.append(idiom.getEnglishExample() + "\n");
                 }
                 csvData.ensureCapacity(csvData.length());
-//                System.out.println(csvData);
                 printWriter.write(csvData.toString());
                 printWriter.close();
             } catch (FileNotFoundException e) {

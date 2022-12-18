@@ -27,10 +27,11 @@ public class PhrasalVerbsParser {
                     .englishExample(getExampleEnglish(element))
                     .linkToPhrasalVerb(getLinkToPhrasalVerb(element)).
                     build();
-            log.info(phrasalVerb.toString());
+
             phrasalVerbList.add(phrasalVerb);
         });
         phrasalVerbList.sort(new PhrasalIdComparator());
+        log.info(phrasalVerbList.toString());
         return phrasalVerbList;
     }
 

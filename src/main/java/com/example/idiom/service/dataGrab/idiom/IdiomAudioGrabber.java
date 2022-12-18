@@ -22,8 +22,12 @@ public class IdiomAudioGrabber {
 
         createDirForMp3() ;
 
+
+
+
         for (Idiom idiom : idiomList
         ) {
+            Runnable r = () -> {
             log.info(idiom.toString());
             File translatedFileMp3 = restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
                 File mp3File = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "translated" + ".mp3");
@@ -37,7 +41,10 @@ public class IdiomAudioGrabber {
                 mp3File.createNewFile();
                 StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(mp3File));
                 return mp3File;
-            });
+            });   };
+            var t=new Thread(r);
+            t.start();
+
 
         }
 
@@ -53,3 +60,5 @@ public class IdiomAudioGrabber {
     }
 
 }
+
+
