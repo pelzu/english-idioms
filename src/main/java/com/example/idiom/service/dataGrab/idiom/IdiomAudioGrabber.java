@@ -20,8 +20,7 @@ public class IdiomAudioGrabber {
 
     public void downLoadAudio(List<Idiom> idiomList) {
         createDirForMp3();
-        for (Idiom idiom : idiomList
-        ) {
+        for (Idiom idiom : idiomList) {
             Runnable r = () -> {
                 log.info(idiom.toString());
                 File translatedFileMp3 = restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {

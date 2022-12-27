@@ -34,7 +34,9 @@ public class IdiomController {
 
 
     @GetMapping("/learn")
-    public List<DataGrabberAngPl> getPhrasal(@RequestParam(required = false) String kind, @RequestParam(required = false) String audio, @RequestParam(required = false) String csv) {
+    public List<DataGrabberAngPl> getPhrase(@RequestParam(required = false) String kind,
+                                            @RequestParam(required = false) String audio,
+                                            @RequestParam(required = false) String csv) {
         return chooseClass.getRightImpl(kind).getObject(audio, csv);
     }
 
