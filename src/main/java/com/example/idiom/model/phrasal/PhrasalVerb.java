@@ -26,6 +26,6 @@ public class PhrasalVerb {
                 ", englishMeaning='" + englishMeaning + '\'' +
                 ", englishExample='" + englishExample + '\'' +
                 ", linkToPhrasalVerb='" + linkToPhrasalVerb + '\'' +
-                '}';
+                '}'+"\n";
     }
 }

@@ -29,7 +29,7 @@ public class IdiomImpl implements DataGrabberAngPl {
 
     @Override
     public List<Idiom> getObject(String audio, String csv) {
-        long start = System.currentTimeMillis();
+
         List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
         if (csv != null) {
             if (csv.equals("true")) {
@@ -42,8 +42,6 @@ public class IdiomImpl implements DataGrabberAngPl {
             }
         }
 
-        long end = System.currentTimeMillis();
-        log.info("Idiom time: " + "" + (end - start));
         return idiomList;
     }
 }

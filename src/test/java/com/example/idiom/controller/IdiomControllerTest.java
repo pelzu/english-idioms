@@ -30,12 +30,16 @@ class IdiomControllerTest {
 
     @Test
     void PhrasalControllerGetPhrasals() throws Exception {
+        //given
+        String phrasalTestLink ="/learn?kind=phrasal";
 
-        MvcResult mvcResult = mockMvc.perform(get("/learn?kind=phrasal"))
+        //when
+        MvcResult mvcResult = mockMvc.perform(get(phrasalTestLink))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andReturn();
         List<PhrasalVerb> phrasalVerbList = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), objectMapper.getTypeFactory().constructType(List.class, PhrasalVerb.class));
+        //then
         assertThat(phrasalVerbList.size()).isEqualTo(402);
     }
 
