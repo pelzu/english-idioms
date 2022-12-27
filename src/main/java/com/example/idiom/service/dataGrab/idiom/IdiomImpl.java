@@ -19,7 +19,6 @@ public class IdiomImpl implements DataGrabberAngPl {
 
     private final IdiomCsVConverter idiomCsVConverter;
 
-
     @Autowired
     public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement, IdiomAudioGrabber idiomAudioGrabber, IdiomCsVConverter idiomCsVConverter) {
         this.idiomParser = idiomParser;
@@ -30,7 +29,7 @@ public class IdiomImpl implements DataGrabberAngPl {
 
     @Override
     public List<Idiom> getObject(String audio, String csv) {
-        long start=System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
         if (csv != null) {
             if (csv.equals("true")) {
@@ -43,8 +42,8 @@ public class IdiomImpl implements DataGrabberAngPl {
             }
         }
 
-        long end=System.currentTimeMillis();
-        log.info("Idiom time: "+ ""+ (end-start));
+        long end = System.currentTimeMillis();
+        log.info("Idiom time: " + "" + (end - start));
         return idiomList;
     }
 }

@@ -19,36 +19,28 @@ public class IdiomAudioGrabber {
     RestTemplate restTemplate = new RestTemplate();
 
     public void downLoadAudio(List<Idiom> idiomList) {
-
-        createDirForMp3() ;
-
-
-
-
+        createDirForMp3();
         for (Idiom idiom : idiomList
         ) {
             Runnable r = () -> {
-            log.info(idiom.toString());
-            File translatedFileMp3 = restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
-                File mp3File = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "translated" + ".mp3");
-                mp3File.createNewFile();
-                StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(mp3File));
-                return mp3File;
-            });
+                log.info(idiom.toString());
+                File translatedFileMp3 = restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
+                    File mp3File = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "translated" + ".mp3");
+                    mp3File.createNewFile();
+                    StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(mp3File));
+                    return mp3File;
+                });
 
-            File exampleFileMp3 = restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {
-                File mp3File = new File(MP3_EXAMPLE_DESTINATION +  idiom.getId() + "example" + ".mp3");
-                mp3File.createNewFile();
-                StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(mp3File));
-                return mp3File;
-            });   };
-            var t=new Thread(r);
+                File exampleFileMp3 = restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {
+                    File mp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + "example" + ".mp3");
+                    mp3File.createNewFile();
+                    StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(mp3File));
+                    return mp3File;
+                });
+            };
+            var t = new Thread(r);
             t.start();
-
-
         }
-
-
     }
 
     public void createDirForMp3() {

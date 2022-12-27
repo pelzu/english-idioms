@@ -17,7 +17,6 @@ public class IdiomElement {
         this.idiomPagination = idiomPagination;
     }
 
-
     public Elements getElements() {
         try {
             int idiomNumbers = this.idiomPagination.getNumberOfPageIdiom();

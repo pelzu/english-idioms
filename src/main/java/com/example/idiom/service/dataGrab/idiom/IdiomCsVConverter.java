@@ -12,7 +12,6 @@ import java.util.List;
 public class IdiomCsVConverter {
 
     public void save(List<Idiom> idioms) {
-
         createDirForCsv();
         PrintWriter printWriter;
         {
@@ -40,9 +39,10 @@ public class IdiomCsVConverter {
             }
         }
     }
+
     public void createDirForCsv() {
         File csvDir = new File("src/main/resources/static/csv");
-        csvDir.mkdir() ;
+        csvDir.mkdir();
 
     }
 }
