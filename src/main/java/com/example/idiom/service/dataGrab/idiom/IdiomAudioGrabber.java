@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 @Service
 @Slf4j
@@ -20,10 +19,10 @@ public class IdiomAudioGrabber {
     RestTemplate restTemplate = new RestTemplate();
 
     public void downLoadAudio(List<Idiom> idiomList) {
-        long start= System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         createDirForMp3();
         for (Idiom idiom : idiomList) {
-//            Runnable r = () -> {
+            Runnable r = () -> {
                 log.info(idiom.toString());
                 File translatedFileMp3 = restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
                     File mp3File = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "translated" + ".mp3");
@@ -39,15 +38,15 @@ public class IdiomAudioGrabber {
                     return mp3File;
 
                 });
-
-//            };
-//            var t = new Thread(r);
-//            t.start();
+                log.info("TimeQWER :" + (System.currentTimeMillis() - start));
+            };
+            var t = new Thread(r);
+            t.start();
 
 
         }
-        long end=System.currentTimeMillis();
-        log.info("Time :" +(end-start));
+
+
     }
 
     public void createDirForMp3() {
