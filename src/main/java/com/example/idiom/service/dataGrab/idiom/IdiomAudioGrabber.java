@@ -23,7 +23,7 @@ public class IdiomAudioGrabber {
         long start= System.currentTimeMillis();
         createDirForMp3();
         for (Idiom idiom : idiomList) {
-            Runnable r = () -> {
+//            Runnable r = () -> {
                 log.info(idiom.toString());
                 File translatedFileMp3 = restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
                     File mp3File = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "translated" + ".mp3");
@@ -39,17 +39,19 @@ public class IdiomAudioGrabber {
                     return mp3File;
 
                 });
-                long end=System.currentTimeMillis();
-                log.info("Time :" +(end-start));
-            };
-            var t = new Thread(r);
-            t.start();
+
+//            };
+//            var t = new Thread(r);
+//            t.start();
 
 
         }
+        long end=System.currentTimeMillis();
+        log.info("Time :" +(end-start));
     }
 
     public void createDirForMp3() {
+        new File("src/main/resources/static").mkdir();
         new File("src/main/resources/static/mp3").mkdir();
         new File("src/main/resources/static/mp3/example").mkdir();
         new File("src/main/resources/static/mp3/translation").mkdir();
