@@ -43,7 +43,7 @@ public class IdiomController {
     //Old approach
 
     @GetMapping("/idiomsPagination")
-    public void getIdiomsByPage() throws IOException {
+    public void getIdiomsByPage()  {
         for (int i = 1; i <= 11; i++) {
             System.out.println("Page " + i);
             idiomPageService.getOnePageOfIdioms(i);
