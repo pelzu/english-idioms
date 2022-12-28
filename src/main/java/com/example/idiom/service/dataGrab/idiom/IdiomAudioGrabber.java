@@ -23,28 +23,12 @@ public class IdiomAudioGrabber {
         createDirForMp3();
         for (Idiom idiom : idiomList) {
             Runnable r = () -> {
-                log.info(idiom.toString());
-                File translatedFileMp3 = restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
-                    File mp3File = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "translated" + ".mp3");
-                    mp3File.createNewFile();
-                    StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(mp3File));
-                    return mp3File;
-                });
-
-                File exampleFileMp3 = restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {
-                    File mp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + "example" + ".mp3");
-                    mp3File.createNewFile();
-                    StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(mp3File));
-                    return mp3File;
-
-                });
-                log.info("TimeQWER :" + (System.currentTimeMillis() - start));
+                getTranslatedMp3(idiom);
+                getExampleMp3File(idiom);
             };
             var t = new Thread(r);
             t.start();
         }
-
-
     }
 
     public void createDirForMp3() {
@@ -52,9 +36,33 @@ public class IdiomAudioGrabber {
         new File("src/main/resources/static/mp3").mkdir();
         new File("src/main/resources/static/mp3/example").mkdir();
         new File("src/main/resources/static/mp3/translation").mkdir();
-
-
     }
+
+    public void getTranslatedMp3(Idiom idiom) {
+        File transMp3File
+                = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "translated" + ".mp3");
+        if (!transMp3File.exists()) {
+            restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
+                transMp3File.createNewFile();
+                StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(transMp3File));
+                log.info("Created " + transMp3File.getName());
+                return transMp3File;
+            });
+        }
+    }
+
+    public void getExampleMp3File(Idiom idiom) {
+        File exMp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + "example" + ".mp3");
+        if (!exMp3File.exists()) {
+            restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {
+                exMp3File.createNewFile();
+                StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(exMp3File));
+                log.info("Created " + exMp3File.getName());
+                return exMp3File;
+            });
+        }
+    }
+
 
 }
 

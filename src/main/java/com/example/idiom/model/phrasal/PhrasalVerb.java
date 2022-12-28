@@ -20,12 +20,13 @@ public class PhrasalVerb {
 
     @Override
     public String toString() {
-        return "PhrasalVerb{" +
+        return "\n"+
+                "PhrasalVerb{" +
                 "id='" + id + '\'' +
                 ", polishMeaning='" + polishMeaning + '\'' +
                 ", englishMeaning='" + englishMeaning + '\'' +
                 ", englishExample='" + englishExample + '\'' +
                 ", linkToPhrasalVerb='" + linkToPhrasalVerb + '\'' +
-                '}'+"\n";
+                '}';
     }
 }

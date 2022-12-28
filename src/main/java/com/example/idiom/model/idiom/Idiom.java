@@ -25,7 +25,8 @@ public class Idiom  {
 
     @Override
     public String toString() {
-        return "Idiom{" +
+        return "\n"+
+        "Idiom{" +
                 "id='" + id + '\'' +
                 ", polishMeaning='" + polishMeaning + '\'' +
                 ", englishMeaning='" + englishMeaning + '\'' +
@@ -33,7 +34,7 @@ public class Idiom  {
                 ", audioTranslateLink='" + audioTranslateLink + '\'' +
                 ", audioExampleLink='" + audioExampleLink + '\'' +
                 ", linkToIdiom='" + linkToIdiom + '\'' +
-                '}' +"\n";
+                '}';
     }
 }
 
