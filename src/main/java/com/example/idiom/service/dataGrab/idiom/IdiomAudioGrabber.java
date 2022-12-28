@@ -42,8 +42,6 @@ public class IdiomAudioGrabber {
             };
             var t = new Thread(r);
             t.start();
-
-
         }
 
 
