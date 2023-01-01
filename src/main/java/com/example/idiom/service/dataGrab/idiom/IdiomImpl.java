@@ -41,7 +41,6 @@ public class IdiomImpl implements DataGrabberAngPl {
                 idiomAudioGrabber.downLoadAudio(idiomList);
             }
         }
-
         return idiomList;
     }
 }

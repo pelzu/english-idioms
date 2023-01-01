@@ -17,7 +17,6 @@ public class PhrasalVerb {
     private String englishMeaning;
     private String englishExample;
     private String linkToPhrasalVerb;
-
     @Override
     public String toString() {
         return "\n"+

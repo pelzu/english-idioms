@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,6 @@ public class IdiomController {
         this.chooseClass = chooseClass;
     }
 
-
     @GetMapping("/learn")
     public List<DataGrabberAngPl> getPhrase(@RequestParam(required = false) String kind,
                                             @RequestParam(required = false) String audio,
@@ -41,9 +39,8 @@ public class IdiomController {
     }
 
     //Old approach
-
     @GetMapping("/idiomsPagination")
-    public void getIdiomsByPage()  {
+    public void getIdiomsByPage() {
         for (int i = 1; i <= 11; i++) {
             System.out.println("Page " + i);
             idiomPageService.getOnePageOfIdioms(i);
@@ -52,14 +49,13 @@ public class IdiomController {
     }
 
     @GetMapping("/idiomsOneGet")
-    public void getIdiomsbyOneGet()  {
+    public void getIdiomsbyOneGet() {
         int idiomLength = 520;
         for (int i = 0; i <= idiomLength; i++) {  //
             addAllIdioms(i);
         }
         writeToCSV();
     }
-
 
     public void writeToCSV() {
         idiomCsVConverter.save(idiomsArrayList);

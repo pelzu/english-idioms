@@ -12,7 +12,6 @@ import java.io.IOException;
 public class PhrasalPagination {
     private final String PHRASAL_VERB_LINK = "https://www.ang.pl/slownictwo/phrasal-verbs/page/";
 
-
     public int getNumberOfPagePhrasalVerb() {
         try {
             Document tempDoc = null;

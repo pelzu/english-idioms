@@ -42,12 +42,10 @@ public class IdiomParser {
         return node.toString();
     }
 
-
     public String getExampleMp3Link(Element el) {
         String exampleMp3Link = el.select("div[class=medium-5 columns]").select("a[href]").attr("href");
         return PREFIX_LINK + exampleMp3Link;
     }
-
 
     public String getPolishTranslation(Element el) {
         String polishTranslation = el.select("p[class=pol]").text();
@@ -58,7 +56,6 @@ public class IdiomParser {
         String englishTranslation = el.select("p[class=big mtop]").select("a[href]").next("a[href]").text();
         return englishTranslation;
     }
-
 
     private String getLinkToIdiom(Element el) {
         String idiomLink = el.select("p[class=big mtop]").select("a[href]").next("a[href]").attr("href");
@@ -71,7 +68,6 @@ public class IdiomParser {
         idNumber = idNumber.substring(idNumber.lastIndexOf("/") + 1);
 
         return idNumber;
-
     }
 
     public String getMp3TranslateLink(Element el) {

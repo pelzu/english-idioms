@@ -35,7 +35,6 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl {
                 phrasalCsvConverter.save(phrasalVerbList);
             }
         }
-
         return phrasalVerbList;
 
 

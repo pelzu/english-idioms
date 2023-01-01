@@ -7,16 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 @Slf4j
 
-public class DefaultImplAngPl implements DataGrabberAngPl{
+public class DefaultImplAngPl implements DataGrabberAngPl {
 
-    private IdiomImpl idiom ;
-    private PhrasalVerbsImpl phrasalVerbs ;
+    private final IdiomImpl idiom;
+    private final PhrasalVerbsImpl phrasalVerbs;
 
     @Autowired
     public DefaultImplAngPl(IdiomImpl idiom, PhrasalVerbsImpl phrasalVerbs) {
@@ -26,7 +25,7 @@ public class DefaultImplAngPl implements DataGrabberAngPl{
 
     @Override
     public List getObject(String audio, String csv) {
-        
+
         return null;
     }
 }

@@ -3,7 +3,6 @@ package com.example.idiom.service.dataGrab;
 import com.example.idiom.inter.DataGrabberAngPl;
 import com.example.idiom.service.dataGrab.idiom.IdiomImpl;
 import com.example.idiom.service.dataGrab.phrasal.PhrasalVerbsImpl;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +31,7 @@ public class ChooseClass {
             return phrasalVerbs;
         } else
             return defaultImplAngPl;
-
-
     }
-
 
 
 }
