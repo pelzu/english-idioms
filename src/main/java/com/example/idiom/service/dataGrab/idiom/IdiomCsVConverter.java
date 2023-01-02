@@ -27,6 +27,7 @@ public class IdiomCsVConverter {
                     printWriter.write(csvHeader.toString());
 
                     for (Idiom idiom : idioms) {
+
                         csvData.append(idiom.getId() + ";");
                         csvData.append(idiom.getPolishMeaning() + ";");
                         csvData.append(idiom.getEnglishMeaning() + ";");
@@ -34,11 +35,13 @@ public class IdiomCsVConverter {
                         csvData.append(idiom.getAudioTranslateLink() + ";");
                         csvData.append(idiom.getAudioExampleLink() + ";");
                         csvData.append(idiom.getEnglishExample() + "\n");
+
                     }
                     csvData.ensureCapacity(csvData.length());
                     printWriter.write(csvData.toString());
                     printWriter.close();
                     log.info("CSV file is created");
+
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }

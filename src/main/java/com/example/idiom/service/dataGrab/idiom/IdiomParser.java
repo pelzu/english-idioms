@@ -34,6 +34,7 @@ public class IdiomParser {
         idiomList.sort(new IdiomIdComparator());
         log.info(idiomList.toString());
 
+
         return idiomList;
     }
 

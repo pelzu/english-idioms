@@ -19,7 +19,6 @@ public class IdiomAudioGrabber {
     RestTemplate restTemplate = new RestTemplate();
 
     public void downLoadAudio(List<Idiom> idiomList) {
-        long start = System.currentTimeMillis();
         createDirForMp3();
         for (Idiom idiom : idiomList) {
             Runnable r = () -> {
