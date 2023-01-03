@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
 
 @Slf4j
 @Service
@@ -23,25 +27,25 @@ public class IdiomElement {
     public Elements getElements() {
         int idiomNumbers = this.idiomPagination.getNumberOfPageIdiom();
         Elements elements = new Elements();
-        for (int i = 1; i <= idiomNumbers; i++) {
 
+        java.util.concurrent.Executor executor = Executors.newFixedThreadPool(10);
+        List<CompletableFuture<Void>> futures = new ArrayList<>();
+
+        for (int i = 1; i <= idiomNumbers; i++) {
             int increment = i;
-            Runnable r = () -> {
+            java.util.concurrent.CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 try {
                     elements.addAll(Jsoup.connect(IDIOM_LINK + increment).get().select("div[style*=border-bottom: 1px solid #ccc;]"));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            };
-            var t = new Thread(r);
-            t.start();
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            }, executor);
+            futures.add(future);
         }
-        return elements;
 
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+        return elements;
     }
+
+
 }

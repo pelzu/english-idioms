@@ -50,6 +50,7 @@ public class IdiomCsVConverter {
     }
 
     public void createDefaultDirForCsv() {
+        new File("src/main/resources/static").mkdir();
         File csvDir = new File("src/main/resources/static/csv");
         csvDir.mkdir();
 
