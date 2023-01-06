@@ -3,7 +3,6 @@ package com.example.idiom.service.dataGrab.idiom;
 import com.example.idiom.model.idiom.Idiom;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Service
+
 @Slf4j
 public class IdiomAudioGrabber {
     private final String MP3_TRANSLATION_DESTINATION = "src/main/resources/static/mp3/translation/";

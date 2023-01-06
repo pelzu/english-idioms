@@ -3,12 +3,10 @@ package com.example.idiom.service.dataGrab.phrasal;
 import com.example.idiom.inter.DataGrabberAngPl;
 import com.example.idiom.model.phrasal.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
-@Service
 public class PhrasalVerbsImpl implements DataGrabberAngPl {
 
     private final PhrasalVerbsParser phrasalVerbsParser;

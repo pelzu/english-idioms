@@ -2,7 +2,6 @@ package com.example.idiom.service.dataGrab.idiom;
 
 import com.example.idiom.model.idiom.Idiom;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Slf4j
-@Service
 public class IdiomCsVConverter {
 
     public void save(List<Idiom> idioms) {

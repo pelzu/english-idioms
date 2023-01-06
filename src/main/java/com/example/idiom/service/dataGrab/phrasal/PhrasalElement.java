@@ -3,12 +3,10 @@ package com.example.idiom.service.dataGrab.phrasal;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 
-@Service
 public class PhrasalElement {
 
     private final String PHRASAL_VERB_LINK = "https://www.ang.pl/slownictwo/phrasal-verbs/page/";

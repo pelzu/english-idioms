@@ -1,14 +1,12 @@
 package com.example.idiom.service.dataGrab.phrasal;
 
 import com.example.idiom.model.phrasal.PhrasalVerb;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@Service
 public class PhrasalCsvConverter {
     public void save(List<PhrasalVerb> phrasalVerbList) {
 
@@ -39,8 +37,9 @@ public class PhrasalCsvConverter {
         }
 
     }
+
     public void createDirForCsv() {
-        File csvDir=new File("src/main/resources/static/csv") ;
+        File csvDir = new File("src/main/resources/static/csv");
         csvDir.mkdirs();
 
     }

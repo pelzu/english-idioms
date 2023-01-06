@@ -3,8 +3,6 @@ package com.example.idiom.service.dataGrab.idiom;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,12 +11,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 
 @Slf4j
-@Service
 public class IdiomElement {
     public static final String IDIOM_LINK = "https://www.ang.pl/slownictwo/idiomy/page/";
     private final IdiomPagination idiomPagination;
 
-    @Autowired
+
     public IdiomElement(IdiomPagination idiomPagination) {
         this.idiomPagination = idiomPagination;
     }
