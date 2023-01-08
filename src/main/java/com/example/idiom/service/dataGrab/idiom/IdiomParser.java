@@ -30,7 +30,7 @@ public class IdiomParser {
             idiomList.add(idiom);
         });
         idiomList.sort(new IdiomIdComparator());
-        log.info(idiomList.toString());
+        log.info("Add "+idiomList.size()+" to list");
 
 
         return idiomList;
