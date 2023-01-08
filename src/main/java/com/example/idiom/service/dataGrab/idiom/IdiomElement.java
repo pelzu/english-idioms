@@ -19,6 +19,7 @@ public class IdiomElement {
     }
 
     public Elements getElements() {
+
         int idiomNumbers = this.idiomPagination.getNumberOfPageIdiom();
         ExecutorService executor = Executors.newFixedThreadPool(idiomNumbers);
         List<Future<Elements>> elementFutures = new ArrayList<>();

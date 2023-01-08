@@ -38,7 +38,7 @@ public class IdiomCsVConverter {
                     csvData.ensureCapacity(csvData.length());
                     printWriter.write(csvData.toString());
                     printWriter.close();
-                    log.info("CSV file is created");
+                    log.info("CSV file is created: "+csvFile.getAbsolutePath());
 
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);

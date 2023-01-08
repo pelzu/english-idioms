@@ -25,16 +25,12 @@ public class IdiomAudioGrabber {
         ExecutorService executorService = Executors.newFixedThreadPool(30);
 
         createDirForMp3();
-        long start = System.currentTimeMillis();
         for (Idiom idiom : idiomList) {
             executorService.submit(() -> {
                 Thread.currentThread().setName("AudioDownloadThread");
 
                 getTranslatedMp3(idiom);
                 getExampleMp3File(idiom);
-                long end = System.currentTimeMillis();
-                log.info("Priority" + Thread.currentThread().getPriority());
-                log.warn("Time: " + (end - start));
             });
         }
         executorService.shutdown();
@@ -49,7 +45,7 @@ public class IdiomAudioGrabber {
 
     public void getTranslatedMp3(Idiom idiom) {
         File transMp3File
-                = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "_translated" + ".mp3");
+                = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() +"_"+idiom.getEnglishMeaning()  + ".mp3");
         if (!transMp3File.exists()) {
             restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
                 transMp3File.createNewFile();
@@ -57,21 +53,21 @@ public class IdiomAudioGrabber {
                 try (FileOutputStream fos = new FileOutputStream(transMp3File)) {
                     StreamUtils.copy(clientHttpResponse.getBody(), fos);
                 }
-                log.info("Created " + transMp3File.getName());
+                log.info("Created File: "+transMp3File.getAbsolutePath());
                 return transMp3File;
             });
         }
     }
 
     public void getExampleMp3File(Idiom idiom) {
-        File exMp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + "_example" + ".mp3");
+        File exMp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId()+"_"+idiom.getEnglishExample() + ".mp3");
         if (!exMp3File.exists()) {
             restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {
                 exMp3File.createNewFile();
                 try (FileOutputStream fos = new FileOutputStream(exMp3File)) {
                     StreamUtils.copy(clientHttpResponse.getBody(), fos);
                 }
-                log.info("Created " + exMp3File.getName());
+                log.info("Created file:  " + exMp3File.getAbsolutePath());
                 return exMp3File;
             });
         }
