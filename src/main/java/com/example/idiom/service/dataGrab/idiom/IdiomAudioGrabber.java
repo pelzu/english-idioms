@@ -23,13 +23,17 @@ public class IdiomAudioGrabber {
 
     public void downLoadAudio(List<Idiom> idiomList) {
         ExecutorService executorService = Executors.newFixedThreadPool(30);
+
         createDirForMp3();
         long start = System.currentTimeMillis();
         for (Idiom idiom : idiomList) {
             executorService.submit(() -> {
+                Thread.currentThread().setName("AudioDownloadThread");
+
                 getTranslatedMp3(idiom);
                 getExampleMp3File(idiom);
                 long end = System.currentTimeMillis();
+                log.info("Priority" + Thread.currentThread().getPriority());
                 log.warn("Time: " + (end - start));
             });
         }
