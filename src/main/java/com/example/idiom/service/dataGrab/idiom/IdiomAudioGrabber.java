@@ -58,7 +58,7 @@ public class IdiomAudioGrabber {
 
     public void getTranslatedMp3(Idiom idiom) {
         File transMp3File
-                = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "_" + idiom.getEnglishMeaning() + ".mp3");
+                = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "_" + deleteDots(idiom.getEnglishMeaning()) + ".mp3");
 
         if (!transMp3File.exists()) {
             restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
@@ -67,24 +67,28 @@ public class IdiomAudioGrabber {
                 try (FileOutputStream fos = new FileOutputStream(transMp3File)) {
                     StreamUtils.copy(clientHttpResponse.getBody(), fos);
                 }
-                log.info("Created File: " + transMp3File.getAbsolutePath());
+                log.info("Created translated: " + transMp3File.getAbsolutePath());
                 return transMp3File;
             });
         }
     }
 
     public void getExampleMp3File(Idiom idiom) {
-        File exMp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + "_" + idiom.getEnglishExample() + ".mp3");
+        File exMp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + "_" + deleteDots(idiom.getEnglishExample()) + ".mp3");
         if (!exMp3File.exists()) {
             restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {
                 exMp3File.createNewFile();
                 try (FileOutputStream fos = new FileOutputStream(exMp3File)) {
                     StreamUtils.copy(clientHttpResponse.getBody(), fos);
                 }
-                log.info("Created file:  " + exMp3File.getAbsolutePath());
+                log.info("Created example: " + exMp3File.getAbsolutePath());
                 return exMp3File;
             });
         }
+    }
+
+    private String deleteDots(String englishExample) {
+        return   englishExample.replace(".","").replace(" ","_");
     }
 
 
