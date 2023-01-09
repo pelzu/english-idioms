@@ -38,7 +38,7 @@ public class IdiomCsVConverter {
                     csvData.ensureCapacity(csvData.length());
                     printWriter.write(csvData.toString());
                     printWriter.close();
-                    log.info("CSV file is created: "+csvFile.getAbsolutePath());
+                    log.info("CSV file is created: " + csvFile.getAbsolutePath());
 
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
@@ -48,6 +48,7 @@ public class IdiomCsVConverter {
     }
 
     public void createDefaultDirForCsv() {
+
         new File("src/main/resources/static").mkdir();
         File csvDir = new File("src/main/resources/static/csv");
         csvDir.mkdir();

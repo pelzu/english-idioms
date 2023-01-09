@@ -40,7 +40,9 @@ public class PhrasalCsvConverter {
 
     public void createDirForCsv() {
         File csvDir = new File("src/main/resources/static/csv");
-        csvDir.mkdirs();
+        if (!csvDir.exists()) {
+            csvDir.mkdirs();
+        }
 
     }
 
