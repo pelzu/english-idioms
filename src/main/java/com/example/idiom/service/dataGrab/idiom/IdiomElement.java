@@ -19,16 +19,13 @@ public class IdiomElement {
     }
 
     public Elements getElements() {
-
         int idiomNumbers = this.idiomPagination.getNumberOfPageIdiom();
-        ExecutorService executor = Executors.newFixedThreadPool(idiomNumbers);
+        ExecutorService executor = Executors.newFixedThreadPool(30);
         List<Future<Elements>> elementFutures = new ArrayList<>();
         Elements elements = new Elements();
 
         for (int i = 1; i <= idiomNumbers; i++) {
             int increment = i;
-
-
             Callable<Elements> task = () -> {
                 try {
                     log.info("Downloading HTML site:" + IDIOM_LINK + increment);
@@ -38,7 +35,6 @@ public class IdiomElement {
                 }
             };
             elementFutures.add(executor.submit(task));
-
         }
 
         for (Future<Elements> elementFuture : elementFutures) {

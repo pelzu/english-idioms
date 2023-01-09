@@ -29,7 +29,7 @@ public class PhrasalVerbsParser {
             phrasalVerbList.add(phrasalVerb);
         });
         phrasalVerbList.sort(new PhrasalIdComparator());
-        log.info(phrasalVerbList.toString());
+        log.info("Parsed and added " + phrasalVerbList.size() + " number of Phrasal to list");
         return phrasalVerbList;
     }
 

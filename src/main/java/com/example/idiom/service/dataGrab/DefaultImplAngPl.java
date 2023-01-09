@@ -1,31 +1,23 @@
 package com.example.idiom.service.dataGrab;
 
 import com.example.idiom.inter.DataGrabberAngPl;
-import com.example.idiom.service.dataGrab.idiom.IdiomImpl;
-import com.example.idiom.service.dataGrab.phrasal.PhrasalVerbsImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 @Slf4j
-
 public class DefaultImplAngPl implements DataGrabberAngPl {
-
-    private final IdiomImpl idiom;
-    private final PhrasalVerbsImpl phrasalVerbs;
-
-    @Autowired
-    public DefaultImplAngPl(IdiomImpl idiom, PhrasalVerbsImpl phrasalVerbs) {
-        this.idiom = idiom;
-        this.phrasalVerbs = phrasalVerbs;
-    }
 
     @Override
     public List getObject(String audio, String csv) {
-
-        return null;
+        List<String> defaultMsg = new ArrayList<>();
+        defaultMsg.add("No object by this link ");
+        defaultMsg.add("http://localhost:8000/learn?kind=idiom&audio=true&csv=true");
+        defaultMsg.add("parameter kind can be idiom or phrasal ");
+        defaultMsg.add("Choose audio=true to download mp3 file");
+        defaultMsg.add("Choose csv=true to get CSV file");
+        return defaultMsg;
     }
 }

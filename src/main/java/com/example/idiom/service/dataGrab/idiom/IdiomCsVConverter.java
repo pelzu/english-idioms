@@ -35,7 +35,6 @@ public class IdiomCsVConverter {
                         csvData.append(idiom.getEnglishExample() + "\n");
 
                     }
-                    csvData.ensureCapacity(csvData.length());
                     printWriter.write(csvData.toString());
                     printWriter.close();
                     log.info("CSV file is created: " + csvFile.getAbsolutePath());
@@ -49,9 +48,19 @@ public class IdiomCsVConverter {
 
     public void createDefaultDirForCsv() {
 
-        new File("src/main/resources/static").mkdir();
+        File staticFolder = new File("src/main/resources/static");
+        if (!staticFolder.exists()) {
+            staticFolder.mkdir();
+            log.info("Directory is created: " + staticFolder.getAbsolutePath());
+
+        }
         File csvDir = new File("src/main/resources/static/csv");
-        csvDir.mkdir();
+        if (!csvDir.exists()) {
+            csvDir.mkdir();
+            log.info("Directory is created: " + csvDir.getAbsolutePath());
+
+        }
+
 
     }
 }
