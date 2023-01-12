@@ -20,7 +20,6 @@ public class PhrasalElement {
 
     private final PhrasalPagination phrasalPagination;
 
-    @Autowired
     public PhrasalElement(PhrasalPagination phrasalPagination) {
         this.phrasalPagination = phrasalPagination;
     }

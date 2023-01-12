@@ -1,6 +1,6 @@
 package com.example.idiom.service.dataGrab.phrasal;
 
-import com.example.idiom.model.phrasal.PhrasalIdComparator;
+import com.example.idiom.model.phrasal.PhrasalComparator;
 import com.example.idiom.model.phrasal.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
@@ -28,7 +28,7 @@ public class PhrasalVerbsParser {
 
             phrasalVerbList.add(phrasalVerb);
         });
-        phrasalVerbList.sort(new PhrasalIdComparator());
+        phrasalVerbList.sort(new PhrasalComparator());
         log.info("Parsed and added " + phrasalVerbList.size() + " number of Phrasal to list");
         return phrasalVerbList;
     }
