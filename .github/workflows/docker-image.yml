@@ -14,5 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: List all
+      run: ls -la 
+    - name: Get current directory
+      run: pwd
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+#       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build -f Dockerfile --tag idiom-handler:$(date +%s)
