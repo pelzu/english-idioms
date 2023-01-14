@@ -11,6 +11,7 @@ import java.util.List;
 @Slf4j
 public class IdiomCsVConverter {
 
+
     public void save(List<Idiom> idioms) {
         createDefaultDirForCsv();
         PrintWriter printWriter;
@@ -47,7 +48,6 @@ public class IdiomCsVConverter {
     }
 
     public void createDefaultDirForCsv() {
-
         File staticFolder = new File("src/main/resources/static");
         if (!staticFolder.exists()) {
             staticFolder.mkdir();

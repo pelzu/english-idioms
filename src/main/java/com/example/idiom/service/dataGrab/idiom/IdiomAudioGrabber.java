@@ -58,7 +58,7 @@ public class IdiomAudioGrabber {
 
     public void getTranslatedMp3(Idiom idiom) {
         File transMp3File
-                = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() + "_" + deleteDots(idiom.getEnglishMeaning()) + ".mp3");
+                = new File(MP3_TRANSLATION_DESTINATION + idiom.getId() +"_Translated"+ "_" + deleteDots(idiom.getEnglishMeaning()) + ".mp3");
 
         if (!transMp3File.exists()) {
             restTemplate.execute(idiom.getAudioTranslateLink(), HttpMethod.GET, null, clientHttpResponse -> {
@@ -74,7 +74,7 @@ public class IdiomAudioGrabber {
     }
 
     public void getExampleMp3File(Idiom idiom) {
-        File exMp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + "_" + deleteDots(idiom.getEnglishExample()) + ".mp3");
+        File exMp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() +"_Example"+ "_" + deleteDots(idiom.getEnglishExample()) + ".mp3");
         if (!exMp3File.exists()) {
             restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {
                 exMp3File.createNewFile();

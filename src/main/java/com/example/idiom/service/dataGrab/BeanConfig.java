@@ -5,6 +5,8 @@ import com.example.idiom.service.dataGrab.phrasal.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.ServletContext;
+
 @Configuration
 public class BeanConfig {
 
@@ -27,6 +29,8 @@ public class BeanConfig {
     public IdiomCsVConverter idiomCsVConverter() {
         return new IdiomCsVConverter();
     }
+
+
 
     @Bean
     public IdiomElement idiomElement() {
