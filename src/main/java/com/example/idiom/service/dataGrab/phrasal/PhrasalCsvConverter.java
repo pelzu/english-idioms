@@ -46,13 +46,13 @@ public class PhrasalCsvConverter {
         File staticFolder = new File("src/main/resources/static");
         if (!staticFolder.exists()) {
             staticFolder.mkdir();
-            log.info("Directory is created: "+staticFolder.getAbsolutePath());
+            log.info("Directory is created: " + staticFolder.getAbsolutePath());
 
         }
         File csvFolder = new File("src/main/resources/static/csv");
         if (!csvFolder.exists()) {
             csvFolder.mkdirs();
-            log.info("Directory is created: "+csvFolder.getAbsolutePath());
+            log.info("Directory is created: " + csvFolder.getAbsolutePath());
         }
 
     }

@@ -6,9 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +16,9 @@ public class IdiomParser {
 
     private final String PREFIX_LINK = "https://www.ang.pl";
 
-    @Autowired
-    ServletContext servletContext;
-
 
     public List<Idiom> parseToIdiom(Elements elements) {
-        String absolutePath = servletContext.getRealPath("resources/static/csv");
-        log.info("*****Context is :"+absolutePath+"****");
+
         List<Idiom> idiomList = new ArrayList<>();
         elements.forEach(element -> {
             Idiom idiom = Idiom.builder()
