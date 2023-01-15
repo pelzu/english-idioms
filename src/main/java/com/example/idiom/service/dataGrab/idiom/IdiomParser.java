@@ -22,7 +22,7 @@ public class IdiomParser {
         List<Idiom> idiomList = new ArrayList<>();
         elements.forEach(element -> {
             Idiom idiom = Idiom.builder()
-                    .id(getIdNumber(element))
+                    .id(Long.valueOf(getIdNumber(element)))
                     .audioTranslateLink(getMp3TranslateLink(element))
                     .linkToIdiom(getLinkToIdiom(element))
                     .englishMeaning(getEnglishTranslation(element))

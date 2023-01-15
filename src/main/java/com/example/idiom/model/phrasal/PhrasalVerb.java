@@ -19,7 +19,9 @@ public class PhrasalVerb {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long queryId ;
+
+    private Long id;
     private String polishMeaning;
     private String englishMeaning;
     private String englishExample;

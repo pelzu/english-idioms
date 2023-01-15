@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Builder
 @Data
@@ -20,7 +17,10 @@ public class Idiom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @Column(nullable = false)
+    private Long queryId;
+
+    private Long id;
     private String polishMeaning;
     private String englishMeaning;
     private String englishExample;

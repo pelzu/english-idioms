@@ -2,9 +2,11 @@ package com.example.idiom.service.dataGrab.phrasal;
 
 import com.example.idiom.model.phrasal.PhrasalComparator;
 import com.example.idiom.model.phrasal.PhrasalVerb;
+import com.example.idiom.model.phrasal.PhrasalVerbDao;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +16,14 @@ public class PhrasalVerbsParser {
 
     private final String PREFIX_LINK = "https://www.ang.pl";
 
+
+
     public List<PhrasalVerb> parseToPhrasalVerbs(Elements elements) {
         List<PhrasalVerb> phrasalVerbList = new ArrayList<>();
 
         elements.forEach(element -> {
             PhrasalVerb phrasalVerb = PhrasalVerb.builder()
-                    .id(getId(element))
+                    .id(Long.valueOf(getId(element)))
                     .englishMeaning(getEnglishMeaning(element))
                     .polishMeaning(getPolishTranslation(element))
                     .englishExample(getExampleEnglish(element))
@@ -29,6 +33,7 @@ public class PhrasalVerbsParser {
             phrasalVerbList.add(phrasalVerb);
         });
         phrasalVerbList.sort(new PhrasalComparator());
+
         log.info("Parsed and added " + phrasalVerbList.size() + " number of Phrasal to list");
         return phrasalVerbList;
     }
