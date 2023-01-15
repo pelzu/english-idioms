@@ -20,6 +20,7 @@ public class Idiom {
     @Column(nullable = false)
     private Long queryId;
 
+
     private Long id;
     private String polishMeaning;
     private String englishMeaning;

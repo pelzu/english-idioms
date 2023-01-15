@@ -72,4 +72,23 @@ You should use links bellow.
 git clone https://github.com/pelzu/english-idioms
 
 ```
-
+## Customize app
+You can change in application.properties file witch port will be used. Default is 8000
+```
+server.port=8000
+```
+Also you should set correct userName and Password
+```
+spring.datasource.username=
+spring.datasource.password=
+```
+Or other...
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.datasource.hikari.connection-timeout=20000
+spring.datasource.hikari.maximum-pool-size=5
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
