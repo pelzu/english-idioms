@@ -5,15 +5,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Comparator;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+public class Idiom {
 
-public class Idiom  {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String polishMeaning;
     private String englishMeaning;
@@ -25,8 +31,8 @@ public class Idiom  {
 
     @Override
     public String toString() {
-        return "\n"+
-        "Idiom{" +
+        return "\n" +
+                "Idiom{" +
                 "id='" + id + '\'' +
                 ", polishMeaning='" + polishMeaning + '\'' +
                 ", englishMeaning='" + englishMeaning + '\'' +

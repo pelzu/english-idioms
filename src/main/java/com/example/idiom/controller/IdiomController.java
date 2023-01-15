@@ -3,20 +3,17 @@ package com.example.idiom.controller;
 import com.example.idiom.inter.DataGrabberAngPl;
 import com.example.idiom.service.dataGrab.ChooseClass;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletContext;
 import java.util.List;
+
 @Slf4j
 @RestController
 public class IdiomController {
 
     private final ChooseClass chooseClass;
-    @Autowired
-    ServletContext servletContext;
 
 
     public IdiomController(ChooseClass chooseClass) {
@@ -27,8 +24,6 @@ public class IdiomController {
     public List<DataGrabberAngPl> getPhrase(@RequestParam(required = false) String kind,
                                             @RequestParam(required = false) String audio,
                                             @RequestParam(required = false) String csv) {
-        String absolutePath = servletContext.getRealPath("resources/static/csv");
-        log.info("*****Context is :" + absolutePath + "****");
         return chooseClass.getRightImpl(kind).getObject(audio, csv);
     }
 }
