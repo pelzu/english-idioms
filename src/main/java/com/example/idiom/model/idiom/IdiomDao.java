@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class IdiomDao {
 
-    private IdiomRepository idiomRepository;
+    private final IdiomRepository idiomRepository;
 
     @Autowired
     public IdiomDao(IdiomRepository idiomRepository) {

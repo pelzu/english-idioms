@@ -22,6 +22,8 @@ public class IdiomImpl implements DataGrabberAngPl {
     @Autowired
     private IdiomDao idiomDao;
 
+
+
     public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement, IdiomAudioGrabber idiomAudioGrabber, IdiomCsVConverter idiomCsVConverter) {
         this.idiomParser = idiomParser;
         this.idiomElement = idiomElement;
@@ -48,12 +50,7 @@ public class IdiomImpl implements DataGrabberAngPl {
     }
 
     public void saveToDB(List<Idiom> idiomList) {
-//        ExecutorService executorService = Executors.newFixedThreadPool(5);
-//        executorService.submit(() -> {
-//            Thread.currentThread().setName("AudioDownloadThread");
         idiomDao.saveAllIdioms(idiomList);
 
-//        });
-//        executorService.shutdown();
     }
 }
