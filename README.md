@@ -33,11 +33,11 @@ PostgreSQL by docker
     2. [Docker Desktop](https://www.docker.com/)
     3. If you have Docker already installed, just open a terminal and run
 
-   ```properties
-   docker=pull postgres    
+   ```shell
+   docker pull postgres    
    ```
     4. If you download image of postgres try:
-   ```properties
+   ```shell
    docker run   
                 --name=postgress 
                 -p=5432:5432 
@@ -46,8 +46,9 @@ PostgreSQL by docker
                 -e=POSTGRES_DB=postgresDB 
                 -d=postgres
    ```
-`docker run --name postgress -p 5432:5432 -e POSTGRES_USER=user -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=postgresDB -d postgres
-` 
+   ```shell
+   docker run --name postgress -p 5432:5432 -e POSTGRES_USER=user -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=postgresDB -d postgres
+   ```
 
   ` docker run` is the command used to create and run a new container based on an already downloaded image.
  
@@ -65,10 +66,8 @@ PostgreSQL by docker
 
 ## To get this app.
 
-```
-
+```shell
 git clone https://github.com/pelzu/english-idioms
-
 ```
 
 
