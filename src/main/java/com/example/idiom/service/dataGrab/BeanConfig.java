@@ -1,13 +1,16 @@
 package com.example.idiom.service.dataGrab;
 
+import com.example.idiom.model.idiom.IdiomRepository;
 import com.example.idiom.service.dataGrab.idiom.*;
 import com.example.idiom.service.dataGrab.phrasal.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 //@EnableJpaRepositories(basePackageClasses = IdiomRepository.class)
 public class BeanConfig {
+
 
     @Bean
     public IdiomPagination idiomPagination() {
@@ -37,7 +40,7 @@ public class BeanConfig {
 
     @Bean
     public IdiomImpl idiomImpl() {
-        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter());
+        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(),idiomDBService());
     }
 
     @Bean
@@ -75,5 +78,7 @@ public class BeanConfig {
         return new DefaultImplAngPl();
     }
 
+    @Bean
+    public IdiomDBService idiomDBService() {return new IdiomDBService();}
 
 }

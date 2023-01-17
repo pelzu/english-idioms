@@ -2,10 +2,7 @@ package com.example.idiom.service.dataGrab.idiom;
 
 import com.example.idiom.inter.DataGrabberAngPl;
 import com.example.idiom.model.idiom.Idiom;
-import com.example.idiom.model.idiom.IdiomDao;
-import com.example.idiom.model.phrasal.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -19,16 +16,14 @@ public class IdiomImpl implements DataGrabberAngPl {
 
     private final IdiomCsVConverter idiomCsVConverter;
 
-    @Autowired
-    private IdiomDao idiomDao;
+    private final IdiomDBService idiomDBService;
 
-
-
-    public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement, IdiomAudioGrabber idiomAudioGrabber, IdiomCsVConverter idiomCsVConverter) {
+    public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement, IdiomAudioGrabber idiomAudioGrabber, IdiomCsVConverter idiomCsVConverter, IdiomDBService idiomDBService) {
         this.idiomParser = idiomParser;
         this.idiomElement = idiomElement;
         this.idiomAudioGrabber = idiomAudioGrabber;
         this.idiomCsVConverter = idiomCsVConverter;
+        this.idiomDBService = idiomDBService;
     }
 
     @Override
@@ -45,12 +40,9 @@ public class IdiomImpl implements DataGrabberAngPl {
                 idiomAudioGrabber.downLoadAudio(idiomList);
             }
         }
-        saveToDB(idiomList);
+        idiomDBService.saveIdiomListToDb(idiomList);
         return idiomList;
     }
 
-    public void saveToDB(List<Idiom> idiomList) {
-        idiomDao.saveAllIdioms(idiomList);
 
-    }
 }
