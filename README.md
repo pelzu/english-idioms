@@ -39,12 +39,12 @@ PostgreSQL by docker
     4. If you download image of postgres try:
    ```shell
    docker run   
-                --name=postgress 
-                -p=5432:5432 
-                -e=POSTGRES_USER=user 
-                -e=POSTGRES_PASSWORD=1234 
-                -e=POSTGRES_DB=postgresDB 
-                -d=postgres
+                --name postgress 
+                -p 5432:5432 
+                -e POSTGRES_USER=user 
+                -e POSTGRES_PASSWORD=1234 
+                -e POSTGRES_DB=postgresDB 
+                -d postgres
    ```
    ```shell
    docker run --name postgress -p 5432:5432 -e POSTGRES_USER=user -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=postgresDB -d postgres
