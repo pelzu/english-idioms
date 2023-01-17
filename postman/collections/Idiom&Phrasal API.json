@@ -39,7 +39,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/learn?kind=idiom",
+					"raw": "http://localhost:8000/learn?kind=idioms",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -51,7 +51,7 @@
 					"query": [
 						{
 							"key": "kind",
-							"value": "idiom"
+							"value": "idioms"
 						}
 					]
 				}
