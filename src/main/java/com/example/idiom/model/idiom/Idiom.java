@@ -16,11 +16,7 @@ public class Idiom {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private Long queryId;
-
-
     private Long id;
     private String polishMeaning;
     private String englishMeaning;

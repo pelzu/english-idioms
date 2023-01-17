@@ -18,9 +18,6 @@ import javax.persistence.Id;
 public class PhrasalVerb {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long queryId ;
-
     private Long id;
     private String polishMeaning;
     private String englishMeaning;
