@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "3ec1dff6-3a68-4200-9bb1-ccd241e4222d",
+		"name": "Idiom&Phrasal API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25345406-3ec1dff6-3a68-4200-9bb1-ccd241e4222d"
+	},
+	"item": [
+		{
+			"name": "Get Idioms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "678d5994-3d5f-466a-a293-f95f831795e2",
+						"exec": [
+							"pm.test(\"Get 200 status\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"pm.test(\"Check is array\", function () {\r",
+							"    var jsonData =pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Check number of idioms is 521\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.length).to.equal(521);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "3a1aab08-efad-4d05-98f5-37be6497329a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/learn?kind=idiom",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"learn"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "idiom"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Idioms,CSV",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7b4018c8-c4c4-48ea-ae82-e687fd057421",
+						"exec": [
+							"pm.test(\"Get 200 status\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"pm.test(\"Check is array\", function () {\r",
+							"    var jsonData =pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Check number of idioms is 521\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.length).to.equal(521);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "61e433ad-9a29-4694-94d5-c2d38b7e46e6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/learn?kind=idiom&csv=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"learn"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "idiom"
+						},
+						{
+							"key": "csv",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Idioms,CSV,audio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1724e65-5ae6-4840-98c7-e163404a02bf",
+						"exec": [
+							"pm.test(\"Get 200 status\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"pm.test(\"Check is array\", function () {\r",
+							"    var jsonData =pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Check number of idioms is 521\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.length).to.equal(521);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "67e0090c-f7a5-47d5-af99-17e0d56cd864",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/learn?kind=idiom&csv=true&audio=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"learn"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "idiom"
+						},
+						{
+							"key": "csv",
+							"value": "true"
+						},
+						{
+							"key": "audio",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Phrasal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ea285c8-be8f-437c-b9d5-7a29b9d36cab",
+						"exec": [
+							"pm.test(\"Get 200 status\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"pm.test(\"Check is array\", function () {\r",
+							"    var jsonData =pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check number of phrasal is 402\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.length).to.equal(402);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "d336aa56-1577-4526-bbad-7bbc749c2c93",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/learn?kind=phrasal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"learn"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "phrasal"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Phrasal,CSV",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06b8a0ed-d0ba-4690-8ca0-ee687a6b56b3",
+						"exec": [
+							"pm.test(\"Get 200 status\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"pm.test(\"Check is array\", function () {\r",
+							"    var jsonData =pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Check number of phrasal is 402\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.length).to.equal(402);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "2d16da64-48df-4a0a-af25-ec7a9b3f127b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/learn?kind=phrasal&csv=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"learn"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "phrasal"
+						},
+						{
+							"key": "csv",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

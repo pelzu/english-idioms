@@ -5,6 +5,7 @@ id = e5623806-ada0-4b14-9e08-9fab76878efd
 
 [relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"25345406-3ec1dff6-3a68-4200-9bb1-ccd241e4222d","path":"Idiom&Phrasal API.json","metaData":{}}
 
 [relations.collections.metaData]
 
@@ -12,3 +13,4 @@ rootDirectory = postman/collections
 rootDirectory = postman/schemas
 
 [relations.apiDefinition.metaData]
+type = openapi:3
