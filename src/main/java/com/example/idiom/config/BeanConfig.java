@@ -1,9 +1,10 @@
-package com.example.idiom.service.dataGrab;
+package com.example.idiom.config;
 
-import com.example.idiom.model.idiom.IdiomRepository;
-import com.example.idiom.service.dataGrab.idiom.*;
-import com.example.idiom.service.dataGrab.phrasal.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.idiom.repository.idiom.IdiomDBService;
+import com.example.idiom.service.ChooseClass;
+import com.example.idiom.service.idiom.*;
+import com.example.idiom.service.nooption.DefaultImplAngPl;
+import com.example.idiom.service.phrasal.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

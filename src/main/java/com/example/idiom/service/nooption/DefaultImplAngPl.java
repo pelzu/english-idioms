@@ -1,6 +1,6 @@
-package com.example.idiom.service.dataGrab;
+package com.example.idiom.service.nooption;
 
-import com.example.idiom.inter.DataGrabberAngPl;
+import com.example.idiom.service.DataGrabberAngPl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.example.idiom.controller;
 
-import com.example.idiom.inter.DataGrabberAngPl;
-import com.example.idiom.service.dataGrab.ChooseClass;
+import com.example.idiom.service.DataGrabberAngPl;
+import com.example.idiom.service.ChooseClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

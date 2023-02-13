@@ -1,7 +1,8 @@
-package com.example.idiom.service.dataGrab.idiom;
+package com.example.idiom.service.idiom;
 
-import com.example.idiom.inter.DataGrabberAngPl;
+import com.example.idiom.service.DataGrabberAngPl;
 import com.example.idiom.model.idiom.Idiom;
+import com.example.idiom.repository.idiom.IdiomDBService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;

@@ -1,5 +1,6 @@
-package com.example.idiom.model.phrasal;
+package com.example.idiom.repository.phrasal;
 
+import com.example.idiom.model.phrasal.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
