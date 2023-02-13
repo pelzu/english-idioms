@@ -11,8 +11,12 @@ public class IdiomDBService {
     private IdiomDao idiomDao;
 
 
-    public void saveIdiomListToDb(List<Idiom> idiomList){
+    public void saveIdiomListToDb(List<Idiom> idiomList) {
         idiomDao.saveAllIdioms(idiomList);
+    }
+
+    public List<Idiom> getIdiomListFromDB() {
+        return idiomDao.getIdiomList();
     }
 
 

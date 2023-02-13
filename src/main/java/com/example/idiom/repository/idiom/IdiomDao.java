@@ -19,4 +19,7 @@ public class IdiomDao {
     public void saveAllIdioms(List<Idiom> idiomList){
             idiomRepository.saveAll(idiomList);
     }
+    public List<Idiom> getIdiomList( ){
+           return idiomRepository.findAll();
+    }
 }
