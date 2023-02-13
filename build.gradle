@@ -28,6 +28,8 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.15.3'
     implementation 'junit:junit:4.13.2'
     implementation 'org.projectlombok:lombok:1.18.22'
+    implementation 'com.vaadin:vaadin-bom:23.3.6'
+    implementation 'com.vaadin:vaadin-spring-boot-starter:23.3.6'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
