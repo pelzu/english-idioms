@@ -1,4 +1,4 @@
-package com.example.idiom.service.dataGrab.idiom;
+package com.example.idiom.service.idiom;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;

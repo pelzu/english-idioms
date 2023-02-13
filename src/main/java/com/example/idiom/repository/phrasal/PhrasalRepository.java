@@ -1,6 +1,7 @@
-package com.example.idiom.model.phrasal;
+package com.example.idiom.repository.phrasal;
 
 
+import com.example.idiom.model.phrasal.PhrasalVerb;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.example.idiom;
+package com.example.idiom.frontend;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

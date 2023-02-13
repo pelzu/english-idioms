@@ -1,4 +1,4 @@
-package com.example.idiom.service.dataGrab.phrasal;
+package com.example.idiom.service.phrasal;
 
 import com.example.idiom.model.phrasal.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;

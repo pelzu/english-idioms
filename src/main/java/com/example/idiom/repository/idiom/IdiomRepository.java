@@ -1,5 +1,6 @@
-package com.example.idiom.model.idiom;
+package com.example.idiom.repository.idiom;
 
+import com.example.idiom.model.idiom.Idiom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

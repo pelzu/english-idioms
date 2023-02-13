@@ -1,4 +1,4 @@
-package com.example.idiom.inter;
+package com.example.idiom.service;
 
 
 import java.util.List;

@@ -1,7 +1,6 @@
-package com.example.idiom.service.dataGrab.idiom;
+package com.example.idiom.repository.idiom;
 
 import com.example.idiom.model.idiom.Idiom;
-import com.example.idiom.model.idiom.IdiomDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
