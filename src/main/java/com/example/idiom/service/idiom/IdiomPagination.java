@@ -11,7 +11,7 @@ import java.io.IOException;
 public class IdiomPagination {
 
 
-    private final String BASE_LINK = "https://www.ang.pl/slownictwo/idiomy/page/";
+    private final String BASE_LINK = "https://www.ang.pl/slownictwo/idiomy/page/1";
 
     public int getNumberOfPageIdiom() {
         try {

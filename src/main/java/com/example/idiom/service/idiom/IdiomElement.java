@@ -29,7 +29,7 @@ public class IdiomElement {
             Callable<Elements> task = () -> {
                 try {
                     log.info("Downloading HTML site:" + IDIOM_LINK + increment);
-                    return Jsoup.connect(IDIOM_LINK + increment).get().select("div[style*=border-bottom: 1px solid #ccc;]");
+                    return Jsoup.connect(IDIOM_LINK + increment).get().select("div[class=row border-bottom py-2]");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
