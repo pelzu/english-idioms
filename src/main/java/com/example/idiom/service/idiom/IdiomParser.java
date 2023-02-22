@@ -40,41 +40,49 @@ public class IdiomParser {
     }
 
     public String getExampleEnglish(Element el) {
-        Node node = el.select("div[class=medium-5 columns]").select("p").first().childNodes().get(1);
-        return node.toString();
+        StringBuffer exampleEnglish = new StringBuffer();
+        List<Node> exampleEnglishNodes = el.select("p[class=mb-1]").first().childNodes();
+
+        for (Node node : exampleEnglishNodes) {
+            if (node.childNodes().isEmpty()) {
+                exampleEnglish.append(node);
+            } else exampleEnglish.append(node.firstChild());
+        }
+        return exampleEnglish.toString();
+
     }
 
+
     public String getExampleMp3Link(Element el) {
-        String exampleMp3Link = el.select("div[class=medium-5 columns]").select("a[href]").attr("href");
-        return PREFIX_LINK + exampleMp3Link;
+        String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        return PREFIX_LINK + linkToIdiom;
     }
 
     public String getPolishTranslation(Element el) {
-        String polishTranslation = el.select("p[class=pol]").text();
-        return polishTranslation;
+        Node polishTranslation = el.select("div[class=col-7 col-sm-4 lh-1]").first().firstChild();
+        return polishTranslation.toString();
     }
 
     public String getEnglishTranslation(Element el) {
-        String englishTranslation = el.select("p[class=big mtop]").select("a[href]").next("a[href]").text();
-        return englishTranslation;
+        Node englishTranslation = el.select("div[class=col-5 col-sm-3 ang]").first().firstChild().firstChild();
+        return englishTranslation.toString();
     }
 
     private String getLinkToIdiom(Element el) {
-        String idiomLink = el.select("p[class=big mtop]").select("a[href]").next("a[href]").attr("href");
-        return PREFIX_LINK + idiomLink;
+        String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        return PREFIX_LINK + linkToIdiom;
     }
 
     private String getIdNumber(Element el) {
+        String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        linkToIdiom = linkToIdiom.substring(linkToIdiom.lastIndexOf("/") + 1);
 
-        String idNumber = el.select("p[class=big mtop]").select("a[href]").next("a[href]").attr("href");
-        idNumber = idNumber.substring(idNumber.lastIndexOf("/") + 1);
-
-        return idNumber;
+        return linkToIdiom;
     }
 
     public String getMp3TranslateLink(Element el) {
-        String mp3El = el.select("p[class=big mtop]").select("a[href]").attr("href");
-        return PREFIX_LINK + mp3El;
+        String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        return PREFIX_LINK + linkToIdiom;
     }
 
 
