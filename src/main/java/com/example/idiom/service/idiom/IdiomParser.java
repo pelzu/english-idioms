@@ -40,7 +40,7 @@ public class IdiomParser {
     }
 
     public String getExampleEnglish(Element el) {
-        StringBuffer exampleEnglish = new StringBuffer();
+        StringBuilder exampleEnglish = new StringBuilder();
         List<Node> exampleEnglishNodes = el.select("p[class=mb-1]").first().childNodes();
 
         for (Node node : exampleEnglishNodes) {

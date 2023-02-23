@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @Slf4j
 public class PhrasalPagination {
-    private final String PHRASAL_VERB_LINK = "https://www.ang.pl/slownictwo/phrasal-verbs/page/";
+    private final String PHRASAL_VERB_LINK = "https://www.ang.pl/slownictwo/phrasal-verbs/page/1";
 
     public int getNumberOfPagePhrasalVerb() {
         try {

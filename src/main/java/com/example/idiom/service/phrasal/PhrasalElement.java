@@ -35,7 +35,7 @@ public class PhrasalElement {
             Callable<Elements> task = () -> {
                 try {
                     log.info("Downloading HTML site:" + PHRASAL_VERB_LINK + increment);
-                    return Jsoup.connect(PHRASAL_VERB_LINK + increment).get().select("div[style*=border-bottom: 1px solid #ccc;]");
+                    return Jsoup.connect(PHRASAL_VERB_LINK + increment).get().select("div[class=row border-bottom py-2]");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
