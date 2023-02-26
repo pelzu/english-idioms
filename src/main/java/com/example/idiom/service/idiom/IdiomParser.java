@@ -1,7 +1,7 @@
 package com.example.idiom.service.idiom;
 
 import com.example.idiom.model.idiom.Idiom;
-import com.example.idiom.model.idiom.IdiomIdComparator;
+import com.example.idiom.model.idiom.IdiomComparator;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
@@ -32,7 +32,7 @@ public class IdiomParser {
                     .build();
             idiomList.add(idiom);
         });
-        idiomList.sort(new IdiomIdComparator());
+        idiomList.sort((new IdiomComparator()));
         log.info("Parsed and added " + idiomList.size() + " number of Idiom to list");
 
 
