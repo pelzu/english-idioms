@@ -6,9 +6,10 @@ import com.example.idiom.repository.idiom.IdiomDBService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @Slf4j
-public class IdiomImpl implements DataGrabberAngPl {
+public class IdiomImpl implements DataGrabberAngPl,Predicate<String > {
     private final IdiomParser idiomParser;
 
     private final IdiomElement idiomElement;
@@ -28,7 +29,7 @@ public class IdiomImpl implements DataGrabberAngPl {
     }
 
     @Override
-    public List<Idiom> getObject(String audio, String csv) {
+    public List<Idiom> getList(String audio, String csv) {
 
         List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
         if (csv != null) {
@@ -45,5 +46,8 @@ public class IdiomImpl implements DataGrabberAngPl {
         return idiomList;
     }
 
-
+    @Override
+    public boolean test(String kind) {
+        return kind.equals("idiom");
+    }
 }

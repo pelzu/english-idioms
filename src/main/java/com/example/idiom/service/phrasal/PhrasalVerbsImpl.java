@@ -7,9 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @Slf4j
-public class PhrasalVerbsImpl implements DataGrabberAngPl {
+public class PhrasalVerbsImpl implements DataGrabberAngPl, Predicate<String > {
 
     private final PhrasalVerbsParser phrasalVerbsParser;
 
@@ -27,7 +28,7 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl {
     }
 
     @Override
-    public List<PhrasalVerb> getObject(String audio, String csv) {
+    public List<PhrasalVerb> getList(String audio, String csv) {
         List<PhrasalVerb> phrasalVerbList = phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements());
 
         if (audio != null) {
@@ -56,5 +57,9 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl {
     }
 
 
+    @Override
+    public boolean test(String kind) {
+        return kind.equals("phrasal");
+    }
 }
 

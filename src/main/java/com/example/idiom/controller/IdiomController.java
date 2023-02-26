@@ -24,6 +24,6 @@ public class IdiomController {
     public List<DataGrabberAngPl> getPhrase(@RequestParam(required = false) String kind,
                                             @RequestParam(required = false) String audio,
                                             @RequestParam(required = false) String csv) {
-        return chooseClass.getRightImpl(kind).getObject(audio, csv);
+        return chooseClass.getImplByParameter(kind).getList(audio, csv);
     }
 }

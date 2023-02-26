@@ -11,7 +11,7 @@ import java.util.List;
 public class DefaultImplAngPl implements DataGrabberAngPl {
 
     @Override
-    public List getObject(String audio, String csv) {
+    public List getList(String audio, String csv) {
         List<String> defaultMsg = new ArrayList<>();
         defaultMsg.add("No object by this link ");
         defaultMsg.add("http://localhost:8000/learn?kind=idiom&audio=true&csv=true");
