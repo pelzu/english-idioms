@@ -4,8 +4,12 @@ import com.example.idiom.service.idiom.IdiomImpl;
 import com.example.idiom.service.nooption.DefaultImplAngPl;
 import com.example.idiom.service.phrasal.PhrasalVerbsImpl;
 
+import java.util.HashMap;
+
 
 public class ChooseClass {
+
+    private final HashMap<String, DataGrabberAngPl> angPlHashMap = new HashMap<String, DataGrabberAngPl>();
 
     private final PhrasalVerbsImpl phrasalVerbs;
     private final IdiomImpl idiomImpl;
@@ -18,15 +22,17 @@ public class ChooseClass {
     }
 
     public DataGrabberAngPl getImplByParameter(String kind) {
+        saveHashMap();
+        if (angPlHashMap.containsKey(kind)) {
+            return angPlHashMap.get(kind);
+        } else return defaultImplAngPl;
 
-        if (kind == null) {
-            return defaultImplAngPl;
-        } else if (idiomImpl.test(kind)) {
-            return idiomImpl;
-        } else if (phrasalVerbs.test(kind)) {
-            return phrasalVerbs;
-        } else
-            return defaultImplAngPl;
+    }
+
+    public void saveHashMap() {
+        angPlHashMap.put("idiom", idiomImpl);
+        angPlHashMap.put("phrasal", phrasalVerbs);
+
     }
 
 
