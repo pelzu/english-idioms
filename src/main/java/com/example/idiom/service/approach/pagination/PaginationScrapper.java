@@ -1,4 +1,4 @@
-package com.example.idiom.service.approach;
+package com.example.idiom.service.approach.pagination;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 @Slf4j
-public class HtmlPaginationScrapper {
+public class PaginationScrapper {
 
 
     public static int getNumberOfPage(String BASE_LINK) {
@@ -21,7 +21,7 @@ public class HtmlPaginationScrapper {
     private static int parseNumberFromSite(String BASE_LINK) {
         String numberOfPage;
         try {
-            Document tempDoc = null;
+            Document tempDoc ;
             tempDoc = Jsoup.connect(BASE_LINK).get();
             Elements elements = tempDoc.getElementsByClass("pagination");
             numberOfPage = elements.first().lastElementChild().text();
