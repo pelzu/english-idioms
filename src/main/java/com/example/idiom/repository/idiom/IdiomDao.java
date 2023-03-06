@@ -16,10 +16,11 @@ public class IdiomDao {
         this.idiomRepository = idiomRepository;
     }
 
-    public void saveAllIdioms(List<Idiom> idiomList){
-            idiomRepository.saveAll(idiomList);
+    public void saveAllIdioms(List<Idiom> idiomList) {
+        idiomRepository.saveAll(idiomList);
     }
-    public List<Idiom> getIdiomList( ){
-           return idiomRepository.findAll();
+
+    public List<Idiom> getIdiomList() {
+        return idiomRepository.findAll();
     }
 }

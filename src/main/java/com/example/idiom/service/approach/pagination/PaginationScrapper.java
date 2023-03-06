@@ -21,7 +21,7 @@ public class PaginationScrapper {
     private static int parseNumberFromSite(String BASE_LINK) {
         String numberOfPage;
         try {
-            Document tempDoc ;
+            Document tempDoc;
             tempDoc = Jsoup.connect(BASE_LINK).get();
             Elements elements = tempDoc.getElementsByClass("pagination");
             numberOfPage = elements.first().lastElementChild().text();

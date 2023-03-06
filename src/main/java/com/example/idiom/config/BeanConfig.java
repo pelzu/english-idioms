@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-//@EnableJpaRepositories(basePackageClasses = IdiomRepository.class)
 public class BeanConfig {
 
 
@@ -41,7 +40,7 @@ public class BeanConfig {
 
     @Bean
     public IdiomImpl idiomImpl() {
-        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(),idiomDBService());
+        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(), idiomDBService());
     }
 
     @Bean
@@ -80,6 +79,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public IdiomDBService idiomDBService() {return new IdiomDBService();}
+    public IdiomDBService idiomDBService() {
+        return new IdiomDBService();
+    }
 
 }

@@ -1,15 +1,15 @@
 package com.example.idiom.service.idiom;
 
-import com.example.idiom.service.DataGrabberAngPl;
 import com.example.idiom.model.idiom.Idiom;
 import com.example.idiom.repository.idiom.IdiomDBService;
+import com.example.idiom.service.DataGrabberAngPl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 @Slf4j
-public class IdiomImpl implements DataGrabberAngPl,Predicate<String > {
+public class IdiomImpl implements DataGrabberAngPl, Predicate<String> {
     private final IdiomParser idiomParser;
 
     private final IdiomElement idiomElement;

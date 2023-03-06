@@ -1,7 +1,7 @@
 package com.example.idiom.service.idiom;
 
-import com.example.idiom.service.approach.pagination.PaginationScrapper;
 import com.example.idiom.service.approach.pagination.PaginationInterface;
+import com.example.idiom.service.approach.pagination.PaginationScrapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
