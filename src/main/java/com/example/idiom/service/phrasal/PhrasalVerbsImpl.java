@@ -29,7 +29,7 @@ public class PhrasalVerbsImpl implements DataGrabberAngPl, Predicate<String > {
 
     @Override
     public List<PhrasalVerb> getList(String audio, String csv) {
-        List<PhrasalVerb> phrasalVerbList = phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getElements());
+        List<PhrasalVerb> phrasalVerbList = phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getPhrasalElements());
 
         if (audio != null) {
             if (audio.equals("true")) {
