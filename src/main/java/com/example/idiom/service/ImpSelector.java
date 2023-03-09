@@ -4,6 +4,7 @@ import com.example.idiom.service.idiom.IdiomImpl;
 import com.example.idiom.service.nooption.DefaultImplAngPl;
 import com.example.idiom.service.phrasal.PhrasalVerbsImpl;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 
@@ -21,14 +22,13 @@ public class ImpSelector {
         this.defaultImplAngPl = defaultImplAngPl;
     }
 
+
     public IdiomAndPhrasalInterface getImplByParameter(String kind) {
-        saveHashMap();
-        if (angPlHashMap.containsKey(kind)) {
-            return angPlHashMap.get(kind);
-        } else return defaultImplAngPl;
+        return angPlHashMap.getOrDefault(kind, defaultImplAngPl);
 
     }
 
+    @PostConstruct
     public void saveHashMap() {
         angPlHashMap.put("idiom", idiomImpl);
         angPlHashMap.put("phrasal", phrasalVerbs);
