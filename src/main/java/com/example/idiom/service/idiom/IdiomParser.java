@@ -1,8 +1,7 @@
 package com.example.idiom.service.idiom;
 
 import com.example.idiom.model.idiom.Idiom;
-import com.example.idiom.model.idiom.IdiomComparator;
-import com.example.idiom.service.approach.ElementParser;
+import com.example.idiom.model.idiom.IdiomComparatorById;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
@@ -32,7 +31,7 @@ public class IdiomParser {
                     .build();
             idiomList.add(idiom);
         });
-        idiomList.sort((new IdiomComparator()));
+        idiomList.sort((new IdiomComparatorById()));
         log.info("Parsed and added " + idiomList.size() + " number of Idiom to list");
 
 
@@ -84,6 +83,5 @@ public class IdiomParser {
         String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
         return PREFIX_LINK + linkToIdiom;
     }
-
 
 }
