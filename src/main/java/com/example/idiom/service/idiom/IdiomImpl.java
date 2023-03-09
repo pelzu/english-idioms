@@ -2,14 +2,14 @@ package com.example.idiom.service.idiom;
 
 import com.example.idiom.model.idiom.Idiom;
 import com.example.idiom.repository.idiom.IdiomDBService;
-import com.example.idiom.service.DataGrabberAngPl;
+import com.example.idiom.service.IdiomAndPhrasalInterface;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 @Slf4j
-public class IdiomImpl implements DataGrabberAngPl, Predicate<String> {
+public class IdiomImpl implements IdiomAndPhrasalInterface, Predicate<String> {
     private final IdiomParser idiomParser;
 
     private final IdiomElement idiomElement;
@@ -29,7 +29,7 @@ public class IdiomImpl implements DataGrabberAngPl, Predicate<String> {
     }
 
     @Override
-    public List<Idiom> getList(String audio, String csv) {
+    public List<Idiom> getIdiomOrPhrasalList(String audio, String csv) {
 
         List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
         if (csv != null) {

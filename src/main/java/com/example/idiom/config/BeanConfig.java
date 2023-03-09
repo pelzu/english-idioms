@@ -1,7 +1,7 @@
 package com.example.idiom.config;
 
 import com.example.idiom.repository.idiom.IdiomDBService;
-import com.example.idiom.service.ChooseClass;
+import com.example.idiom.service.ImpSelector;
 import com.example.idiom.service.idiom.*;
 import com.example.idiom.service.nooption.DefaultImplAngPl;
 import com.example.idiom.service.phrasal.*;
@@ -69,8 +69,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public ChooseClass chooseClass() {
-        return new ChooseClass(phrasalVerbs(), idiomImpl(), defaultImplAngPl());
+    public ImpSelector chooseClass() {
+        return new ImpSelector(phrasalVerbs(), idiomImpl(), defaultImplAngPl());
     }
 
     @Bean

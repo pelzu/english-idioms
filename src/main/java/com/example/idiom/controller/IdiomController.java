@@ -1,7 +1,7 @@
 package com.example.idiom.controller;
 
-import com.example.idiom.service.ChooseClass;
-import com.example.idiom.service.DataGrabberAngPl;
+import com.example.idiom.service.ImpSelector;
+import com.example.idiom.service.IdiomAndPhrasalInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,17 +13,17 @@ import java.util.List;
 @RestController
 public class IdiomController {
 
-    private final ChooseClass chooseClass;
+    private final ImpSelector impSelector;
 
 
-    public IdiomController(ChooseClass chooseClass) {
-        this.chooseClass = chooseClass;
+    public IdiomController(ImpSelector impSelector) {
+        this.impSelector = impSelector;
     }
 
     @GetMapping("/learn")
-    public List<DataGrabberAngPl> getPhrase(@RequestParam(required = false) String kind,
-                                            @RequestParam(required = false) String audio,
-                                            @RequestParam(required = false) String csv) {
-        return chooseClass.getImplByParameter(kind).getList(audio, csv);
+    public List<IdiomAndPhrasalInterface> getPhrase(@RequestParam(required = false) String kind,
+                                                    @RequestParam(required = false) String audio,
+                                                    @RequestParam(required = false) String csv) {
+        return impSelector.getImplByParameter(kind).getIdiomOrPhrasalList(audio, csv);
     }
 }
