@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class ImpSelector {
 
-    private final HashMap<String, IdiomAndPhrasalInterface> angPlHashMap = new HashMap<String, IdiomAndPhrasalInterface>();
+    private final HashMap<String, IdiomAndPhrasalInterface> angPlHashMap = new HashMap<>();
 
     private final PhrasalVerbsImpl phrasalVerbs;
     private final IdiomImpl idiomImpl;

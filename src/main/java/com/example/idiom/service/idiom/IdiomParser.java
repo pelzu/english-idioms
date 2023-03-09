@@ -41,7 +41,7 @@ public class IdiomParser {
 
     public String getExampleEnglish(Element el) {
         StringBuilder exampleEnglish = new StringBuilder();
-        List<Node> exampleEnglishNodes = ElementParser.getChildOfElement(el, "p[class=mb-1]").first().childNodes();
+        List<Node> exampleEnglishNodes = el.select("p[class=mb-1]").first().childNodes();
 
         for (Node node : exampleEnglishNodes) {
             if (node.childNodes().isEmpty()) {
@@ -52,30 +52,37 @@ public class IdiomParser {
 
     }
 
+
     public String getExampleMp3Link(Element el) {
-        return ElementParser.getChildOfElement(el, "div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        return PREFIX_LINK + linkToIdiom;
     }
 
     public String getPolishTranslation(Element el) {
-        return ElementParser.getChildOfElement(el, "div[class=col-7 col-sm-4 lh-1]").first().firstChild().toString();
+        Node polishTranslation = el.select("div[class=col-7 col-sm-4 lh-1]").first().firstChild();
+        return polishTranslation.toString();
     }
 
     public String getEnglishTranslation(Element el) {
-        return ElementParser.getChildOfElement(el, "div[class=col-5 col-sm-3 ang]").first().firstChild().firstChild().toString();
+        Node englishTranslation = el.select("div[class=col-5 col-sm-3 ang]").first().firstChild().firstChild();
+        return englishTranslation.toString();
     }
 
     private String getLinkToIdiom(Element el) {
-        return PREFIX_LINK + ElementParser.getChildOfElement(el, "div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        return PREFIX_LINK + linkToIdiom;
     }
 
     private String getIdNumber(Element el) {
-        String linkToIdiom = ElementParser.getChildOfElement(el, "div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
         linkToIdiom = linkToIdiom.substring(linkToIdiom.lastIndexOf("/") + 1);
+
         return linkToIdiom;
     }
 
     public String getMp3TranslateLink(Element el) {
-        return ElementParser.getChildOfElement(el, "div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
+        return PREFIX_LINK + linkToIdiom;
     }
 
 
