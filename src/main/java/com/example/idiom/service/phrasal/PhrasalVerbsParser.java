@@ -13,19 +13,19 @@ import java.util.List;
 @Slf4j
 public class PhrasalVerbsParser {
 
+    private static int counter = 0;
     private final String PREFIX_LINK = "https://www.ang.pl";
-    private static int  counter=0 ;
 
-    public List<PhrasalVerb> parseToPhrasalVerbs(Elements elements) {
+    public List<PhrasalVerb> parseElementsToPhrasalVerbList(Elements elements) {
         List<PhrasalVerb> phrasalVerbList = new ArrayList<>();
 
         elements.forEach(element -> {
             PhrasalVerb phrasalVerb = PhrasalVerb.builder()
-                    .id(Long.valueOf(getId()))
-                    .englishMeaning(getEnglishMeaning(element))
-                    .polishMeaning(getPolishTranslation(element))
-                    .englishExample(getExampleEnglish(element))
-                    .linkToPhrasalVerb(getLinkToPhrasalVerb(element)).
+                    .id(Long.valueOf(getPhrasalVerbId()))
+                    .englishMeaning(getEnglishMeaningPhrase(element))
+                    .polishMeaning(getPolishPhrase(element))
+                    .englishExample(getExampleEnglishPhrase(element))
+                    .linkToPhrasalVerb(getDirectLinkToPhrasalVerb(element)).
                     build();
 
             phrasalVerbList.add(phrasalVerb);
@@ -36,16 +36,15 @@ public class PhrasalVerbsParser {
         return phrasalVerbList;
     }
 
-    public String getPolishTranslation(Element el) {
+    public String getPolishPhrase(Element el) {
         Node polishTranslation = el.select("div[class=col-7 col-sm-4 lh-1]").first().firstChild();
 
         return polishTranslation.toString();
     }
 
-    public String getExampleEnglish(Element el) {
+    public String getExampleEnglishPhrase(Element el) {
         StringBuilder exampleEnglish = new StringBuilder();
         List<Node> exampleEnglishNodes = el.select("p[class=mb-1]").first().childNodes();
-
         for (Node node : exampleEnglishNodes) {
             if (node.childNodes().isEmpty()) {
                 exampleEnglish.append(node);
@@ -54,19 +53,19 @@ public class PhrasalVerbsParser {
         return exampleEnglish.toString();
     }
 
-    public String getEnglishMeaning(Element el) {
+    public String getEnglishMeaningPhrase(Element el) {
         Node englishTranslation = el.select("div[class=col-5 col-sm-3 ang]").first().firstChild().firstChild();
         return englishTranslation.toString();
     }
 
-    public String getLinkToPhrasalVerb(Element el) {
+    public String getDirectLinkToPhrasalVerb(Element el) {
         String linkToIdiom = el.select("div[class=col-5 col-sm-3 ang]").first().firstElementChild().attr("href");
 
-        return PREFIX_LINK +linkToIdiom;
+        return PREFIX_LINK + linkToIdiom;
     }
 
-    public String getId() {
-        counter=counter+1 ;
+    public String getPhrasalVerbId() {
+        counter = counter + 1;
         return String.valueOf(counter);
     }
 }

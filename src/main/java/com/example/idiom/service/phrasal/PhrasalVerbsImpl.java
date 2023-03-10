@@ -29,7 +29,7 @@ public class PhrasalVerbsImpl implements IdiomAndPhrasalInterface, Predicate<Str
 
     @Override
     public List<PhrasalVerb> getIdiomOrPhrasalList(String audio, String csv) {
-        List<PhrasalVerb> phrasalVerbList = phrasalVerbsParser.parseToPhrasalVerbs(phrasalElement.getPhrasalElements());
+        List<PhrasalVerb> phrasalVerbList = phrasalVerbsParser.parseElementsToPhrasalVerbList(phrasalElement.getPhrasalElements());
 
         if (audio != null) {
             if (audio.equals("true")) {
