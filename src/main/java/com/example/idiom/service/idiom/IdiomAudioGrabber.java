@@ -19,25 +19,24 @@ public class IdiomAudioGrabber {
     private final String MP3_TRANSLATION_DESTINATION = "src/main/resources/static/mp3/translation/";
     private final String MP3_EXAMPLE_DESTINATION = "src/main/resources/static/mp3/example/";
 
-    RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate = new RestTemplate();
 
 
-    public void downLoadAudio(List<Idiom> idiomList) {
+    public void downloadAudioByIdiomList(List<Idiom> idiomList) {
         ExecutorService executorService = Executors.newFixedThreadPool(30);
 
-        createDirForMp3();
+        createBasicDirectoryForMp3();
         for (Idiom idiom : idiomList) {
             executorService.submit(() -> {
                 Thread.currentThread().setName("AudioDownloadThread");
-
                 getTranslatedMp3(idiom);
-                getExampleMp3File(idiom);
+                getExampleMp3(idiom);
             });
         }
         executorService.shutdown();
     }
 
-    public void createDirForMp3() {
+    public void createBasicDirectoryForMp3() {
         List<File> folderList = new ArrayList<>();
         File static_folder = new File("src/main/resources/static");
         File static_mp3_folder = new File("src/main/resources/static/mp3");
@@ -73,7 +72,7 @@ public class IdiomAudioGrabber {
         }
     }
 
-    public void getExampleMp3File(Idiom idiom) {
+    public void getExampleMp3(Idiom idiom) {
         File exMp3File = new File(MP3_EXAMPLE_DESTINATION + idiom.getId() + "_Example" + "_" + deleteDots(idiom.getEnglishExample()) + ".mp3");
         if (!exMp3File.exists()) {
             restTemplate.execute(idiom.getAudioExampleLink(), HttpMethod.GET, null, clientHttpResponse -> {

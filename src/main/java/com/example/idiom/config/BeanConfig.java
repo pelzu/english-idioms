@@ -1,21 +1,37 @@
 package com.example.idiom.config;
 
 import com.example.idiom.repository.idiom.IdiomDBService;
-import com.example.idiom.service.ImpSelector;
+import com.example.idiom.repository.idiom.IdiomRepository;
+import com.example.idiom.repository.phrasal.PhrasalRepository;
+import com.example.idiom.repository.phrasal.PhrasalVerbDbService;
+import com.example.idiom.service.ImplSelector;
 import com.example.idiom.service.idiom.*;
 import com.example.idiom.service.nooption.DefaultImplAngPl;
-import com.example.idiom.service.phrasal.*;
+import com.example.idiom.service.phrasal.PhrasalCsvConverter;
+import com.example.idiom.service.phrasal.PhrasalElementScrapper;
+import com.example.idiom.service.phrasal.PhrasalVerbsImpl;
+import com.example.idiom.service.phrasal.PhrasalVerbsParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanConfig {
 
+    public IdiomRepository idiomRepository;
+    public PhrasalRepository phrasalRepository;
+
+    @Autowired
+    public BeanConfig(IdiomRepository idiomRepository, PhrasalRepository phrasalRepository) {
+        this.idiomRepository = idiomRepository;
+        this.phrasalRepository = phrasalRepository;
+    }
 
     @Bean
-    public IdiomPagination idiomPagination() {
-        return new IdiomPagination();
+    public IdiomImpl idiomImpl() {
+        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(), idiomDBService());
     }
+
 
     @Bean
     public IdiomParser idiomParser() {
@@ -28,19 +44,25 @@ public class BeanConfig {
     }
 
     @Bean
-    public IdiomCsVConverter idiomCsVConverter() {
-        return new IdiomCsVConverter();
+    public IdiomCsvConverter idiomCsVConverter() {
+        return new IdiomCsvConverter();
     }
 
 
     @Bean
-    public IdiomElement idiomElement() {
-        return new IdiomElement(idiomPagination());
+    public IdiomElementScrapper idiomElement() {
+        return new IdiomElementScrapper();
+    }
+
+
+    @Bean
+    public IdiomDBService idiomDBService() {
+        return new IdiomDBService(idiomRepository);
     }
 
     @Bean
-    public IdiomImpl idiomImpl() {
-        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(), idiomDBService());
+    public PhrasalVerbsImpl phrasalVerbs() {
+        return new PhrasalVerbsImpl(phrasalVerbsParser(), phrasalElement(), phrasalCsvConverter(), phrasalVerbDbService());
     }
 
     @Bean
@@ -49,13 +71,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public PhrasalElement phrasalElement() {
-        return new PhrasalElement(phrasalPagination());
-    }
-
-    @Bean
-    public PhrasalPagination phrasalPagination() {
-        return new PhrasalPagination();
+    public PhrasalElementScrapper phrasalElement() {
+        return new PhrasalElementScrapper();
     }
 
     @Bean
@@ -64,13 +81,13 @@ public class BeanConfig {
     }
 
     @Bean
-    public PhrasalVerbsImpl phrasalVerbs() {
-        return new PhrasalVerbsImpl(phrasalVerbsParser(), phrasalElement(), phrasalCsvConverter());
+    public PhrasalVerbDbService phrasalVerbDbService() {
+        return new PhrasalVerbDbService(phrasalRepository);
     }
 
     @Bean
-    public ImpSelector chooseClass() {
-        return new ImpSelector(phrasalVerbs(), idiomImpl(), defaultImplAngPl());
+    public ImplSelector chooseClass() {
+        return new ImplSelector(phrasalVerbs(), idiomImpl(), defaultImplAngPl());
     }
 
     @Bean
@@ -78,9 +95,5 @@ public class BeanConfig {
         return new DefaultImplAngPl();
     }
 
-    @Bean
-    public IdiomDBService idiomDBService() {
-        return new IdiomDBService();
-    }
 
 }

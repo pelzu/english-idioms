@@ -10,18 +10,18 @@ import java.util.List;
 
 @Slf4j
 public class PhrasalCsvConverter {
-    public void save(List<PhrasalVerb> phrasalVerbList) {
-        createDirForCsv();
-        PrintWriter printWriter;
+    public void savePhrasalVerbToCsvFile(List<PhrasalVerb> phrasalVerbList) {
+        createDefaultDirectoryForCsv();
+        PrintWriter phrasalVerbWriter;
         File csvFile = new File("src/main/resources/static/csv/phrasalVerb.csv");
         if (!csvFile.exists()) {
             {
                 try {
-                    printWriter = new PrintWriter(csvFile);
+                    phrasalVerbWriter = new PrintWriter(csvFile);
                     StringBuffer csvHeader = new StringBuffer();
                     csvHeader.append("id;polishMeaning;englishMeaning;englishExample;LinkToPhrasalVerb\n");
                     StringBuffer csvData = new StringBuffer();
-                    printWriter.write(csvHeader.toString());
+                    phrasalVerbWriter.write(csvHeader.toString());
                     for (PhrasalVerb phrasalVerb : phrasalVerbList) {
                         csvData.append(phrasalVerb.getId() + ";");
                         csvData.append(phrasalVerb.getPolishMeaning() + ";");
@@ -30,8 +30,8 @@ public class PhrasalCsvConverter {
                         csvData.append(phrasalVerb.getLinkToPhrasalVerb() + "\n");
 
                     }
-                    printWriter.write(csvData.toString());
-                    printWriter.close();
+                    phrasalVerbWriter.write(csvData.toString());
+                    phrasalVerbWriter.close();
                     log.info("CSV file is created: " + csvFile.getAbsolutePath());
 
                 } catch (FileNotFoundException e) {
@@ -42,7 +42,7 @@ public class PhrasalCsvConverter {
 
     }
 
-    public void createDirForCsv() {
+    public void createDefaultDirectoryForCsv() {
         File staticFolder = new File("src/main/resources/static");
         if (!staticFolder.exists()) {
             staticFolder.mkdir();

@@ -12,37 +12,36 @@ import java.util.function.Predicate;
 public class IdiomImpl implements IdiomAndPhrasalInterface, Predicate<String> {
     private final IdiomParser idiomParser;
 
-    private final IdiomElement idiomElement;
+    private final IdiomElementScrapper idiomElementScrapper;
 
     private final IdiomAudioGrabber idiomAudioGrabber;
 
-    private final IdiomCsVConverter idiomCsVConverter;
+    private final IdiomCsvConverter idiomCsvConverter;
 
-    private final IdiomDBService idiomDBService;
 
-    public IdiomImpl(IdiomParser idiomParser, IdiomElement idiomElement, IdiomAudioGrabber idiomAudioGrabber, IdiomCsVConverter idiomCsVConverter, IdiomDBService idiomDBService) {
+
+    public IdiomImpl(IdiomParser idiomParser, IdiomElementScrapper idiomElementScrapper, IdiomAudioGrabber idiomAudioGrabber, IdiomCsvConverter idiomCsvConverter, IdiomDBService idiomDBService) {
         this.idiomParser = idiomParser;
-        this.idiomElement = idiomElement;
+        this.idiomElementScrapper = idiomElementScrapper;
         this.idiomAudioGrabber = idiomAudioGrabber;
-        this.idiomCsVConverter = idiomCsVConverter;
-        this.idiomDBService = idiomDBService;
+        this.idiomCsvConverter = idiomCsvConverter;
     }
 
     @Override
     public List<Idiom> getIdiomOrPhrasalList(String audio, String csv) {
 
-        List<Idiom> idiomList = idiomParser.parseToIdiom(idiomElement.getElements());
+        List<Idiom> idiomList = idiomParser.parseElementsToIdiomList(idiomElementScrapper.getElementsContainingIdioms());
         if (csv != null) {
             if (csv.equals("true")) {
-                idiomCsVConverter.save(idiomList);
+                idiomCsvConverter.saveIdiomListToCsvFile(idiomList);
             }
         }
         if (audio != null) {
             if (audio.equals("true")) {
-                idiomAudioGrabber.downLoadAudio(idiomList);
+
+                idiomAudioGrabber.downloadAudioByIdiomList(idiomList);
             }
         }
-        idiomDBService.saveIdiomListToDb(idiomList);
         return idiomList;
     }
 

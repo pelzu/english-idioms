@@ -1,22 +1,24 @@
 package com.example.idiom.repository.idiom;
 
 import com.example.idiom.model.idiom.Idiom;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+
 public class IdiomDBService {
 
-    @Autowired
-    private IdiomDao idiomDao;
+    private final IdiomRepository idiomRepository;
 
-
-    public void saveIdiomListToDb(List<Idiom> idiomList) {
-        idiomDao.saveAllIdioms(idiomList);
+    public IdiomDBService(IdiomRepository idiomRepository) {
+        this.idiomRepository = idiomRepository;
     }
 
-    public List<Idiom> getIdiomListFromDB() {
-        return idiomDao.getIdiomList();
+    public void saveIdiomList(List<Idiom> idiomList) {
+        idiomRepository.saveAll(idiomList);
+    }
+
+    public List<Idiom> getIdiomList() {
+        return idiomRepository.findAll();
     }
 
 

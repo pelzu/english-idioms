@@ -1,7 +1,7 @@
 package com.example.idiom.service.idiom;
 
 import com.example.idiom.model.idiom.Idiom;
-import com.example.idiom.model.idiom.IdiomComparatorById;
+import com.example.idiom.model.idiom.IdiomComparatorAscendingById;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
@@ -16,7 +16,7 @@ public class IdiomParser {
 
     private final String PREFIX_LINK = "https://www.ang.pl";
 
-    public List<Idiom> parseToIdiom(Elements elements) {
+    public List<Idiom> parseElementsToIdiomList(Elements elements) {
 
         List<Idiom> idiomList = new ArrayList<>();
         elements.forEach(element -> {
@@ -31,7 +31,7 @@ public class IdiomParser {
                     .build();
             idiomList.add(idiom);
         });
-        idiomList.sort((new IdiomComparatorById()));
+        idiomList.sort((new IdiomComparatorAscendingById()));
         log.info("Parsed and added " + idiomList.size() + " number of Idiom to list");
 
 

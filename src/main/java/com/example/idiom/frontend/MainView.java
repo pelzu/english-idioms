@@ -41,7 +41,7 @@ public class MainView extends VerticalLayout {
     }
 
     private Grid<Idiom> configureGrid() {
-        idiomController.getPhrase("idiom", "false", "false");
+        idiomController.getPhraseByParams("idiom", "false", "false");
         getIdiomList();
         idiomGrid.setClassName("contact-grid");
         idiomGrid.setItems(idiomList);
@@ -51,7 +51,7 @@ public class MainView extends VerticalLayout {
 
     private void getIdiomList() {
         if (idiomList.isEmpty()) {
-            idiomList = idiomDBService.getIdiomListFromDB();
+            idiomList = idiomDBService.getIdiomList();
         }
     }
 

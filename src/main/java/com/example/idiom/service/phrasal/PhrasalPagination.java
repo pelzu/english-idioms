@@ -11,22 +11,5 @@ import java.io.IOException;
 public class PhrasalPagination {
     private final String PHRASAL_VERB_LINK = "https://www.ang.pl/slownictwo/phrasal-verbs/page/1";
 
-    public int getNumberOfPagePhrasalVerb() {
-        try {
-            log.info("Downloading number of pagination:" + PHRASAL_VERB_LINK);
-            Document tempDoc = null;
-            tempDoc = Jsoup.connect(PHRASAL_VERB_LINK).get();
-            Elements elements = tempDoc.getElementsByClass("pagination");
-            String numberOfPage = elements.first().lastElementChild().text();
-            log.info("Number of pagination is :" + numberOfPage);
-            return Integer.parseInt(numberOfPage);
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-            //TODO Add hand RuntimeException(e) handling
-
-        }
-
-
-    }
 }

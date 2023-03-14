@@ -1,6 +1,6 @@
 package com.example.idiom.service.phrasal;
 
-import com.example.idiom.model.phrasal.PhrasalComparatorById;
+import com.example.idiom.model.phrasal.PhrasalComparatorAscendingById;
 import com.example.idiom.model.phrasal.PhrasalVerb;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
@@ -30,7 +30,7 @@ public class PhrasalVerbsParser {
 
             phrasalVerbList.add(phrasalVerb);
         });
-        phrasalVerbList.sort(new PhrasalComparatorById());
+        phrasalVerbList.sort(new PhrasalComparatorAscendingById());
 
         log.info("Parsed and added " + phrasalVerbList.size() + " number of Phrasal to list");
         return phrasalVerbList;

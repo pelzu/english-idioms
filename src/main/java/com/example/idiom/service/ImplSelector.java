@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 
-public class ImpSelector {
+public class ImplSelector {
 
     private final HashMap<String, IdiomAndPhrasalInterface> angPlHashMap = new HashMap<>();
 
@@ -16,7 +16,7 @@ public class ImpSelector {
     private final IdiomImpl idiomImpl;
     private final DefaultImplAngPl defaultImplAngPl;
 
-    public ImpSelector(PhrasalVerbsImpl phrasalVerbs, IdiomImpl idiom, DefaultImplAngPl defaultImplAngPl) {
+    public ImplSelector(PhrasalVerbsImpl phrasalVerbs, IdiomImpl idiom, DefaultImplAngPl defaultImplAngPl) {
         this.phrasalVerbs = phrasalVerbs;
         this.idiomImpl = idiom;
         this.defaultImplAngPl = defaultImplAngPl;
