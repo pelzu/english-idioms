@@ -39,7 +39,7 @@ public class IdiomImpl implements IdiomAndPhrasalInterface, Predicate<String> {
         if (audio != null) {
             if (audio.equals("true")) {
 
-                idiomAudioDownloader.downloadAudioByIdiomList(idiomList);
+                idiomAudioDownloader.downloadIdiomsAudios(idiomList);
             }
         }
         return idiomList;

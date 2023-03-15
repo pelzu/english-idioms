@@ -22,7 +22,7 @@ public class IdiomAudioDownloader {
     private RestTemplate restTemplate = new RestTemplate();
 
 
-    public void downloadAudioByIdiomList(List<Idiom> idiomList) {
+    public void downloadIdiomsAudios(List<Idiom> idiomList) {
         ExecutorService executorService = Executors.newFixedThreadPool(30);
 
         createBasicDirectoryForMp3();
