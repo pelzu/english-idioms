@@ -39,8 +39,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public IdiomAudioGrabber idiomAudioGrabber() {
-        return new IdiomAudioGrabber();
+    public IdiomAudioDownloader idiomAudioGrabber() {
+        return new IdiomAudioDownloader();
     }
 
     @Bean

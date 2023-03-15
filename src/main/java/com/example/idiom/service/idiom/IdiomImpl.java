@@ -14,16 +14,16 @@ public class IdiomImpl implements IdiomAndPhrasalInterface, Predicate<String> {
 
     private final IdiomElementScrapper idiomElementScrapper;
 
-    private final IdiomAudioGrabber idiomAudioGrabber;
+    private final IdiomAudioDownloader idiomAudioDownloader;
 
     private final IdiomCsvConverter idiomCsvConverter;
 
 
 
-    public IdiomImpl(IdiomParser idiomParser, IdiomElementScrapper idiomElementScrapper, IdiomAudioGrabber idiomAudioGrabber, IdiomCsvConverter idiomCsvConverter, IdiomDbService idiomDBService) {
+    public IdiomImpl(IdiomParser idiomParser, IdiomElementScrapper idiomElementScrapper, IdiomAudioDownloader idiomAudioDownloader, IdiomCsvConverter idiomCsvConverter, IdiomDbService idiomDBService) {
         this.idiomParser = idiomParser;
         this.idiomElementScrapper = idiomElementScrapper;
-        this.idiomAudioGrabber = idiomAudioGrabber;
+        this.idiomAudioDownloader = idiomAudioDownloader;
         this.idiomCsvConverter = idiomCsvConverter;
     }
 
@@ -39,7 +39,7 @@ public class IdiomImpl implements IdiomAndPhrasalInterface, Predicate<String> {
         if (audio != null) {
             if (audio.equals("true")) {
 
-                idiomAudioGrabber.downloadAudioByIdiomList(idiomList);
+                idiomAudioDownloader.downloadAudioByIdiomList(idiomList);
             }
         }
         return idiomList;

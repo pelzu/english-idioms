@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 
 
 @Slf4j
-public class IdiomAudioGrabber {
+public class IdiomAudioDownloader {
     private final String MP3_TRANSLATION_DESTINATION = "src/main/resources/static/mp3/translation/";
     private final String MP3_EXAMPLE_DESTINATION = "src/main/resources/static/mp3/example/";
 
