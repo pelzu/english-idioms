@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanConfig {
 
-    public IdiomRepository idiomRepository;
-    public PhrasalRepository phrasalRepository;
+    private IdiomRepository idiomRepository;
+    private PhrasalRepository phrasalRepository;
 
     @Autowired
     public BeanConfig(IdiomRepository idiomRepository, PhrasalRepository phrasalRepository) {
