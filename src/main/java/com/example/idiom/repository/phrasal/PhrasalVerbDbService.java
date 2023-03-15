@@ -13,7 +13,7 @@ public class PhrasalVerbDbService {
         this.phrasalRepository = phrasalRepository;
     }
 
-    public void savePhrasalVerbList(List<PhrasalVerb> phrasalVerbList) {
+    public void savePhrasalVerbs(List<PhrasalVerb> phrasalVerbList) {
         phrasalRepository.saveAll(phrasalVerbList);
     }
 }

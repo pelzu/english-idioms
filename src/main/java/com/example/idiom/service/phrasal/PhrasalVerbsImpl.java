@@ -40,7 +40,7 @@ public class PhrasalVerbsImpl implements IdiomAndPhrasalInterface, Predicate<Str
                 phrasalCsvConverter.savePhrasalVerbToCsvFile(phrasalVerbList);
             }
         }
-        phrasalVerbDbService.savePhrasalVerbList(phrasalVerbList);
+        phrasalVerbDbService.savePhrasalVerbs(phrasalVerbList);
 
         return phrasalVerbList;
 

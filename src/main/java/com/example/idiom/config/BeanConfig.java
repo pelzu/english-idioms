@@ -1,6 +1,6 @@
 package com.example.idiom.config;
 
-import com.example.idiom.repository.idiom.IdiomDBService;
+import com.example.idiom.repository.idiom.IdiomDbService;
 import com.example.idiom.repository.idiom.IdiomRepository;
 import com.example.idiom.repository.phrasal.PhrasalRepository;
 import com.example.idiom.repository.phrasal.PhrasalVerbDbService;
@@ -56,8 +56,8 @@ public class BeanConfig {
 
 
     @Bean
-    public IdiomDBService idiomDBService() {
-        return new IdiomDBService(idiomRepository);
+    public IdiomDbService idiomDBService() {
+        return new IdiomDbService(idiomRepository);
     }
 
     @Bean
