@@ -16,4 +16,7 @@ public class PhrasalVerbDbService {
     public void savePhrasalVerbs(List<PhrasalVerb> phrasalVerbList) {
         phrasalRepository.saveAll(phrasalVerbList);
     }
+    public List<PhrasalVerb> getPhrasalVerbs() {
+        return phrasalRepository.findAll();
+    }
 }
