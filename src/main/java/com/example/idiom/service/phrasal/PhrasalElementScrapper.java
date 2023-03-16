@@ -52,9 +52,10 @@ public class PhrasalElementScrapper {
 
     public int getNumberOfPagePhrasalVerb() {
         try {
-            log.info("Downloading number of pagination:" + PHRASAL_VERB_LINK);
+            String firstPageLink=PHRASAL_VERB_LINK+"1";
+            log.info("Downloading number of pagination:" + firstPageLink);
             Document tempDoc = null;
-            tempDoc = Jsoup.connect(PHRASAL_VERB_LINK).get();
+            tempDoc = Jsoup.connect(firstPageLink).get();
             Elements elements = tempDoc.getElementsByClass("pagination");
             String numberOfPage = elements.first().lastElementChild().text();
             log.info("Number of pagination is :" + numberOfPage);
