@@ -1,58 +1,74 @@
 package com.example.idiom.frontend;
 
 import com.example.idiom.controller.IdiomController;
-import com.example.idiom.model.idiom.Idiom;
-import com.example.idiom.repository.idiom.IdiomDBService;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Route
-public class MainView extends VerticalLayout {
-
-    private final IdiomDBService idiomDBService;
+@PageTitle("PhrasalVerb and Idiom Downloader")
+public class MainView extends AppLayout {
     private final IdiomController idiomController;
-    Grid<Idiom> idiomGrid = new Grid<>(Idiom.class);
-    Button mainButton = new Button("Download");
-    private List<Idiom> idiomList = new ArrayList<>();
 
-
-    public MainView(IdiomDBService idiomDBService, IdiomController idiomController) {
-        this.idiomDBService = idiomDBService;
+    public MainView(IdiomController idiomController) {
         this.idiomController = idiomController;
-        configureGrid();
-        configureButton();
 
-        add(idiomGrid, mainButton);
-
-    }
-
-    private Component configureButton() {
-
-        mainButton.addClickListener((clickEvent) -> {
-            configureGrid();
+        DrawerToggle toggle = new DrawerToggle();
+        Tabs views = getPrimaryNavigation();
+        views.addSelectedChangeListener((selectedChangeEvent)->{
+            System.out.println(views.getSelectedTab().getLabel());
         });
-        return mainButton;
+
+        H2 subTitle = new H2("Idioms");
+        subTitle.getStyle().set("font-size", "var(--lumo-font-size-l)")
+                .set("margin", "0");
+
+        HorizontalLayout wrapper = new HorizontalLayout(toggle, subTitle);
+        wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
+        wrapper.setSpacing(false);
+        Component idiomView = configureIdiomView();
+        VerticalLayout viewHeader = new VerticalLayout(wrapper,idiomView);
+
+        viewHeader.setPadding(false);
+        viewHeader.setSpacing(false);
+
+        H1 appTitle = new H1("Word downloader");
+        appTitle.getStyle().set("font-size", "var(--lumo-font-size-l)")
+                .set("line-height", "var(--lumo-size-l)")
+                .set("margin", "0 var(--lumo-space-m)")
+                .set("color", "red");
+        addToNavbar(viewHeader);
+        addToDrawer(appTitle, views);
+        setPrimarySection(Section.DRAWER);
+
     }
 
-    private Grid<Idiom> configureGrid() {
-        idiomController.getPhraseByParams("idiom", "false", "false");
-        getIdiomList();
-        idiomGrid.setClassName("contact-grid");
-        idiomGrid.setItems(idiomList);
 
-        return idiomGrid;
+    private Component configureIdiomView() {
+        IdiomView idiomView=new IdiomView(idiomController);
+        return idiomView;
     }
 
-    private void getIdiomList() {
-        if (idiomList.isEmpty()) {
-            idiomList = idiomDBService.getIdiomList();
-        }
+    private Tabs getPrimaryNavigation() {
+
+        Tabs tabs = new Tabs(
+                (new Tab(VaadinIcon.NOTEBOOK.create(), new Span("Idiom"))),
+                (new Tab(VaadinIcon.NOTEBOOK.create(), new Span("PhrasalVerb"))),
+                (new Tab(VaadinIcon.COG.create(), new Span("Settings")))
+        );
+        tabs.setOrientation(Tabs.Orientation.VERTICAL);
+        return tabs;
     }
 
 
