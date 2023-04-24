@@ -2,6 +2,7 @@ package com.example.idiom.frontend;
 
 import com.example.idiom.controller.TranslateController;
 import com.example.idiom.model.phrasal.PhrasalVerb;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -37,7 +38,10 @@ public class PhrasalView extends VerticalLayout {
                 phrasalVerbGrid.getColumnByKey("englishExample"),
                 phrasalVerbGrid.getColumnByKey("linkToPhrasalVerb")
         );
+        phrasalVerbGrid.setHeight(20, Unit.CM);
+
         return phrasalVerbGrid;
+
     }
 
     private void fillTab() {
