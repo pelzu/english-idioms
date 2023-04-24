@@ -3,6 +3,7 @@ package com.example.idiom.controller;
 import com.example.idiom.model.idiom.Idiom;
 import com.example.idiom.model.phrasal.PhrasalVerb;
 import com.example.idiom.repository.idiom.IdiomDbService;
+import com.example.idiom.repository.phrasal.PhrasalVerbDbService;
 import com.example.idiom.service.IdiomAndPhrasalInterface;
 import com.example.idiom.service.ImplSelector;
 import lombok.extern.slf4j.Slf4j;
@@ -14,15 +15,18 @@ import java.util.List;
 
 @Slf4j
 @Controller
-public class IdiomController {
+public class TranslateController {
 
     private final ImplSelector implSelector;
     private final IdiomDbService idiomDbService;
 
+    private final PhrasalVerbDbService phrasalVerbDbService;
 
-    public IdiomController(ImplSelector implSelector, IdiomDbService idiomDbService) {
+    public TranslateController(ImplSelector implSelector, IdiomDbService idiomDbService, PhrasalVerbDbService phrasalVerbDbService) {
         this.implSelector = implSelector;
         this.idiomDbService = idiomDbService;
+        this.phrasalVerbDbService=phrasalVerbDbService;
+
     }
 
     @GetMapping("/learn")
@@ -36,12 +40,6 @@ public class IdiomController {
     public List<Idiom> downloadIdioms() {
         return implSelector.getImplByParameter("idiom").getIdiomOrPhrasalList("false", "false");
     }
-
-    public List<PhrasalVerb> downloadPhrasalVerbs() {
-
-        return implSelector.getImplByParameter("idiom").getIdiomOrPhrasalList("false", "false");
-    }
-
     public List<Idiom> getIdiomsFromDB() {
         return idiomDbService.getIdioms();
     }
@@ -51,5 +49,22 @@ public class IdiomController {
         idiomDbService.saveIdioms(idioms);
         return idioms;
     }
+
+    public List<PhrasalVerb> downloadPhrasalVerbs() {
+
+        return implSelector.getImplByParameter("phrasal").getIdiomOrPhrasalList("false", "false");
+    }
+    public List<PhrasalVerb> getPhrasalsFromDB() {
+        return phrasalVerbDbService.getPhrasalVerbs();
+    }
+
+    public List<PhrasalVerb> addPhrasalsToDB() {
+        List<PhrasalVerb> phrasals = downloadPhrasalVerbs();
+        phrasalVerbDbService.savePhrasalVerbs(phrasals);
+        return phrasals;
+    }
+
+
+
 
 }

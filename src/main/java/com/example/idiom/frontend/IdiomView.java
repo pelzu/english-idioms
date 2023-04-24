@@ -1,22 +1,25 @@
 package com.example.idiom.frontend;
 
-import com.example.idiom.controller.IdiomController;
+import com.example.idiom.controller.TranslateController;
 import com.example.idiom.model.idiom.Idiom;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Route
+@Route(value = "idiom",layout = MainView.class)
+@PageTitle("Welcome to Idiom downloader")
 public class IdiomView extends VerticalLayout {
 
-    private final IdiomController idiomController;
+    private final TranslateController translateController;
     private List<Idiom> idiomList = new ArrayList<>();
     private final Grid<Idiom> idiomGrid = new Grid<>(Idiom.class);
     private final Button downloadButton = new Button("Download");
@@ -26,8 +29,8 @@ public class IdiomView extends VerticalLayout {
     HorizontalLayout horizontalLayout = new HorizontalLayout(downloadSelector, downloadButton, getIdiomFromDBButton);
 
 
-    public IdiomView(IdiomController idiomController) {
-        this.idiomController = idiomController;
+    public IdiomView(TranslateController translateController) {
+        this.translateController = translateController;
         configureGrid();
         configureButton();
         configuregetIdiomFromDBButton();
@@ -38,7 +41,7 @@ public class IdiomView extends VerticalLayout {
 
     private Component configuregetIdiomFromDBButton() {
         getIdiomFromDBButton.addClickListener((clickEvent) -> {
-            List<Idiom> idioms=idiomController.getIdiomsFromDB();
+            List<Idiom> idioms= translateController.getIdiomsFromDB();
             idiomList.addAll(idioms);
             getIdiomFromDBButton.setText("GetFromDB");
             configureGrid();
@@ -78,12 +81,13 @@ public class IdiomView extends VerticalLayout {
                 idiomGrid.getColumnByKey("audioExampleLink"),
                 idiomGrid.getColumnByKey("linkToIdiom")
         );
+        idiomGrid.setHeight(20, Unit.CM);
         return idiomGrid;
     }
 
     private void addWordsToDb() {
         if (idiomList.isEmpty()) {
-            idiomList.addAll(idiomController.addIdiomsToDB());
+            idiomList.addAll(translateController.addIdiomsToDB());
         }
     }
 
