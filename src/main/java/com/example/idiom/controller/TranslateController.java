@@ -60,7 +60,7 @@ public class TranslateController {
         return phrasalVerbDbService.getPhrasalVerbs();
     }
 
-    public List<PhrasalVerb> addPhrasalsToDB() {
+    public List<PhrasalVerb> grabPhrasalsToDb() {
         List<PhrasalVerb> phrasals = downloadPhrasalVerbs();
         phrasalVerbDbService.savePhrasalVerbs(phrasals);
         return phrasals;
