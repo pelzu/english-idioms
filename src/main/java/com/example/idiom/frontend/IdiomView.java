@@ -3,9 +3,7 @@ package com.example.idiom.frontend;
 import com.example.idiom.controller.TranslateController;
 import com.example.idiom.model.idiom.Idiom;
 import com.vaadin.flow.component.Unit;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -20,17 +18,12 @@ public class IdiomView extends VerticalLayout {
     private final TranslateController translateController;
     private final List<Idiom> idioms = new ArrayList<>();
     private final Grid<Idiom> idiomsGrid = new Grid<>(Idiom.class);
-    private final Button idiomsDownloadButton = new Button("Download");
-
-    HorizontalLayout horizontalLayout = new HorizontalLayout(idiomsDownloadButton);
-
 
     public IdiomView(TranslateController translateController) {
         this.translateController = translateController;
         fillTab();
         configureGrid();
-        configureHorizontalLayout();
-        add(idiomsGrid, horizontalLayout);
+        add(idiomsGrid);
     }
 
     private void fillTab() {
@@ -39,12 +32,6 @@ public class IdiomView extends VerticalLayout {
             idioms = translateController.grabIdiomsToDB();
         }
         this.idioms.addAll(idioms);
-    }
-
-
-    private void configureHorizontalLayout() {
-        horizontalLayout.setAlignItems(Alignment.CENTER);
-        horizontalLayout.addClassName("backColorGrey");
     }
 
     private Grid<Idiom> configureGrid() {
@@ -62,6 +49,5 @@ public class IdiomView extends VerticalLayout {
         idiomsGrid.setHeight(20, Unit.CM);
         return idiomsGrid;
     }
-
 
 }
