@@ -25,7 +25,7 @@ public class TranslateController {
     public TranslateController(ImplSelector implSelector, IdiomDbService idiomDbService, PhrasalVerbDbService phrasalVerbDbService) {
         this.implSelector = implSelector;
         this.idiomDbService = idiomDbService;
-        this.phrasalVerbDbService=phrasalVerbDbService;
+        this.phrasalVerbDbService = phrasalVerbDbService;
 
     }
 
@@ -37,15 +37,16 @@ public class TranslateController {
         return implSelector.getImplByParameter(kind).getIdiomOrPhrasalList(audio, csv);
     }
 
-    public List<Idiom> downloadIdioms() {
+    public List<Idiom> getIdioms() {
         return implSelector.getImplByParameter("idiom").getIdiomOrPhrasalList("false", "false");
     }
+
     public List<Idiom> getIdiomsFromDB() {
         return idiomDbService.getIdioms();
     }
 
-    public List<Idiom> addIdiomsToDB() {
-        List<Idiom> idioms = downloadIdioms();
+    public List<Idiom> grabIdiomsToDB() {
+        List<Idiom> idioms = getIdioms();
         idiomDbService.saveIdioms(idioms);
         return idioms;
     }
@@ -54,6 +55,7 @@ public class TranslateController {
 
         return implSelector.getImplByParameter("phrasal").getIdiomOrPhrasalList("false", "false");
     }
+
     public List<PhrasalVerb> getPhrasalsFromDB() {
         return phrasalVerbDbService.getPhrasalVerbs();
     }
@@ -63,8 +65,6 @@ public class TranslateController {
         phrasalVerbDbService.savePhrasalVerbs(phrasals);
         return phrasals;
     }
-
-
 
 
 }

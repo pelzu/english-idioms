@@ -25,7 +25,7 @@ public class MainView extends AppLayout {
         VerticalLayout navigationBar = getPrimaryNavigation();
 
 
-        H2 subTitle = new H2("Idioms");
+        H2 subTitle = new H2("Navigator");
         subTitle.getStyle().set("font-size", "var(--lumo-font-size-l)")
                 .set("margin", "0");
 
@@ -37,11 +37,10 @@ public class MainView extends AppLayout {
         viewHeader.setPadding(false);
         viewHeader.setSpacing(false);
 
-        H1 appTitle = new H1("Wofrd downloader");
+        H1 appTitle = new H1("Idiom&Phrasal");
         appTitle.getStyle().set("font-size", "var(--lumo-font-size-l)")
                 .set("line-height", "var(--lumo-size-l)")
-                .set("margin", "0 var(--lumo-space-m)")
-                .set("color", "red");
+                .set("margin", "0 var(--lumo-space-m)");
         addToNavbar(viewHeader);
         addToDrawer(appTitle, navigationBar);
         setPrimarySection(Section.DRAWER);
