@@ -2,6 +2,7 @@ package com.example.idiom.frontend;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -9,6 +10,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
@@ -16,20 +18,15 @@ import com.vaadin.flow.router.RouterLink;
 @Route
 @PageTitle("PhrasalVerb and Idiom Downloader")
 public class MainView extends AppLayout {
+    Tabs navigationBar = getPrimaryNavigation();
+    H2 subTitle = new H2("Navigator");
+
 
     public MainView() {
 
-
         DrawerToggle toggle = new DrawerToggle();
+        HorizontalLayout wrapper = new HorizontalLayout(toggle,subTitle);
 
-        VerticalLayout navigationBar = getPrimaryNavigation();
-
-
-        H2 subTitle = new H2("Navigator");
-        subTitle.getStyle().set("font-size", "var(--lumo-font-size-l)")
-                .set("margin", "0");
-
-        HorizontalLayout wrapper = new HorizontalLayout(toggle, subTitle);
         wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         wrapper.setSpacing(false);
         VerticalLayout viewHeader = new VerticalLayout(wrapper);
@@ -48,16 +45,25 @@ public class MainView extends AppLayout {
     }
 
 
-    private VerticalLayout getPrimaryNavigation() {
+    private Tabs getPrimaryNavigation() {
+        RouterLink idiomLink = new RouterLink("Idiom", IdiomView.class);
+        idiomLink.add(VaadinIcon.BOOK.create());
+        Tab idiomTab = new Tab(idiomLink);
 
 
-        VerticalLayout navigationList = new VerticalLayout(
-                new Tab(VaadinIcon.ARCHIVES.create(), new RouterLink("idiom", IdiomView.class)),
-                new Tab(VaadinIcon.ARCHIVE.create(), new RouterLink("phrasalVerb", PhrasalView.class)),
-                new Tab(VaadinIcon.TERMINAL.create(), new RouterLink("test", TestView.class))
-        );
+        RouterLink phrasalVerbLink = new RouterLink("PhrasalVerb", PhrasalView.class);
+        phrasalVerbLink.add(VaadinIcon.BOOK.create());
+        Tab phrasalVerbTab = new Tab(phrasalVerbLink);
 
 
+        RouterLink testLink = new RouterLink("Test", TestView.class);
+        testLink.add(VaadinIcon.TRAIN.create());
+        Tab testTab = new Tab(testLink);
+
+
+        Tabs navigationList = new Tabs();
+        navigationList.add(idiomTab, phrasalVerbTab, testTab);
+        navigationList.setOrientation(Tabs.Orientation.VERTICAL);
         return navigationList;
     }
 

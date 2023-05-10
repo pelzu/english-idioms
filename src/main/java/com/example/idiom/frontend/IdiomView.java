@@ -3,6 +3,7 @@ package com.example.idiom.frontend;
 import com.example.idiom.controller.TranslateController;
 import com.example.idiom.model.idiom.Idiom;
 import com.vaadin.flow.component.Unit;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -18,12 +19,21 @@ public class IdiomView extends VerticalLayout {
     private final TranslateController translateController;
     private final List<Idiom> idioms = new ArrayList<>();
     private final Grid<Idiom> idiomsGrid = new Grid<>(Idiom.class);
+    private final Button downloadIdiomButton = new Button("Download Idiom");
 
     public IdiomView(TranslateController translateController) {
         this.translateController = translateController;
-        fillTab();
+//        fillTab();
         configureGrid();
-        add(idiomsGrid);
+        configureDownloadButton();
+        add(idiomsGrid, downloadIdiomButton);
+    }
+
+    private void configureDownloadButton() {
+        downloadIdiomButton.addClickListener(event -> {
+            fillTab();
+            configureGrid();
+        });
     }
 
     private void fillTab() {
