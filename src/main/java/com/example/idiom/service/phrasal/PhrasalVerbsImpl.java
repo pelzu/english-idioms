@@ -1,7 +1,7 @@
 package com.example.idiom.service.phrasal;
 
 import com.example.idiom.model.phrasal.PhrasalVerb;
-import com.example.idiom.repository.phrasal.PhrasalVerbDbService;
+import com.example.idiom.repository.phrasal.PhrasalVerbDbImpl;
 import com.example.idiom.service.IdiomAndPhrasalInterface;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,13 +18,13 @@ public class PhrasalVerbsImpl implements IdiomAndPhrasalInterface, Predicate<Str
     private final PhrasalCsvConverter phrasalCsvConverter;
 
 
-    private final PhrasalVerbDbService phrasalVerbDbService;
+    private final PhrasalVerbDbImpl phrasalVerbDbImpl;
 
-    public PhrasalVerbsImpl(PhrasalVerbsParser phrasalVerbsParser, PhrasalElementScrapper phrasalElementScrapper, PhrasalCsvConverter phrasalCsvConverter, PhrasalVerbDbService phrasalVerbDbService) {
+    public PhrasalVerbsImpl(PhrasalVerbsParser phrasalVerbsParser, PhrasalElementScrapper phrasalElementScrapper, PhrasalCsvConverter phrasalCsvConverter, PhrasalVerbDbImpl phrasalVerbDbImpl) {
         this.phrasalVerbsParser = phrasalVerbsParser;
         this.phrasalElementScrapper = phrasalElementScrapper;
         this.phrasalCsvConverter = phrasalCsvConverter;
-        this.phrasalVerbDbService = phrasalVerbDbService;
+        this.phrasalVerbDbImpl = phrasalVerbDbImpl;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class PhrasalVerbsImpl implements IdiomAndPhrasalInterface, Predicate<Str
                 phrasalCsvConverter.savePhrasalVerbToCsvFile(phrasalVerbList);
             }
         }
-        phrasalVerbDbService.savePhrasalVerbs(phrasalVerbList);
+        phrasalVerbDbImpl.savePhrasalVerbs(phrasalVerbList);
 
         return phrasalVerbList;
 

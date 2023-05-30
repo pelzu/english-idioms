@@ -1,7 +1,7 @@
 package com.example.idiom.service.idiom;
 
 import com.example.idiom.model.idiom.Idiom;
-import com.example.idiom.repository.idiom.IdiomDbService;
+import com.example.idiom.repository.idiom.IdiomDbImpl;
 import com.example.idiom.service.IdiomAndPhrasalInterface;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +20,7 @@ public class IdiomImpl implements IdiomAndPhrasalInterface, Predicate<String> {
 
 
 
-    public IdiomImpl(IdiomParser idiomParser, IdiomElementScrapper idiomElementScrapper, IdiomAudioDownloader idiomAudioDownloader, IdiomCsvConverter idiomCsvConverter, IdiomDbService idiomDBService) {
+    public IdiomImpl(IdiomParser idiomParser, IdiomElementScrapper idiomElementScrapper, IdiomAudioDownloader idiomAudioDownloader, IdiomCsvConverter idiomCsvConverter, IdiomDbImpl idiomDBImpl) {
         this.idiomParser = idiomParser;
         this.idiomElementScrapper = idiomElementScrapper;
         this.idiomAudioDownloader = idiomAudioDownloader;
