@@ -4,12 +4,12 @@ import com.example.idiom.model.phrasal.PhrasalVerb;
 
 import java.util.List;
 
-public class PhrasalVerbDbService {
+public class PhrasalVerbDbImpl {
 
     private final PhrasalRepository phrasalRepository;
 
 
-    public PhrasalVerbDbService(PhrasalRepository phrasalRepository) {
+    public PhrasalVerbDbImpl(PhrasalRepository phrasalRepository) {
         this.phrasalRepository = phrasalRepository;
     }
 

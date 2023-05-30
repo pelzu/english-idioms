@@ -1,9 +1,9 @@
 package com.example.idiom.config;
 
-import com.example.idiom.repository.idiom.IdiomDbService;
+import com.example.idiom.repository.idiom.IdiomDbImpl;
 import com.example.idiom.repository.idiom.IdiomRepository;
 import com.example.idiom.repository.phrasal.PhrasalRepository;
-import com.example.idiom.repository.phrasal.PhrasalVerbDbService;
+import com.example.idiom.repository.phrasal.PhrasalVerbDbImpl;
 import com.example.idiom.service.ImplSelector;
 import com.example.idiom.service.idiom.*;
 import com.example.idiom.service.nooption.DefaultImplAngPl;
@@ -29,7 +29,7 @@ public class BeanConfig {
 
     @Bean
     public IdiomImpl idiomImpl() {
-        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(), idiomDBService());
+        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(), idiomDbImpl());
     }
 
 
@@ -56,13 +56,13 @@ public class BeanConfig {
 
 
     @Bean
-    public IdiomDbService idiomDBService() {
-        return new IdiomDbService(idiomRepository);
+    public IdiomDbImpl idiomDbImpl() {
+        return new IdiomDbImpl(idiomRepository);
     }
 
     @Bean
     public PhrasalVerbsImpl phrasalVerbs() {
-        return new PhrasalVerbsImpl(phrasalVerbsParser(), phrasalElement(), phrasalCsvConverter(), phrasalVerbDbService());
+        return new PhrasalVerbsImpl(phrasalVerbsParser(), phrasalElement(), phrasalCsvConverter(), phrasalVerbDbImpl());
     }
 
     @Bean
@@ -81,8 +81,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public PhrasalVerbDbService phrasalVerbDbService() {
-        return new PhrasalVerbDbService(phrasalRepository);
+    public PhrasalVerbDbImpl phrasalVerbDbImpl() {
+        return new PhrasalVerbDbImpl(phrasalRepository);
     }
 
     @Bean

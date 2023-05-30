@@ -5,11 +5,11 @@ import com.example.idiom.model.idiom.Idiom;
 import java.util.List;
 
 
-public class IdiomDbService {
+public class IdiomDbImpl {
 
     private final IdiomRepository idiomRepository;
 
-    public IdiomDbService(IdiomRepository idiomRepository) {
+    public IdiomDbImpl(IdiomRepository idiomRepository) {
         this.idiomRepository = idiomRepository;
     }
 
