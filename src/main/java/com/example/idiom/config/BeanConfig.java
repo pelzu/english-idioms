@@ -9,7 +9,7 @@ import com.example.idiom.service.idiom.*;
 import com.example.idiom.service.nooption.DefaultImplAngPl;
 import com.example.idiom.service.phrasal.PhrasalCsvConverter;
 import com.example.idiom.service.phrasal.PhrasalElementScrapper;
-import com.example.idiom.service.phrasal.PhrasalVerbsImpl;
+import com.example.idiom.service.phrasal.PhrasalVerbService;
 import com.example.idiom.service.phrasal.PhrasalVerbsParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,8 +28,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public IdiomImpl idiomImpl() {
-        return new IdiomImpl(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(), idiomDbImpl());
+    public IdiomService idiomImpl() {
+        return new IdiomService(idiomParser(), idiomElement(), idiomAudioGrabber(), idiomCsVConverter(), idiomDbImpl());
     }
 
 
@@ -61,8 +61,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public PhrasalVerbsImpl phrasalVerbs() {
-        return new PhrasalVerbsImpl(phrasalVerbsParser(), phrasalElement(), phrasalCsvConverter(), phrasalVerbDbImpl());
+    public PhrasalVerbService phrasalVerbs() {
+        return new PhrasalVerbService(phrasalVerbsParser(), phrasalElement(), phrasalCsvConverter(), phrasalVerbDbImpl());
     }
 
     @Bean

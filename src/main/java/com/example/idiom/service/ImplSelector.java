@@ -1,8 +1,8 @@
 package com.example.idiom.service;
 
-import com.example.idiom.service.idiom.IdiomImpl;
+import com.example.idiom.service.idiom.IdiomService;
 import com.example.idiom.service.nooption.DefaultImplAngPl;
-import com.example.idiom.service.phrasal.PhrasalVerbsImpl;
+import com.example.idiom.service.phrasal.PhrasalVerbService;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -12,13 +12,13 @@ public class ImplSelector {
 
     private final HashMap<String, IdiomAndPhrasalInterface> angPlHashMap = new HashMap<>();
 
-    private final PhrasalVerbsImpl phrasalVerbs;
-    private final IdiomImpl idiomImpl;
+    private final PhrasalVerbService phrasalVerbs;
+    private final IdiomService idiomService;
     private final DefaultImplAngPl defaultImplAngPl;
 
-    public ImplSelector(PhrasalVerbsImpl phrasalVerbs, IdiomImpl idiom, DefaultImplAngPl defaultImplAngPl) {
+    public ImplSelector(PhrasalVerbService phrasalVerbs, IdiomService idiom, DefaultImplAngPl defaultImplAngPl) {
         this.phrasalVerbs = phrasalVerbs;
-        this.idiomImpl = idiom;
+        this.idiomService = idiom;
         this.defaultImplAngPl = defaultImplAngPl;
     }
 
@@ -30,7 +30,7 @@ public class ImplSelector {
 
     @PostConstruct
     public void saveHashMap() {
-        angPlHashMap.put("idiom", idiomImpl);
+        angPlHashMap.put("idiom", idiomService);
         angPlHashMap.put("phrasal", phrasalVerbs);
 
     }

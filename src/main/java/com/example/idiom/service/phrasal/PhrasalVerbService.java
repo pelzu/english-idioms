@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Slf4j
-public class PhrasalVerbsImpl implements IdiomAndPhrasalInterface, Predicate<String> {
+public class PhrasalVerbService implements IdiomAndPhrasalInterface, Predicate<String> {
 
     private final PhrasalVerbsParser phrasalVerbsParser;
 
@@ -20,7 +20,7 @@ public class PhrasalVerbsImpl implements IdiomAndPhrasalInterface, Predicate<Str
 
     private final PhrasalVerbDbImpl phrasalVerbDbImpl;
 
-    public PhrasalVerbsImpl(PhrasalVerbsParser phrasalVerbsParser, PhrasalElementScrapper phrasalElementScrapper, PhrasalCsvConverter phrasalCsvConverter, PhrasalVerbDbImpl phrasalVerbDbImpl) {
+    public PhrasalVerbService(PhrasalVerbsParser phrasalVerbsParser, PhrasalElementScrapper phrasalElementScrapper, PhrasalCsvConverter phrasalCsvConverter, PhrasalVerbDbImpl phrasalVerbDbImpl) {
         this.phrasalVerbsParser = phrasalVerbsParser;
         this.phrasalElementScrapper = phrasalElementScrapper;
         this.phrasalCsvConverter = phrasalCsvConverter;
