@@ -2,7 +2,6 @@ package com.example.idiom.frontend;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -18,14 +17,14 @@ import com.vaadin.flow.router.RouterLink;
 @Route
 @PageTitle("PhrasalVerb and Idiom Downloader")
 public class MainView extends AppLayout {
-    Tabs navigationBar = getPrimaryNavigation();
-    H2 subTitle = new H2("Navigator");
+    Tabs primaryNavigation = getPrimaryNavigation();
+    H2 navigatorSubtitle = new H2("Navigator");
 
 
     public MainView() {
 
         DrawerToggle toggle = new DrawerToggle();
-        HorizontalLayout wrapper = new HorizontalLayout(toggle,subTitle);
+        HorizontalLayout wrapper = new HorizontalLayout(toggle, navigatorSubtitle);
 
         wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         wrapper.setSpacing(false);
@@ -39,7 +38,7 @@ public class MainView extends AppLayout {
                 .set("line-height", "var(--lumo-size-l)")
                 .set("margin", "0 var(--lumo-space-m)");
         addToNavbar(viewHeader);
-        addToDrawer(appTitle, navigationBar);
+        addToDrawer(appTitle, primaryNavigation);
         setPrimarySection(Section.DRAWER);
 
     }
