@@ -14,7 +14,7 @@ import com.example.idiom.service.phrasal.PhrasalVerbsParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+//Loli
 @Configuration
 public class BeanConfig {
 
